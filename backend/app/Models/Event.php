@@ -15,6 +15,7 @@ class Event extends Model
         'date',
         'position',
         'aviable_places',
-        'image'
+        'image',
+        'time'
     ];
 }

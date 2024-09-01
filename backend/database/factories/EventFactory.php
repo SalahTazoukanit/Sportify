@@ -19,8 +19,11 @@ class EventFactory extends Factory
         return [
             'name' => fake()->name(),
             'image' => fake()->image(),
-            'description' => fake()->text(400),
-            'image' => fake()->image(),
+            'description' => fake()->sentence(20),
+            'date' => fake()->date(),
+            'position' => fake()->text(10),
+            'aviable_places' => fake()->numberBetween(2, 24),
+            'time' => fake()->time()
         ];
     }
 }

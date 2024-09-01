@@ -29,7 +29,8 @@ class EventController extends Controller
             'date' => 'date',
             'position' => "string",
             'aviable_places' => "sometimes",
-            'image' => "image|sometimes|mimes:jpeg,png,jpg|max:2048"
+            'image' => "image|sometimes|mimes:jpeg,png,jpg|max:2048",
+            'time' => "date_format:H:i",
         ]);
 
         $event = Event::create($request->all());
@@ -62,7 +63,7 @@ class EventController extends Controller
             'date' => 'date|sometimes',
             'position' => "string",
             'aviable_places' => "sometimes",
-            'image' => "image|sometimes|mimes:jpeg,png,jpg|max:2048"
+            'image' => "image|sometimes|mimes:jpeg,png,jpg|max:2048",
         ]);
 
         $event = Event::find($id);

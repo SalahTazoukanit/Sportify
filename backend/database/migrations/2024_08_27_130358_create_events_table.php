@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('description');
             $table->string('image');
             $table->dateTime('date');
+            $table->time('time');
             $table->integer('aviable_places');
             $table->string('position');
             $table->timestamps();
