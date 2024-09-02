@@ -25,15 +25,20 @@ class EventController extends Controller
     {
         $request->validate([
             'name' => 'string',
+            'category_id' => 'integer',
+            'user_id' => 'integer',
             'description' => 'sometimes',
-            'date' => 'date',
+            'date' => 'date|required',
             'position' => "string",
-            'aviable_places' => "sometimes",
+            'aviable_places' => "sometimes|required",
             'image' => "image|sometimes|mimes:jpeg,png,jpg|max:2048",
             'time' => "date_format:H:i",
         ]);
 
         $event = Event::create($request->all());
+        if ($request->hasFile('image')) {
+            $event->image = $request->file('image')->store('images/events', 'public');
+        }
 
         return response()->json([
             'event' => $event,
@@ -59,14 +64,20 @@ class EventController extends Controller
     {
         $request->validate([
             'name' => 'string',
+            'category_id' => 'sometimes',
             'description' => 'sometimes',
             'date' => 'date|sometimes',
             'position' => "string",
             'aviable_places' => "sometimes",
             'image' => "image|sometimes|mimes:jpeg,png,jpg|max:2048",
+            'time' => "sometimes|date_format:H:i",
+
         ]);
 
         $event = Event::find($id);
+        if ($request->hasFile('image')) {
+            $event->image = $request->file('image')->store('images/events', 'public');
+        }
 
         $event->update($request->all());
 

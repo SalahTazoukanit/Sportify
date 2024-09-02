@@ -20,6 +20,14 @@ return new class extends Migration
             $table->time('time');
             $table->integer('aviable_places');
             $table->string('position');
+            $table->foreignId('user_id')
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreignId('category_id')
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

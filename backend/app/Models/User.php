@@ -30,6 +30,12 @@ class User extends Authenticatable
         'image_profile'
     ];
 
+    // Relation between users and events ;
+    public function events()
+    {
+        return $this->hasMany(Event::class);
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
