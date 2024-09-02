@@ -1,6 +1,9 @@
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 const Header = () => {
+  const [isLogged, setIsLogged] = useState(true);
+
   return (
     <>
       <div className="bg-third-color flex justify-center items-center gap-32">
@@ -12,7 +15,7 @@ const Header = () => {
               alt="image logo sportify"
             />
           </div>
-          <div className="flex justify-center items-center gap-24 text-white">
+          <div className="flex justify-center items-center gap-20 text-white">
             <NavLink
               className={(nav) => (nav.isActive ? "nav-active" : "")}
               to={"/"}
@@ -31,6 +34,14 @@ const Header = () => {
             >
               Sports
             </NavLink>
+            {isLogged && (
+              <NavLink
+                className={(nav) => (nav.isActive ? "nav-active" : "")}
+                to={"/dashboard"}
+              >
+                Mon Profile
+              </NavLink>
+            )}
             <NavLink
               className={(nav) => (nav.isActive ? "nav-active" : "")}
               to={"/a-propos"}

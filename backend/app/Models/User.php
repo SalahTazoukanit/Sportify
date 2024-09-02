@@ -33,7 +33,7 @@ class User extends Authenticatable
     // Relation between users and events ;
     public function events()
     {
-        return $this->hasMany(Event::class);
+        return $this->belongsToMany(Event::class);
     }
 
     /**

@@ -30,6 +30,6 @@ class Event extends Model
     // Relation between users and events ;
     public function participants()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsToMany(User::class);
     }
 }

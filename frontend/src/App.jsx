@@ -6,6 +6,7 @@ import About from "./views/About";
 import Contact from "./views/Contact";
 import SignIn from "./views/SignIn";
 import SignUp from "./views/SignUp";
+import Dashboard from "./views/Dashboard";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/contact" Component={Contact} />
           <Route path="/sign-in" Component={SignIn} />
           <Route path="/sign-up" Component={SignUp} />
+          <Route path="/dashboard" Component={Dashboard} />
         </Routes>
       </BrowserRouter>
     </>
