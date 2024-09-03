@@ -23,6 +23,7 @@ Route::prefix('v1')->group(function () {
         Route::post('/store', [EventController::class, 'store'])->name('store.event');
         Route::put('/update/{id}', [EventController::class, 'update'])->name('update.event');
         Route::delete('/delete/{id}', [EventController::class, 'destroy'])->name('destroy.event');
+        Route::post('/{id}/addParticipantToEvent', [EventController::class, 'participate'])->name('participate.event');
     });
     //Categories Routes
     Route::prefix('categories')->group(function () {

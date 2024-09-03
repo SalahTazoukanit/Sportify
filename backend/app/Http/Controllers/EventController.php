@@ -3,10 +3,43 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
+
+    public function participate(Request $request, String $id)
+    {
+        $userId = 1;
+        // Trouver l'utilisateur
+        $user = User::find($userId);
+
+        if (!$user) {
+            return redirect()->back()->with('error', 'User not found.');
+        }
+        // Récupérer l'événement
+        $event = Event::findOrFail($id);
+
+        if ($event->participants()->where('user_id', $user->id)->exists()) {
+            return response()->json(['error' => "Vous êtes déjà inscrit à l'événement."], 409);
+        }
+
+        if ($event->aviable_places > 0) {
+            $event->participants()->attach($user->id);
+            $event->aviable_places -= 1;
+            $event->save();
+            return response()->json([
+                "message" => "Vous vous êtes bien enregistré(e).",
+                "aviable_places_update" => $$event->aviable_places,
+            ], 200);
+        } else {
+            return response()->json([
+                "message" => "Desolé , il ne reste plus de places disponibles"
+            ]);
+        };
+    }
+
     /**
      * Display a listing of the resource.
      */
