@@ -14,6 +14,7 @@ class EventController extends Controller
         $userId = 1;
         // Trouver l'utilisateur
         $user = User::find($userId);
+        // $user->id = 1;
 
         if (!$user) {
             return redirect()->back()->with('error', 'Utilisateur pas trouvé.');
@@ -21,7 +22,7 @@ class EventController extends Controller
         // Récupérer l'événement
         $event = Event::findOrFail($id);
 
-        if ($event->participants()->where('user_id', $user->id)->exists()) {
+        if ($event->participants()->where('user_id', $userId)->exists()) {
             return response()->json(['error' => "Vous êtes déjà inscrit à l'événement."], 409);
         }
 
@@ -35,9 +36,10 @@ class EventController extends Controller
             ], 200);
         } else {
             return response()->json([
-                "message" => "Desolé , il ne reste plus de places disponibles"
+                "message" => "Desolé , il ne reste plus de places disponibles ."
             ]);
         };
+
     }
 
     /**
@@ -57,10 +59,10 @@ class EventController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'string',
+            'name' => 'string|max:200',
             'category_id' => 'integer',
             'user_id' => 'integer',
-            'description' => 'sometimes',
+            'description' => 'sometimes|max:1000',
             'date' => 'date|required',
             'position' => "string",
             'aviable_places' => "sometimes|required",
@@ -75,7 +77,7 @@ class EventController extends Controller
 
         return response()->json([
             'event' => $event,
-            'message' => "L'evenement " .  $event->name . " a été créé avec succes ."
+            'message' => "L'evenement " .  $event->name . " a été créé avec succès et est en attente de validation par l'un de nos administrateurs."
         ]);
     }
 
@@ -96,15 +98,14 @@ class EventController extends Controller
     public function update(Request $request, Event $event, String $id)
     {
         $request->validate([
-            'name' => 'string',
+            'name' => 'string|sometimes|max:200',
             'category_id' => 'sometimes',
-            'description' => 'sometimes',
+            'description' => 'sometimes|max:1000',
             'date' => 'date|sometimes',
             'position' => "string",
             'aviable_places' => "sometimes",
             'image' => "image|sometimes|mimes:jpeg,png,jpg|max:2048",
             'time' => "sometimes|date_format:H:i",
-
         ]);
 
         $event = Event::find($id);

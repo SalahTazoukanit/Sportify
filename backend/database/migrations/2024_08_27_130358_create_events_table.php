@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('description');
+            $table->enum('status',["pending","published"]);
             $table->string('image');
             $table->dateTime('date');
             $table->time('time');

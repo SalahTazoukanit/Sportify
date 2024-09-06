@@ -18,7 +18,8 @@ class Event extends Model
         'position',
         'aviable_places',
         'image',
-        'time'
+        'time',
+        "status"
     ];
 
     // Relation between event and category ;
