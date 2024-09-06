@@ -12,12 +12,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
     //User Routes
-    Route::prefix('users')->group(function () {
+    Route::prefix('/users')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('index.users');
         Route::post('/register', [UserController::class, 'register'])->name('register');
+        Route::post('/login', [UserController::class, 'login'])->name('login');
+        Route::post('/logout', [UserController::class, 'logout'])->name('logout')->middleware('auth:sanctum');
     });
+
     // Events Routes
-    Route::prefix('events')->group(function () {
+    Route::prefix('/events')->group(function () {
         Route::get('/', [EventController::class, 'index'])->name('index.events');
         Route::get('/{id}', [EventController::class, 'show'])->name('show.event');
         Route::post('/store', [EventController::class, 'store'])->name('store.event');
@@ -25,8 +28,9 @@ Route::prefix('v1')->group(function () {
         Route::delete('/delete/{id}', [EventController::class, 'destroy'])->name('destroy.event');
         Route::post('/{id}/addParticipantToEvent', [EventController::class, 'participate'])->name('participate.event');
     });
+
     //Categories Routes
-    Route::prefix('categories')->group(function () {
+    Route::prefix('/categories')->group(function () {
         Route::get('/', [CategoryController::class, 'index'])->name('index.categories');
         Route::get('/{id}', [CategoryController::class, 'show'])->name('show.category');
         Route::post('/store', [CategoryController::class, 'store'])->name('store.categories');

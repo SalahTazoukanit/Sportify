@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -15,82 +16,86 @@ class UserController extends Controller
     public function register(Request $request)
     {
 
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
-            'password_confirmation' => 'required|string|min:8',
-            'image_profile' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
+        $request->validate([
+            "name" => "string|required|max:255",
+            "email" => "required|string|max:255|unique:users|email",
+            "image_profile" => "image|nullable",
+            'password' => [
+                'required',
+                'string',
+                'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/',
+                'confirmed',
+            ],
+            'password_confirmation' => 'required|same:password'
         ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => false,
-                'message' => 'validation error',
-                'errors' => $validator->errors()
-            ], 401);
-        }
 
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'image_profile' => $request->image_profile
+            "name" => $request->name,
+            "email" => $request->email,
+            "image_profile" => $request->image_profile,
+            "password" => bcrypt($request->password),
+            "password_confirmation" => bcrypt($request->password_confirmation),
         ]);
 
-        // return response()->json($user, 201);
-
-        $token = $user->createToken("API TOKEN")->plainTextToken;
-
-        return response()->json([
-            'status'  => true,
-            'message' => 'User created successfully',
-            'user' => $user,
-            "token" => $token,
-            // 'token'=>$user->createToken("API TOKEN")->plainTextToken
+        // if($user){
+            return response()->json([
+                "user" => $user,
+                "message" => "Votre compte a été créé avec succès. "
         ], 200);
+        // }else{
+        //     return response()->json([
+        //         "message" => "Echec !!!!"
+        //     ],400);
+        // }
+
     }
 
     public function login(Request $request)
     {
-        $validateUser = Validator::make($request->all(), [
-            'name' => 'required|max:255',
-            'email' => 'required|string|max:255|email',
-            'password' => [
-                'required',
-                'string',
-                'min:5',
-            ],
+        Log::info('Request data:', $request->all());
+
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required']
         ]);
 
-        if ($validateUser->fails()) {
-            return response()->json([
-                'status' => false,
-                'message' => 'validation error',
-                'errors' => $validateUser->errors()
-            ], 401);
-        }
-
-        if (Auth::attempt($request->all())) {
+        if (Auth::attempt($credentials)) {
             if (auth('sanctum')->check()) {
                 auth()->user()->tokens()->delete();
             }
 
-            // 'name'=>$request->name,
-            // 'email'=>$request->email,
-            // 'password'=> Hash::make($request->password),
-
-            $user = Auth::user();
-            $token = $user->createToken("API TOKEN")->plainTextToken;
+            $user = User::where('email', $credentials['email'])->first();
+            $token = $user->createToken('authToken', ['*'])->plainTextToken;
 
             return response()->json([
-                'status'  => true,
-                'message' => 'User logged in successfully',
+                'message' => 'Connexion réussie ! Bienvenue ' . $user->name,
                 'user' => $user,
-                'token' => $token,
-                // 'token'=>$user->createToken("API TOKEN")->plainTextToken
-                // "token"=>$token,
+                'token' => $token
+            ]);
+        } else {
+            return response()->json([
+                'message' => 'Échec de la connexion. Veuillez vérifier vos informations de connexion et réessayer.',
+            ], 401);
+        }
+    }
+
+    public function logout()
+    {
+        $user = Auth::user();
+
+        if ($user) {
+            // Suppression du jeton d'accès actuel
+            $user->currentAccessToken()->delete();
+
+            return response()->json([
+                'message' => 'Déconnexion réussie. À bientôt !',
+                'status_code' => 200
             ], 200);
+        } else {
+            return response()->json([
+                'message' => 'Utilisateur non identifié!',
+                'status_code' => 401
+            ], 401);
         }
     }
 

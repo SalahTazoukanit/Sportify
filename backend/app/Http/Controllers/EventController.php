@@ -16,7 +16,7 @@ class EventController extends Controller
         $user = User::find($userId);
 
         if (!$user) {
-            return redirect()->back()->with('error', 'User not found.');
+            return redirect()->back()->with('error', 'Utilisateur pas trouvé.');
         }
         // Récupérer l'événement
         $event = Event::findOrFail($id);
