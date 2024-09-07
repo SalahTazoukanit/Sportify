@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -11,10 +12,8 @@ class EventController extends Controller
 
     public function participate(Request $request, String $id)
     {
-        $userId = 1;
-        // Trouver l'utilisateur
-        $user = User::find($userId);
-        // $user->id = 1;
+        $user = Auth::user();
+        $user_id = $user->id;
 
         if (!$user) {
             return redirect()->back()->with('error', 'Utilisateur pas trouvé.');
@@ -22,17 +21,19 @@ class EventController extends Controller
         // Récupérer l'événement
         $event = Event::findOrFail($id);
 
-        if ($event->participants()->where('user_id', $userId)->exists()) {
+        if ($event->participants()->where('user_id', $user_id )->exists()) {
             return response()->json(['error' => "Vous êtes déjà inscrit à l'événement."], 409);
         }
 
         if ($event->aviable_places > 0) {
             $event->participants()->attach($user->id);
+
             $event->aviable_places -= 1;
             $event->save();
+
             return response()->json([
-                "message" => "Vous vous êtes bien enregistré(e).",
-                "aviable_places_update" => $$event->aviable_places,
+                "message" => "Vous vous êtes bien inscrit(e) à l'événement.",
+                "aviable_places_remaining" => $event->aviable_places,
             ], 200);
         } else {
             return response()->json([
@@ -42,6 +43,25 @@ class EventController extends Controller
 
     }
 
+    // public function showParticipantsEvent (String $id){
+
+    //     $event = Event::with('users')->findOrFail($id);
+
+    //     return response()->json([
+    //         $event,
+    //         // $event->users,
+    //         "messsage" => 'ok',
+    //     ]);
+    // }
+
+    public function showParticipantsEvent(Event $event, String $id){
+        // Charger l'événement avec ses participants
+        $event = Event::with('participants')->findOrFail($id);
+
+        return response()->json([
+            'event' => $event,
+        ],200);
+    }
     /**
      * Display a listing of the resource.
      */
@@ -58,10 +78,11 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
+        $user = Auth::user();
+
         $request->validate([
             'name' => 'string|max:200',
             'category_id' => 'integer',
-            'user_id' => 'integer',
             'description' => 'sometimes|max:1000',
             'date' => 'date|required',
             'position' => "string",
@@ -70,7 +91,18 @@ class EventController extends Controller
             'time' => "date_format:H:i",
         ]);
 
-        $event = Event::create($request->all());
+        $event = Event::create([
+            'user_id' => $user->id ,
+            'name' => $request->name ,
+            'category_id' =>  $request->category_id,
+            'description' =>  $request->description,
+            'date' =>  $request->date,
+            'position' =>  $request->position,
+            'aviable_places' =>  $request->aviable_places,
+            'image' =>  $request->image,
+            'time' =>  $request->time,
+        ]);
+
         if ($request->hasFile('image')) {
             $event->image = $request->file('image')->store('images/events', 'public');
         }
