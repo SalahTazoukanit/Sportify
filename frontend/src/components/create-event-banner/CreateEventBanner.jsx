@@ -8,7 +8,7 @@ const CreateEventBanner = () => {
         <div className="create-events hidden md:block md:w-1/2 md:h-96"></div>
         <div className="flex flex-col sm:p-5 md:gap-10 m-5 w-full md:w-1/2 justify-center md:pl-12 mr-0 bg-third-color text-white">
           <div className="flex flex-col md:gap-5">
-            <h2 className="font-bold">Créez votre propre Événement</h2>
+            <h2 className="font-semibold">Créez votre propre Événement</h2>
             <p>
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel,
               fuga?

@@ -51,7 +51,7 @@ const Header = () => {
           className={(nav) => (nav.isActive ? "nav-active" : "")}
           to={"/events"}
         >
-          Evenements
+          Événements
         </NavLink>
         <NavLink
           className={(nav) => (nav.isActive ? "nav-active" : "")}
@@ -64,7 +64,7 @@ const Header = () => {
             className={(nav) => (nav.isActive ? "nav-active" : "")}
             to={"/dashboard"}
           >
-            Mon Profile
+            Mon Profil
           </NavLink>
         }
         <NavLink
