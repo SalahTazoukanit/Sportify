@@ -1,6 +1,35 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import "./SignIn.css";
+import { useState } from "react";
+import axios from "axios";
 
 const SignIn = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
+
+  const login = (e) => {
+    e.preventDefault();
+
+    const user = {
+      email: email,
+      password: password,
+    };
+
+    axios
+      .post("http://127.0.0.1:8000/api/v1/users/login", user)
+      .then((response) => {
+        //get token form response and saved it in localStorage;
+        const token = response.data.token;
+        localStorage.setItem("token", token);
+        //message
+        alert(response.data.message);
+        //redirect to dashboard if login successfully ;
+        navigate("/dashboard");
+      });
+  };
+
   return (
     <>
       <div className="block-signin flex justify-center items-center w-full bg-gray-100">
@@ -16,26 +45,28 @@ const SignIn = () => {
               </NavLink>
             </div>
             <div className="flex flex-col justify-center gap-5 w-1/3">
-              <h2>Se Connecter</h2>
-              <form className="flex flex-col gap-10">
+              <h2 className="font-medium">Se Connecter</h2>
+              <form onSubmit={(e) => login(e)} className="flex flex-col gap-10">
                 <div>
-                  <label htmlFor="">Email</label>
+                  <label htmlFor="">EMAIL</label>
                   <input
                     className="input-text bg-white"
-                    type="text"
-                    name=""
-                    id=""
+                    type="email"
+                    name="email"
+                    onChange={(e) => setEmail(e.target.value)}
                     placeholder="Entrez votre mail"
+                    required
                   />
                 </div>
                 <div>
-                  <label htmlFor="">Mots de passe</label>
+                  <label htmlFor="">MOT DE PASS</label>
                   <input
-                    className="input-text"
+                    className="input-text bg-white"
                     type="password"
-                    name=""
-                    id=""
-                    placeholder="Entrez le mots de passe"
+                    name="password"
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Entrez votre mot de pass"
+                    required
                   />
                 </div>
                 <button className="btn-2">Se Connecter</button>
@@ -44,7 +75,7 @@ const SignIn = () => {
           </div>
           <div className="banner-inscription flex justify-start items-center w-2/5">
             <div className="flex flex-col ml-10 ">
-              <h2 className="">Bienvenue</h2>
+              <h2 className="text-white font-bold ">Bienvenue</h2>
               <NavLink to={"/sign-up"}>
                 <button className="text-white bg-black w-36 h-10 rounded opacity-50">
                   S'Enregistrer

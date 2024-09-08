@@ -37,16 +37,8 @@ h2{
 .general-block{
   margin-top: 4em;
 }
-/* sign-up && sign-in pages */
-.banner-inscription{
-background-image: url(assets/images/tennis.jpg);
-background-position: center;
-background-size: cover;
-background-repeat: no-repeat;
-}
-.block-signin{
-  height: 900px;
-}
+
+
 /* top-banner component */
 .top-banner{
   background-image: url(assets/images/piotr-osmenda-20K-JZ2ppbE-unsplash.jpg);
