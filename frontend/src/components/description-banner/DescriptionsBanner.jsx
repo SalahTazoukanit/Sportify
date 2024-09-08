@@ -4,7 +4,7 @@ const DescriptionBanner = () => {
       <div className="general-block">
         <div className="flex justify-center items-center">
           <div className="flex justify-center items-center w-5/6 gap-3">
-            <div className="w-1/3 flex flex-col border rounded-md justify-center items-center text-center p-4 bg-white">
+            <div className="shadow-custom w-1/3 flex flex-col border rounded-md justify-center items-center text-center p-4 bg-white">
               <img
                 className="w-28"
                 src="src/assets/images/calendar.png"
@@ -15,7 +15,7 @@ const DescriptionBanner = () => {
                 Pariatur soluta doloremque .
               </p>
             </div>
-            <div className="w-1/3 flex flex-col border rounded-md justify-center items-center text-center p-4 bg-white">
+            <div className="shadow-custom w-1/3  flex flex-col border rounded-md justify-center items-center text-center p-4 bg-white">
               <img
                 className="w-28"
                 src="src/assets/images/team.png"
@@ -26,7 +26,7 @@ const DescriptionBanner = () => {
                 Pariatur soluta doloremque .
               </p>
             </div>
-            <div className="w-1/3 flex flex-col border rounded-md justify-center items-center text-center p-4 bg-white">
+            <div className="shadow-custom w-1/3 flex flex-col border rounded-md justify-center items-center text-center p-4 bg-white">
               <img
                 className="w-28"
                 src="src/assets/images/gym.png"
