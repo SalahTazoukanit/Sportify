@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 class EventController extends Controller
 {
 
+    // function that is used to participate in an event ;
     public function participate(Request $request, String $id)
     {
         $user = Auth::user();
@@ -18,7 +19,7 @@ class EventController extends Controller
         if (!$user) {
             return redirect()->back()->with('error', 'Utilisateur pas trouvé.');
         }
-        // Récupérer l'événement
+
         $event = Event::findOrFail($id);
 
         if ($event->participants()->where('user_id', $user_id )->exists()) {
@@ -43,25 +44,16 @@ class EventController extends Controller
 
     }
 
-    // public function showParticipantsEvent (String $id){
-
-    //     $event = Event::with('users')->findOrFail($id);
-
-    //     return response()->json([
-    //         $event,
-    //         // $event->users,
-    //         "messsage" => 'ok',
-    //     ]);
-    // }
-
+    // function that shows all event participants ;
     public function showParticipantsEvent(Event $event, String $id){
-        // Charger l'événement avec ses participants
+
         $event = Event::with('participants')->findOrFail($id);
 
         return response()->json([
             'event' => $event,
         ],200);
     }
+
     /**
      * Display a listing of the resource.
      */
@@ -99,13 +91,11 @@ class EventController extends Controller
             'date' =>  $request->date,
             'position' =>  $request->position,
             'aviable_places' =>  $request->aviable_places,
-            'image' =>  $request->image,
+            'image' =>  $request->file('image')->store('images/events', 'public'),
             'time' =>  $request->time,
         ]);
 
-        if ($request->hasFile('image')) {
-            $event->image = $request->file('image')->store('images/events', 'public');
-        }
+
 
         return response()->json([
             'event' => $event,
