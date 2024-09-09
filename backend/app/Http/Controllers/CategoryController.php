@@ -8,6 +8,18 @@ use App\Models\Category;
 
 class CategoryController extends Controller
 {
+
+    //filter events by categories
+    public function filterEventsByCategory($name){
+
+        $category = Category::with(["events"])->where('name', 'like', '%' . $name . '%')
+        ->get();
+
+        return response()->json([
+            "category" => $category,
+        ],200);
+    }
+
     /**
      * Display a listing of the resource.
      */

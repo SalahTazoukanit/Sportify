@@ -31,6 +31,7 @@ Route::prefix('v1')->group(function () {
     //Categories Routes
     Route::prefix('/categories')->group(function () {
         Route::get('/', [CategoryController::class, 'index'])->name('index.categories');
+        Route::get('/filterEventsByCategory/{name}', [CategoryController::class, 'filterEventsByCategory'])->name('filterEventsByCategory.categories');
         Route::get('/{id}', [CategoryController::class, 'show'])->name('show.category');
 
     });
