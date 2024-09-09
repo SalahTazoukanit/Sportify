@@ -65,6 +65,18 @@ class EventController extends Controller
         ], 200);
     }
 
+    //function to get own events ;
+    public function getOwnEvents(){
+
+        $user = Auth::user();
+
+        $events = Event::where('user_id', $user->id)->get();
+
+        return response()->json([
+            "events" => $events
+        ],200);
+    }
+
     /**
      * Store a newly created resource in storage.
      */

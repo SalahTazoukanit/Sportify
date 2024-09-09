@@ -48,6 +48,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
         //Events Routes
         Route::prefix('/events')->group(function () {
+            Route::post('/getOwnEvents', [EventController::class, 'getOwnEvents'])->name('getOwnEvents.event');
             Route::post('/store', [EventController::class, 'store'])->name('store.event');
             Route::put('/update/{id}', [EventController::class, 'update'])->name('update.event');
             Route::delete('/delete/{id}', [EventController::class, 'destroy'])->name('destroy.event');
@@ -57,6 +58,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
         //Categories Routes
         Route::prefix('/categories')->group(function () {
+            Route::post('/', [CategoryController::class, 'index'])->name('index.categories');
             Route::post('/store', [CategoryController::class, 'store'])->name('store.categories');
             Route::put('/update/{id}', [CategoryController::class, 'update'])->name('update.categories');
             Route::delete('/delete/{id}', [CategoryController::class, 'destroy'])->name('delete.categories');
