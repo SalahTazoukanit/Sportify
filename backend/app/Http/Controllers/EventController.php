@@ -54,16 +54,6 @@ class EventController extends Controller
         ],200);
     }
 
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        $events = Event::all();
-        return response()->json([
-            'events' => $events
-        ], 200);
-    }
 
     //function to get own events ;
     public function getOwnEvents(){
@@ -75,6 +65,31 @@ class EventController extends Controller
         return response()->json([
             "events" => $events
         ],200);
+    }
+
+    //filter events by name
+    public function filterEventsByName($name){
+
+        $event = Event::where('name', 'like', '%' . $name . '%')
+            ->get();
+
+        $number_events = $event->count();
+
+        return response()->json([
+            "event" => $event,
+            "number_events" => $number_events
+        ],200);
+    }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        $events = Event::all();
+        return response()->json([
+            'events' => $events
+        ], 200);
     }
 
     /**

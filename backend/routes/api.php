@@ -23,6 +23,7 @@ Route::prefix('v1')->group(function () {
     // Events Routes
     Route::prefix('/events')->group(function () {
         Route::get('/', [EventController::class, 'index'])->name('index.events');
+        Route::get('/filterEventsByName/{name}', [EventController::class, 'filterEventsByName'])->name('filterEventsByName.events');
         Route::get('/{id}', [EventController::class, 'show'])->name('show.event');
 
     });
