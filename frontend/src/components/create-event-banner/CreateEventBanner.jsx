@@ -15,7 +15,7 @@ const CreateEventBanner = () => {
             </p>
           </div>
           <NavLink>
-            <div className="bg-second-color w-52 h-10 flex justify-center rounded">
+            <div className="bg-second-color md:w-52 md:h-10 flex justify-center rounded">
               <button className="">Créez un événement</button>
             </div>
           </NavLink>

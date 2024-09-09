@@ -8,7 +8,7 @@ const Event = ({ event }) => {
   };
   return (
     <>
-      <div className="boxShadow shadow-custom bg-white rounded-md flex flex-wrap justify-center p-1 md:p-6 ">
+      <div className="boxShadow shadow-custom bg-white rounded-xl flex flex-wrap justify-center p-1 md:p-6 ">
         <div className="flex flex-col md:w-full justify-center ">
           <NavLink>
             <div className="flex justify-center items-center mb-1">
@@ -48,9 +48,6 @@ const Event = ({ event }) => {
                   Événement complet .
                 </p>
               )}
-              {/* <p className="text-third-color opacity-65">
-                {event.aviable_places}
-              </p> */}
               {/* <button className="md:border md:p-1 md:rounded bg-second-color md:text-white">
                 Participer
               </button> */}

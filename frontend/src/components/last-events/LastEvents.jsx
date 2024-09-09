@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import Event from "../event-card/Event";
 import SeeMoreButton from "../see-more-button/SeeMoreButton";
 import axios from "axios";
@@ -19,16 +20,20 @@ const LastEvents = () => {
     <>
       <div className="general-block flex flex-col items-center">
         <div className="flex flex-col justify-center w-5/6 ">
-          <h2 className="text-start font-semibold ">
+          <h2 className="text-start font-semibold">
             Nos derniers événements disponibles
           </h2>
-          <div className="general-block grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 ">
+          <div className="general-block grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 ">
             {events &&
               events
-                .slice(0, 6)
+                .slice(0, 4)
                 .map((event) => <Event key={event.id} event={event} />)}
           </div>
-          <SeeMoreButton />
+        </div>
+        <div className="general-block">
+          <NavLink to={"/events"}>
+            <SeeMoreButton />
+          </NavLink>
         </div>
       </div>
     </>
