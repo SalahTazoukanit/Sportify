@@ -11,8 +11,8 @@ const BottomBanner = () => {
               src="src/assets/images/footingTeam.jpg"
               alt=""
             />
-            <p className="hidden md:block text-center">
-              Unis par le sport, poussés par la passion
+            <p className="hidden md:block text-center italic opacity-70">
+              " Unis par le sport, poussés par la passion "
             </p>
           </div>
           <div className="md:w-2/5">
@@ -21,8 +21,8 @@ const BottomBanner = () => {
               src="src/assets/images/footingTeamOld.jpg"
               alt=""
             />
-            <p className="hidden md:block text-center">
-              Le plaisir du sport, à tout âge
+            <p className="hidden md:block text-center italic opacity-70 ">
+              " Le plaisir du sport, à tout âge "
             </p>
           </div>
           <div className="md:w-1/5">
@@ -31,8 +31,8 @@ const BottomBanner = () => {
               src="src/assets/images/leah-hetteberg-KkoBekO8JtU-unsplash.jpg"
               alt=""
             />
-            <p className="hidden md:block text-center">
-              L'effort collectif, la clé de la réussite
+            <p className="hidden md:block text-center italic opacity-70">
+              " L'effort collectif, la clé de la réussite "
             </p>
           </div>
         </div>
