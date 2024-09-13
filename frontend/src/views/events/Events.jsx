@@ -47,17 +47,17 @@ const Events = () => {
       </div>
       <div className="general-block flex justify-center">
         <div className="flex justify-center md:w-5/6 bg-third-color border rounded-xl">
-          <div className="flex justify-center w-2/5 p-10 rounded-l-lg gap-1">
+          <div className="flex justify-center md:w-2/5 p-10 rounded-l-lg gap-1">
             <input
               onChange={handleInputChange}
               value={searchBar}
-              className="input-text text-center"
+              className="rounded md:w-full text-center"
               type="text"
               placeholder="Rechercher"
             />
             <div className="flex justify-center bg-second-color rounded">
               <img
-                className="w-8 text-white"
+                className="w-8 text-white hidden md:block"
                 src="src/assets/images/icons8-search-50.png"
                 alt="image search"
               />
@@ -65,7 +65,6 @@ const Events = () => {
           </div>
         </div>
       </div>
-
       {searchBar ? (
         <div className="general-block ">
           <div className="flex flex-wrap justify-center m-10 gap-2">
