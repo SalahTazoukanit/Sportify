@@ -8,6 +8,7 @@ import Contact from "./views/contact/Contact";
 import SignIn from "./views/sign-in/SignIn";
 import SignUp from "./views/sign-up/SignUp";
 import Dashboard from "./views/dashboard/Dashboard";
+import EventDetail from "./views/event-detail/EventDetail";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/events/event-details/:id" element={<EventDetail />} />
         </Routes>
       </BrowserRouter>
     </>

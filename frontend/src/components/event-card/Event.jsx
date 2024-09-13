@@ -10,7 +10,7 @@ const Event = ({ event }) => {
     <>
       <div className="boxShadow shadow-custom bg-white rounded-xl flex flex-wrap justify-center p-1 md:p-6 ">
         <div className="flex flex-col md:w-full justify-center ">
-          <NavLink>
+          <NavLink to={`/events/event-details/${event.id}`}>
             <div className="flex justify-center items-center mb-1">
               <img
                 className="md:w-full md:h-56 rounded w-2/3"
