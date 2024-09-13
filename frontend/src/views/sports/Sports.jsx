@@ -27,6 +27,8 @@ const Sports = () => {
 
   const handleSelect = (e) => {
     const category = e.target.value;
+    console.log(category);
+
     setCategoryName(category);
     filterEventsByCategory(category);
   };
@@ -49,13 +51,13 @@ const Sports = () => {
               className="rounded md:w-full text-center text-sm"
               name=""
               id=""
+              onChange={handleSelect}
+              value={categoryName}
             >
               <option value="">Selectionner la categorie recherchée</option>
               {categories &&
                 categories.map((category) => (
                   <option
-                    onChange={handleSelect}
-                    value={categoryName}
                     key={category.id}
                     // onChange={set}
                   >

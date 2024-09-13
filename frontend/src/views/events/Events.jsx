@@ -8,6 +8,34 @@ const Events = () => {
   const [events, setEvents] = useState([]);
   const [searchBar, setSearchBar] = useState("");
   const [filteredEvents, setFilteredEvents] = useState("");
+  const [categories, setCategories] = useState([]);
+  const [categoryName, setCategoryName] = useState("");
+
+  const getCategories = () => {
+    axios.get("http://127.0.0.1:8000/api/v1/categories/").then((response) => {
+      console.log(response.data.categories);
+      setCategories(response.data.categories);
+    });
+  };
+
+  const filterEventsByCategory = (categoryName) => {
+    axios
+      .get(
+        "http://127.0.0.1:8000/api/v1/categories/filterEventsByCategory/" +
+          categoryName
+      )
+      .then((response) => {
+        console.log(response);
+      });
+  };
+
+  const handleSelect = (e) => {
+    const category = e.target.value;
+    console.log(category);
+
+    setCategoryName(category);
+    filterEventsByCategory(category);
+  };
 
   const getEvents = () => {
     axios.get("http://127.0.0.1:8000/api/v1/events/").then((response) => {
@@ -35,6 +63,7 @@ const Events = () => {
 
   useEffect(() => {
     getEvents();
+    getCategories();
   }, []);
 
   return (
@@ -47,7 +76,20 @@ const Events = () => {
       </div>
       <div className="general-block flex justify-center">
         <div className="flex justify-center md:w-5/6 bg-third-color border rounded-xl">
-          <div className="flex justify-center md:w-2/5 p-10 rounded-l-lg gap-1">
+          <div className="flex justify-center md:w-3/5 p-10 rounded-l-lg gap-1">
+            <select
+              className="rounded md:w-full text-center text-sm"
+              name=""
+              id=""
+              onChange={handleSelect}
+              value={categoryName}
+            >
+              <option value="">Selectionner la categorie recherchée</option>
+              {categories &&
+                categories.map((category) => (
+                  <option key={category.id}>{category.name}</option>
+                ))}
+            </select>
             <input
               onChange={handleInputChange}
               value={searchBar}
@@ -57,7 +99,7 @@ const Events = () => {
             />
             <div className="flex justify-center bg-second-color rounded">
               <img
-                className="w-8 text-white hidden md:block"
+                className=" text-white hidden md:block"
                 src="src/assets/images/icons8-search-50.png"
                 alt="image search"
               />
