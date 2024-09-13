@@ -45,7 +45,7 @@ class EventController extends Controller
     }
 
     // function that shows all event participants ;
-    public function showParticipantsEvent(Event $event, String $id){
+    public function showParticipantsEvent( String $id){
 
         $event = Event::with('participants')->findOrFail($id);
 
@@ -98,6 +98,12 @@ class EventController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
+
+        if(!$user){
+            return response()->json([
+                "message" => "Vous n'etes pas connecté(e) ."
+            ]);
+        }
 
         $request->validate([
             'name' => 'string|max:200',

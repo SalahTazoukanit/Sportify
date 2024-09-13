@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
+use App\Models\Event;
 
 class CategoryController extends Controller
 {
@@ -12,11 +13,19 @@ class CategoryController extends Controller
     //filter events by categories
     public function filterEventsByCategory($name){
 
-        $category = Category::with(["events"])->where('name', 'like', '%' . $name . '%')
+        $category = Category::with(["events"])
+        ->where('name', 'like', '%' . $name . '%')
         ->get();
+
+        $allEvents = [];
+
+        for ($i=0; $i < count($category); $i++) {
+           $allEvents = $category[$i]->events ;
+        }
 
         return response()->json([
             "category" => $category,
+            "allEvents" => $allEvents
         ],200);
     }
 
@@ -26,6 +35,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
+
         return response()->json([
             "categories" => $categories
         ]);
