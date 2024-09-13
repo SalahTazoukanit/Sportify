@@ -1,11 +1,13 @@
 import axios from "axios";
 import Header from "../../components/header/Header";
 import "./Events.css";
+import Event from "../../components/event-card/Event.jsx";
 import { useState, useEffect } from "react";
 
 const Events = () => {
   const [events, setEvents] = useState([]);
-  const [searchBar, setSearchBar] = useState(""); // State pour garder la valeur de l'input
+  const [searchBar, setSearchBar] = useState("");
+  const [filteredEvents, setFilteredEvents] = useState("");
 
   const getEvents = () => {
     axios.get("http://127.0.0.1:8000/api/v1/events/").then((response) => {
@@ -15,21 +17,20 @@ const Events = () => {
   };
 
   const getEventsByName = (searchBar) => {
-    // Reçois le terme recherché ici
     axios
       .get(
         "http://127.0.0.1:8000/api/v1/events/filterEventsByName/" + searchBar
       )
       .then((response) => {
         console.log(response);
+        setFilteredEvents(response.data.event);
       });
   };
 
-  // Appel de la fonction à chaque changement de l'input
   const handleInputChange = (e) => {
     const event = e.target.value;
-    setSearchBar(event); // Met à jour la valeur de l'input
-    getEventsByName(event); // Passe la valeur de l'input à la fonction de filtre
+    setSearchBar(event);
+    getEventsByName(event);
   };
 
   useEffect(() => {
@@ -48,8 +49,8 @@ const Events = () => {
         <div className="flex justify-center md:w-5/6 bg-third-color border rounded-xl">
           <div className="flex justify-center w-2/5 p-10 rounded-l-lg gap-1">
             <input
-              onChange={handleInputChange} // Appel de la fonction à chaque changement
-              value={searchBar} // Synchronisation de l'input avec le state
+              onChange={handleInputChange}
+              value={searchBar}
               className="input-text text-center"
               type="text"
               placeholder="Rechercher"
@@ -64,7 +65,30 @@ const Events = () => {
           </div>
         </div>
       </div>
-      <div className="general-block "></div>
+
+      {searchBar ? (
+        <div className="general-block ">
+          <div className="flex flex-wrap justify-center m-10 gap-2">
+            {filteredEvents &&
+              filteredEvents.map((filteredEvent) => (
+                <div className="md:w-1/4" key={filteredEvent.id}>
+                  <Event className="w-40" event={filteredEvent} />
+                </div>
+              ))}
+          </div>
+        </div>
+      ) : (
+        <div className="general-block ">
+          <div className="flex flex-wrap justify-center m-10 gap-2">
+            {events &&
+              events.map((event) => (
+                <div className="md:w-1/4" key={event.id}>
+                  <Event className="w-40" event={event} />
+                </div>
+              ))}
+          </div>
+        </div>
+      )}
     </>
   );
 };
