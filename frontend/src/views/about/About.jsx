@@ -8,11 +8,11 @@ const About = () => {
       {/* images */}
       <div className="flex m-5 justify-center items-center">
         <div className="flex justify-center">
-          <div className="flex flex-col md:w-11/12 justify-center">
-            <div className="general-block flex w-full">
-              <div className="flex flex-col md:w-1/2">
+          <div className="flex flex-col justify-center">
+            <div className="general-block flex ">
+              <div className="flex flex-col justify-center items-center md:w-2/3">
                 <h2 className="font-semibold">À Propos de Sportify</h2>
-                <p className="text-third-color opacity-70 italic">
+                <p className="text-third-color text-start opacity-70 italic w-5/6">
                   Sportify est une application conçue pour tous les passionnés
                   de sport qui aiment pratiquer en groupe, mais qui n'ont pas
                   forcément des amis ou des proches disponibles pour chaque
@@ -23,37 +23,42 @@ const About = () => {
                   fluide. <br />
                 </p>
               </div>
-              <div className="about md:w-1/3">
+              <div className="about hidden md:block md:w-1/3">
                 <img
                   src="/src/assets/images/close-up-athlete-running.jpg"
                   alt=""
                 />
               </div>
             </div>
-            <div className="mt-2">
-              <h2 className="font-semibold">
-                Pourquoi Sportify est née ? <br />
-              </h2>
-              <p className="text-third-color opacity-70 italic">
-                L'idée de Sportify est née d'un constat simple, mais récurrent :
-                organiser un match de football entre amis ou trouver des
-                partenaires pour tout autre sport peut devenir un véritable
-                casse-tête. Très souvent, il faut contacter individuellement
-                chaque personne, vérifier leurs disponibilités, et même une fois
-                l'équipe formée, des imprévus peuvent survenir à la dernière
-                minute. Cela conduit à des équipes déséquilibrées, obligeant à
-                chercher des remplaçants en urgence, et rendant l'organisation
-                stressante et peu efficace. C'est suite à ces difficultés
-                personnelles que l'idée de créer Sportify a émergé. En tant
-                qu'amateur de football, il m'est souvent arrivé de vouloir
-                organiser un match, mais de me retrouver face à des
-                complications pour réunir assez de joueurs ou équilibrer les
-                équipes. Je me suis dit qu'il devait exister une solution plus
-                simple et pratique pour permettre à tous les amateurs de sport
-                de s'organiser facilement et de trouver des partenaires
-                rapidement, sans avoir à gérer manuellement toute la logistique.{" "}
-                <br />
-              </p>
+            <div className="mt-2 w-11/12 flex justify-center">
+              <div className="flex flex-col w-5/6">
+                <h2 className="font-semibold">
+                  Pourquoi Sportify est née ? <br />
+                </h2>
+                <p className="text-third-color opacity-70 italic">
+                  L'idée de Sportify est née d'un constat simple, mais récurrent
+                  : organiser un match de football entre amis ou trouver des
+                  partenaires pour tout autre sport peut devenir un véritable
+                  casse-tête. Très souvent, il faut contacter individuellement
+                  chaque personne, vérifier leurs disponibilités, et même une
+                  fois l'équipe formée, des imprévus peuvent survenir à la
+                  dernière minute. Cela conduit à des équipes déséquilibrées,
+                  obligeant à chercher des remplaçants en urgence, et rendant
+                  l'organisation stressante et peu efficace. C'est suite à ces
+                  difficultés personnelles que l'idée de créer Sportify a
+                  émergé. En tant qu'amateur de football, il m'est souvent
+                  arrivé de vouloir organiser un match, mais de me retrouver
+                  face à des complications pour réunir assez de joueurs ou
+                  équilibrer les équipes. Je me suis dit qu'il devait exister
+                  une solution plus simple et pratique pour permettre à tous les
+                  amateurs de sport de s'organiser facilement et de trouver des
+                  partenaires rapidement, sans avoir à gérer manuellement toute
+                  la logistique. <br />
+                </p>
+              </div>
+              <div>
+                <img src="" alt="" />
+              </div>
             </div>
             <div className="mt-2">
               <h2 className="font-semibold">
