@@ -7,9 +7,9 @@ const About = () => {
       <Header />
       {/* images */}
       <div className="flex m-5 justify-center items-center">
-        <div className="flex justify-center">
-          <div className="flex flex-col justify-center">
-            <div className="general-block flex ">
+        <div className="flex flex-col justify-center ">
+          <div className="general-block flex flex-col justify-center">
+            <div className="flex ">
               <div className="flex flex-col justify-center items-center md:w-2/3">
                 <h2 className="font-semibold">À Propos de Sportify</h2>
                 <p className="text-third-color text-start opacity-70 italic w-5/6">
@@ -30,12 +30,15 @@ const About = () => {
                 />
               </div>
             </div>
-            <div className="mt-2 w-11/12 flex justify-center">
-              <div className="flex flex-col w-5/6">
+            <div className="flex ">
+              <div className="why-sportify hidden md:block md:w-1/3">
+                <img src="/src/assets/images/why-sportify.png" alt="" />
+              </div>
+              <div className="flex flex-col justify-center items-center md:w-2/3">
                 <h2 className="font-semibold">
                   Pourquoi Sportify est née ? <br />
                 </h2>
-                <p className="text-third-color opacity-70 italic">
+                <p className="text-third-color text-start opacity-70 italic w-5/6">
                   L'idée de Sportify est née d'un constat simple, mais récurrent
                   : organiser un match de football entre amis ou trouver des
                   partenaires pour tout autre sport peut devenir un véritable
@@ -56,15 +59,17 @@ const About = () => {
                   la logistique. <br />
                 </p>
               </div>
-              <div>
-                <img src="" alt="" />
-              </div>
             </div>
-            <div className="mt-2">
+          </div>
+
+          {/* paragraph */}
+
+          <div className="flex flex-col justify-center items-center w-full">
+            <div className="flex flex-col justify-center items-center ">
               <h2 className="font-semibold">
                 Notre Mission <br />
               </h2>
-              <p className="text-third-color opacity-70 italic">
+              <p className="text-third-color text-start opacity-70 italic w-5/6">
                 L'objectif de Sportify est de faciliter la vie des sportifs en
                 leur offrant une plateforme dédiée où ils peuvent non seulement
                 créer ou rejoindre des événements sportifs, mais aussi entrer en
@@ -76,56 +81,66 @@ const About = () => {
                 vraiment : jouer et profiter du moment. <br />
               </p>
             </div>
-            <div className="mt-2">
-              <h2 className="font-semibold">
-                Une Communauté de Sportifs <br />
-              </h2>
-              <p className="text-third-color opacity-70 italic">
-                Au-delà de l'organisation, Sportify se veut être une véritable
-                communauté de sportifs. Que vous soyez un athlète confirmé ou un
-                simple amateur, l'application vous permet de rencontrer d'autres
-                personnes qui partagent vos intérêts, de tisser des liens, et de
-                participer à des événements, qu'ils soient compétitifs ou
-                simplement pour le plaisir. Chaque utilisateur peut créer ou
-                rejoindre des événements, échanger via la messagerie interne, et
-                organiser des matchs équilibrés en toute simplicité. <br />
-              </p>
+            <div className="flex general-block">
+              <div className="flex flex-col justify-center items-center ">
+                <h2 className="font-semibold">
+                  Une Communauté de Sportifs <br />
+                </h2>
+                <p className="text-third-color text-start opacity-70 italic w-5/6">
+                  Au-delà de l'organisation, Sportify se veut être une véritable
+                  communauté de sportifs. Que vous soyez un athlète confirmé ou
+                  un simple amateur, l'application vous permet de rencontrer
+                  d'autres personnes qui partagent vos intérêts, de tisser des
+                  liens, et de participer à des événements, qu'ils soient
+                  compétitifs ou simplement pour le plaisir. Chaque utilisateur
+                  peut créer ou rejoindre des événements, échanger via la
+                  messagerie interne, et organiser des matchs équilibrés en
+                  toute simplicité. <br />
+                </p>
+              </div>
             </div>
-            <div className="mt-2">
-              <h2 className="font-semibold">
-                Un Concept Innovant <br />
-              </h2>
-              <p className="text-third-color opacity-70 italic">
-                Sportify se distingue par son concept novateur. En centralisant
-                la création d'événements sportifs, la recherche de partenaires,
-                et la gestion des communications, l'application offre une
-                expérience complète et intuitive. Que vous souhaitiez simplement
-                jouer au foot après le travail ou organiser une compétition plus
-                structurée, Sportify vous fournit tous les outils nécessaires
-                pour le faire de manière simple et efficace. <br />
-              </p>
+            <div className="flex general-block">
+              <div className="flex flex-col justify-center items-center ">
+                <h2 className="font-semibold">
+                  Un Concept Innovant <br />
+                </h2>
+                <p className="text-third-color text-start opacity-70 italic w-5/6">
+                  Sportify se distingue par son concept novateur. En
+                  centralisant la création d'événements sportifs, la recherche
+                  de partenaires, et la gestion des communications,
+                  l'application offre une expérience complète et intuitive. Que
+                  vous souhaitiez simplement jouer au foot après le travail ou
+                  organiser une compétition plus structurée, Sportify vous
+                  fournit tous les outils nécessaires pour le faire de manière
+                  simple et efficace. <br />
+                </p>
+              </div>
             </div>
-            <div className="mt-2">
-              <h2 className="font-semibold">
-                En Résumé <br />
-              </h2>
-              <p className="text-third-color opacity-70 italic">
-                Sportify est l'application idéale pour tous ceux qui aiment
-                pratiquer le sport en groupe, mais qui ont besoin de partenaires
-                ou d'une solution pour simplifier l'organisation de leurs
-                événements. Notre mission est de permettre à chaque utilisateur
-                de vivre pleinement sa passion sportive, sans les tracas liés à
-                la logistique ou à la recherche de coéquipiers. Avec Sportify,
-                vous n'avez plus besoin de vous soucier de savoir qui est
-                disponible : il vous suffit de créer ou de rejoindre un
-                événement, et de commencer à jouer. Rejoignez la communauté
-                Sportify et vivez le sport autrement, en toute convivialité et
-                simplicité !
-              </p>
+            <div className="flex general-block">
+              <div className="flex flex-col justify-center items-center ">
+                <h2 className="font-semibold">
+                  En Résumé <br />
+                </h2>
+                <p className="text-third-color text-start opacity-70 italic w-5/6">
+                  Sportify est l'application idéale pour tous ceux qui aiment
+                  pratiquer le sport en groupe, mais qui ont besoin de
+                  partenaires ou d'une solution pour simplifier l'organisation
+                  de leurs événements. Notre mission est de permettre à chaque
+                  utilisateur de vivre pleinement sa passion sportive, sans les
+                  tracas liés à la logistique ou à la recherche de coéquipiers.
+                  Avec Sportify, vous n'avez plus besoin de vous soucier de
+                  savoir qui est disponible : il vous suffit de créer ou de
+                  rejoindre un événement, et de commencer à jouer. Rejoignez la
+                  communauté Sportify et vivez le sport autrement, en toute
+                  convivialité et simplicité !
+                </p>
+              </div>
+              {/* <div className="about hidden md:block md:w-1/3"></div> */}
             </div>
           </div>
         </div>
       </div>
+      {/* footer */}
     </>
   );
 };

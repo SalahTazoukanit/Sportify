@@ -104,7 +104,7 @@ const Events = () => {
               value={categoryName}
             >
               <option name="option" value="">
-                Selectionnez selon le sport
+                Rechercher selon le sport
               </option>
               {categories &&
                 categories.map((category) => (
