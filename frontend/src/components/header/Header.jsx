@@ -1,8 +1,26 @@
+import axios from "axios";
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false); // État pour gérer l'ouverture/fermeture du menu
+
+  const token = localStorage.getItem("token");
+  const headers = {
+    Authorization: "Bearer " + token,
+  };
+
+  const navigate = useNavigate();
+
+  const logout = () => {
+    axios
+      .post("http://127.0.0.1:8000/api/v1/users/logout", {}, { headers })
+      .then((response) => {
+        alert(response.data.message);
+        localStorage.removeItem("token");
+        navigate("/");
+      });
+  };
 
   return (
     <div className="bg-third-color flex flex-col md:flex-row p-4">
@@ -59,14 +77,16 @@ const Header = () => {
         >
           Sports
         </NavLink>
-        {
+        {token ? (
           <NavLink
             className={(nav) => (nav.isActive ? "nav-active" : "")}
             to={"/dashboard"}
           >
             Mon Profil
           </NavLink>
-        }
+        ) : (
+          ""
+        )}
         <NavLink
           className={(nav) => (nav.isActive ? "nav-active" : "")}
           to={"/a-propos"}
@@ -79,9 +99,15 @@ const Header = () => {
         >
           Contact
         </NavLink>
-        <div className="btn flex justify-center items-center rounded">
-          <NavLink to={"/sign-in"}>Connexion</NavLink>
-        </div>
+        {!token ? (
+          <div className="btn flex justify-center items-center rounded">
+            <NavLink to={"/sign-in"}>Connexion</NavLink>
+          </div>
+        ) : (
+          <div className="bg-orange-500 p-1 flex justify-center items-center rounded">
+            <button onClick={logout}>Déconnexion</button>
+          </div>
+        )}
       </div>
     </div>
   );

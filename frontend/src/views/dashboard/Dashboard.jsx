@@ -1,4 +1,13 @@
+import Footer from "../../components/footer/Footer";
+import Header from "../../components/header/Header";
+
 const Dashboard = () => {
-  return <>ciao</>;
+  return (
+    <>
+      <Header />
+
+      <Footer />
+    </>
+  );
 };
 export default Dashboard;
