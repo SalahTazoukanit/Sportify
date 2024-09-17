@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Header from "../../components/header/Header";
 import "./EventDetail.css";
+import Footer from "../../components/footer/Footer";
 
 const EventDetail = () => {
   const { id } = useParams();
@@ -69,7 +70,7 @@ const EventDetail = () => {
           <div>{event.description && event.description}</div>
         </div>
       </div>
-      <div className="general-block"></div>
+      <Footer />
     </>
   );
 };

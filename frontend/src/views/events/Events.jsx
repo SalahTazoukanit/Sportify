@@ -4,6 +4,7 @@ import "./Events.css";
 import Event from "../../components/event-card/Event.jsx";
 import { useState, useEffect } from "react";
 import CreateEventBanner from "../../components/create-event-banner/CreateEventBanner";
+import Footer from "../../components/footer/Footer.jsx";
 
 const Events = () => {
   const [events, setEvents] = useState([]);
@@ -160,7 +161,7 @@ const Events = () => {
       <div className="general-block">
         <CreateEventBanner />
       </div>
-      <div>footer</div>
+      <Footer />
     </>
   );
 };

@@ -5,6 +5,7 @@ import LastEvents from "../../components/last-events/LastEvents";
 import CreateEventBanner from "../../components/create-event-banner/CreateEventBanner";
 import Sport from "../../components/sport-card/Sport";
 import BottomBanner from "../../components/bottom-banner/BottomBanner";
+import Footer from "../../components/footer/Footer";
 
 const Homepage = () => {
   return (
@@ -17,8 +18,8 @@ const Homepage = () => {
         <CreateEventBanner />
         <Sport />
         <BottomBanner />
+        <Footer />
       </div>
-      <div className="mb-40"></div>
     </>
   );
 };

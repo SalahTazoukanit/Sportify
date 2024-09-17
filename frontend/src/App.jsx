@@ -8,6 +8,7 @@ import Contact from "./views/contact/Contact";
 import SignIn from "./views/sign-in/SignIn";
 import SignUp from "./views/sign-up/SignUp";
 import Dashboard from "./views/dashboard/Dashboard";
+import LegalMentions from "./views/legal-mentions/LegalMentions";
 import EventDetail from "./views/event-detail/EventDetail";
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path="/sports" element={<Sports />} />
           <Route path="/a-propos" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/legal-mentions" element={<LegalMentions />} />
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/dashboard" element={<Dashboard />} />
