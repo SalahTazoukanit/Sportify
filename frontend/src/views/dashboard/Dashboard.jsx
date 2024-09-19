@@ -1,4 +1,4 @@
-import AddEvent from "../../components/add-event/AddEvent";
+import AddEventButton from "../../components/add-event-button/AddEventButton";
 import Footer from "../../components/footer/Footer";
 import Header from "../../components/header/Header";
 import "./Dashboard.css";
@@ -13,7 +13,7 @@ const Dashboard = () => {
         </h1>
       </div>
       <div className="general-block p-5">
-        <AddEvent />
+        <AddEventButton />
       </div>
 
       {/* <div className="general-block flex justify-center items-center ">

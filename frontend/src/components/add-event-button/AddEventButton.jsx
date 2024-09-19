@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-const AddEvent = () => {
+const AddEventButton = () => {
   const token = localStorage.getItem("token");
   return (
     <>
@@ -14,4 +14,4 @@ const AddEvent = () => {
     </>
   );
 };
-export default AddEvent;
+export default AddEventButton;

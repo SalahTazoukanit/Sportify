@@ -10,7 +10,7 @@ import SignUp from "./views/sign-up/SignUp";
 import Dashboard from "./views/dashboard/Dashboard";
 import LegalMentions from "./views/legal-mentions/LegalMentions";
 import EventDetail from "./views/event-detail/EventDetail";
-
+import AddEvent from "./views/add-event/AddEvent";
 
 function App() {
   return (
@@ -27,7 +27,7 @@ function App() {
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/dashboard/add-event" element={} />
+          <Route path="/dashboard/add-event" element={<AddEvent />} />
           <Route path="/events/event-details/:id" element={<EventDetail />} />
         </Routes>
       </BrowserRouter>
