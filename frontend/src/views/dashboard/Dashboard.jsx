@@ -1,6 +1,7 @@
 import AddEventButton from "../../components/add-event-button/AddEventButton";
 import Footer from "../../components/footer/Footer";
 import Header from "../../components/header/Header";
+import OwnEvents from "../../components/own-events/OwnEvents";
 import "./Dashboard.css";
 
 const Dashboard = () => {
@@ -16,7 +17,7 @@ const Dashboard = () => {
         <AddEventButton />
       </div>
 
-      {/* <div className="general-block flex justify-center items-center ">
+      <div className="general-block flex justify-center items-center ">
         <div className="flex justify-center items-center md:w-1/2 border bg-white rounded md:h-72 p-5 md:gap-5">
           <div className="flex flex-col">
             <div className="border-b">
@@ -56,7 +57,8 @@ const Dashboard = () => {
             </button>
           </div>
         </div>
-      </div> */}
+      </div>
+      <OwnEvents />
       <Footer />
     </>
   );
