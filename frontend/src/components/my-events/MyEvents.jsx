@@ -11,6 +11,12 @@ const MyEvents = () => {
     Authorization: "Bearer " + token,
   };
 
+  const getImageUrl = (image) => {
+    if (image) {
+      return "http://127.0.0.1:8000/storage/" + image;
+    }
+  };
+
   const getMyEvents = () => {
     axios
       .post(
@@ -40,31 +46,30 @@ const MyEvents = () => {
   return (
     <>
       <div className="general-block">
-        <div className="flex flex-col bg-white">
-          <div className="flex mb-5 justify-center">
-            <h3 className="w-1/6"></h3>
-            <h3 className="w-1/6 font-semibold">Événement</h3>
-            <h3 className="w-1/6 font-semibold">Status</h3>
-            <div className="flex justify-center items-center gap-10">
-              <h3 className="p-1"></h3>
-              <h3 className="p-1"></h3>
-            </div>
-          </div>
+        <div className="flex flex-col">
           <div className="flex flex-col gap-3">
+            <h2 className="font-semibold text-center">Tous vos Événements</h2>
             {myEvents &&
               myEvents.map((myEvent) => (
                 <div
                   key={myEvent.id}
-                  className="flex justify-center items-center"
+                  className="flex justify-center items-center border-b"
                 >
                   <div className="md:w-1/6 hidden md:block">
                     <img
-                      className="md:w-40"
-                      src={myEvent.image}
+                      className="md:w-40 rounded-md"
+                      src={
+                        myEvent.image.startsWith("images/events")
+                          ? getImageUrl(myEvent.image)
+                          : "src/assets/images/sports-removebg-preview.png"
+                      }
                       alt={myEvent.name}
                     />
                   </div>
                   <h3 className="md:w-1/6">{myEvent.name}</h3>
+                  <h3 className="md:w-1/6">
+                    {new Date(myEvent.date).toLocaleDateString()}{" "}
+                  </h3>
                   <h3 className="md:w-1/6 hidden md:block">
                     {myEvent.status && myEvent.status === "pending" ? (
                       <span className="text-orange-500 italic">En Attente</span>
@@ -73,12 +78,12 @@ const MyEvents = () => {
                     )}
                   </h3>
                   <div className="flex justify-center items-center gap-10">
-                    <div className="bg-green-500 text-white p-1 rounded">
-                      <NavLink>
+                    <div className="bg-green-500 text-white p-1 rounded hover:opacity-50">
+                      <NavLink to={""}>
                         <button>Modifier</button>
                       </NavLink>
                     </div>
-                    <div className="bg-red-500 text-white p-1 rounded">
+                    <div className="bg-red-500 text-white p-1 rounded hover:opacity-50">
                       <button onClick={(e) => deleteEvent(e, myEvent.id)}>
                         Supprimer
                       </button>

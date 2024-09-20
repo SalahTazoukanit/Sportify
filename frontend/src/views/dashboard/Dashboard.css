@@ -1,6 +1,6 @@
 .dashboard-banner{
     background-image: url(/src/assets/images/stats.webp);
     background-position: center;
-    background-size: cover;
+    background-size: contain;
     height: 45vh;
 }
