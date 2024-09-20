@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 const AddEvent = () => {
   const [categories, setCategories] = useState([]);
 
+  const [error, setError] = useState("");
+
   const [sport, selectedSport] = useState();
 
   const titleRef = useRef(null);
@@ -36,6 +38,9 @@ const AddEvent = () => {
     event.append("aviable_places", aviablePlacesRef.current.value);
     event.append("image", imageRef.current.files[0]);
     event.append("category_id", sport.target.value);
+    if (imageRef.current.files[0].size > 2 * 1024 * 1024) {
+      setError("L'image ne doit pas dépasser 2 Mo.");
+    }
 
     axios
       .post("http://127.0.0.1:8000/api/v1/events/store", event, { headers })
@@ -72,6 +77,7 @@ const AddEvent = () => {
               className="input-text"
               type="text"
               name="name"
+              required
               ref={titleRef}
             />
           </div>
@@ -84,6 +90,7 @@ const AddEvent = () => {
                 className="input-text"
                 type="date"
                 name="date"
+                required
                 ref={dateRef}
               />
             </div>
@@ -95,6 +102,7 @@ const AddEvent = () => {
                 className="input-text"
                 type="time"
                 name="time"
+                required
                 ref={timeRef}
               />
             </div>
@@ -108,6 +116,7 @@ const AddEvent = () => {
               type="text"
               name="position"
               placeholder="Ex: 123 Rue de l'Exemple, 75000 Paris"
+              required
               ref={positionRef}
             />
           </div>
@@ -120,6 +129,7 @@ const AddEvent = () => {
               type="number"
               name="aviable_places"
               placeholder="Ajoutez toujours un ou deux remplaçants pour plus de sécurité."
+              required
               ref={aviablePlacesRef}
             />
           </div>
@@ -144,7 +154,9 @@ const AddEvent = () => {
             <h2 className="font-semibold">Details événement</h2>
           </div>
           <div>
-            <input type="file" name="image" ref={imageRef} />
+            <input type="file" name="image" ref={imageRef} required />
+            <br />
+            {error && <span className="text-red-500"> {error} </span>}
           </div>
           <div className="description flex flex-col">
             <label className="font-medium" htmlFor="">
@@ -153,6 +165,7 @@ const AddEvent = () => {
             <textarea
               className="md:h-40 rounded"
               name="description"
+              required
               ref={descriptionRef}
             ></textarea>
           </div>
