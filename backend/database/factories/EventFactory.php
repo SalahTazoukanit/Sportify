@@ -18,7 +18,7 @@ class EventFactory extends Factory
     {
         return [
             "user_id" => 1,
-            "category_id" => 1,
+            "category_id" => random_int(1,5),
             "status"=> "published",
             'name' => fake()->name(),
             'image' => fake()->image(),

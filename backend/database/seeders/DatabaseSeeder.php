@@ -20,6 +20,14 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
             'password' => 'test',
+            "role" => "admin",
+            "image_profile" => fake()->image()
+        ]);
+
+        User::factory()->create([
+            'name' => 'Test Member',
+            'email' => 'member@example.com',
+            'password' => 'member',
             "image_profile" => fake()->image()
         ]);
 
