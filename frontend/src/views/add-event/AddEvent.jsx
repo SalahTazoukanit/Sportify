@@ -1,10 +1,49 @@
 import axios from "axios";
 import Footer from "../../components/footer/Footer";
 import Header from "../../components/header/Header";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AddEvent = () => {
   const [categories, setCategories] = useState([]);
+
+  const [sport, selectedSport] = useState();
+
+  const titleRef = useRef(null);
+  const dateRef = useRef(null);
+  const positionRef = useRef(null);
+  const timeRef = useRef(null);
+  const descriptionRef = useRef(null);
+  const aviablePlacesRef = useRef(null);
+  const imageRef = useRef(null);
+
+  const token = localStorage.getItem("token");
+  const headers = {
+    Authorization: "Bearer " + token,
+  };
+
+  const navigate = useNavigate();
+
+  const addEvent = (e) => {
+    e.preventDefault();
+
+    const event = new FormData();
+    event.append("name", titleRef.current.value);
+    event.append("date", dateRef.current.value);
+    event.append("position", positionRef.current.value);
+    event.append("time", timeRef.current.value);
+    event.append("description", descriptionRef.current.value);
+    event.append("aviable_places", aviablePlacesRef.current.value);
+    event.append("image", imageRef.current.files[0]);
+    event.append("category_id", sport.target.value);
+
+    axios
+      .post("http://127.0.0.1:8000/api/v1/events/store", event, { headers })
+      .then((response) => {
+        alert(response.data.message);
+        navigate("/dashboard");
+      });
+  };
 
   const getCategories = () => {
     axios.get("http://127.0.0.1:8000/api/v1/categories/").then((response) => {
@@ -20,25 +59,44 @@ const AddEvent = () => {
       <Header />
       <div className="general-block flex flex-col justify-center items-center">
         <h2 className="font-semibold">Création d'événements</h2>
-        <form className="flex md:mt-5 md:mb-5 flex-col gap-2 w-full md:w-1/2 p-5">
+        <form
+          onSubmit={(e) => addEvent(e)}
+          encType="multipart/form-data"
+          className="flex md:mt-5 md:mb-5 flex-col gap-2 w-full md:w-1/2 p-5"
+        >
           <div className="title flex flex-col w-full">
             <label className="font-medium" htmlFor="">
               Nom événement
             </label>
-            <input className="input-text" type="text" name="name" id="" />
+            <input
+              className="input-text"
+              type="text"
+              name="name"
+              ref={titleRef}
+            />
           </div>
           <div className="date flex gap-2">
             <div className="title flex flex-col w-1/2">
               <label className="font-medium" htmlFor="">
                 Date
               </label>
-              <input className="input-text" type="date" name="date" id="" />
+              <input
+                className="input-text"
+                type="date"
+                name="date"
+                ref={dateRef}
+              />
             </div>
             <div className="title flex flex-col w-1/2">
               <label className="font-medium" htmlFor="">
                 Horaires
               </label>
-              <input className="input-text" type="time" name="time" id="" />
+              <input
+                className="input-text"
+                type="time"
+                name="time"
+                ref={timeRef}
+              />
             </div>
           </div>
           <div className="title flex flex-col w-full">
@@ -50,6 +108,7 @@ const AddEvent = () => {
               type="text"
               name="position"
               placeholder="Ex: 123 Rue de l'Exemple, 75000 Paris"
+              ref={positionRef}
             />
           </div>
           <div className="title flex flex-col ">
@@ -61,6 +120,7 @@ const AddEvent = () => {
               type="number"
               name="aviable_places"
               placeholder="Ajoutez toujours un ou deux remplaçants pour plus de sécurité."
+              ref={aviablePlacesRef}
             />
           </div>
           <div className="categories flex flex-col w-full flex-wrap ">
@@ -74,16 +134,17 @@ const AddEvent = () => {
                       type="checkbox"
                       name="category_id"
                       value={category.id}
+                      onChange={selectedSport}
                     />
                   </div>
                 ))}
             </div>
           </div>
           <div className="md:mt-5 md:mb-5 text-center">
-            <h2 className="font-semibold">Création d'événements</h2>
+            <h2 className="font-semibold">Details événement</h2>
           </div>
           <div>
-            <input type="file" name="image" />
+            <input type="file" name="image" ref={imageRef} />
           </div>
           <div className="description flex flex-col">
             <label className="font-medium" htmlFor="">
@@ -92,7 +153,7 @@ const AddEvent = () => {
             <textarea
               className="md:h-40 rounded"
               name="description"
-              id=""
+              ref={descriptionRef}
             ></textarea>
           </div>
           <div className="mt-5 bg-third-color p-2 rounded-md text-white text-center">
