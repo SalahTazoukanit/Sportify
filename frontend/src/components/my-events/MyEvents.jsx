@@ -79,7 +79,7 @@ const MyEvents = () => {
                   </h3>
                   <div className="flex justify-center items-center gap-10">
                     <div className="bg-green-500 text-white p-1 rounded hover:opacity-50">
-                      <NavLink to={""}>
+                      <NavLink to={`/dashboard/my-events/update/${myEvent.id}`}>
                         <button>Modifier</button>
                       </NavLink>
                     </div>
