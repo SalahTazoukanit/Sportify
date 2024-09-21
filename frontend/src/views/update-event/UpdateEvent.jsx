@@ -1,8 +1,8 @@
 import axios from "axios";
-import { useRef, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const UpdateEvent = () => {
   const { id } = useParams();
@@ -14,13 +14,19 @@ const UpdateEvent = () => {
     date: "",
     time: "",
     aviable_places: "",
-    sport: "",
+    category_id: "",
     description: "",
     image: "",
   });
 
-  const [sport, selectedSport] = useState("");
   const [error, setError] = useState("");
+
+  const token = localStorage.getItem("token");
+  const headers = {
+    Authorization: "Bearer " + token,
+  };
+
+  const navigate = useNavigate();
 
   const getEventDetail = (id) => {
     axios.get("http://127.0.0.1:8000/api/v1/events/" + id).then((response) => {
@@ -35,6 +41,39 @@ const UpdateEvent = () => {
     });
   };
 
+  const updateEvent = (e) => {
+    e.preventDefault();
+
+    console.log(event);
+
+    const eventUpdated = new FormData();
+
+    eventUpdated.append("name", event.name);
+    eventUpdated.append("position", event.position);
+    eventUpdated.append("description", event.description);
+    eventUpdated.append("time", event.time);
+    eventUpdated.append("date", event.date);
+    eventUpdated.append("image", event.image);
+    eventUpdated.append("category_id", event.category_id);
+
+    if (event.image.size > 2 * 1024 * 1024) {
+      setError("L'image ne doit pas dépasser 2 Mo.");
+    }
+
+    axios
+      .post(
+        `http://127.0.0.1:8000/api/v1/events/update/${id}?_method=PUT`,
+        eventUpdated,
+        {
+          headers,
+        }
+      )
+      .then((response) => {
+        alert(response.data.message);
+        navigate("/dashboard");
+      });
+  };
+
   useEffect(() => {
     getCategories();
     getEventDetail(id);
@@ -45,6 +84,7 @@ const UpdateEvent = () => {
       <div className="general-block flex flex-col justify-center items-center">
         <h2 className="font-semibold">Modification d'événements</h2>
         <form
+          onSubmit={(e) => updateEvent(e)}
           encType="multipart/form-data"
           className="flex md:mt-5 md:mb-5 flex-col gap-2 w-full md:w-1/2 p-5"
         >
@@ -57,6 +97,7 @@ const UpdateEvent = () => {
               type="text"
               name="name"
               value={event.name}
+              onChange={(e) => setEvent({ ...event, name: e.target.value })}
               required
             />
           </div>
@@ -69,7 +110,7 @@ const UpdateEvent = () => {
                 className="input-text"
                 type="date"
                 name="date"
-                value={event.date.split(" ")[0]}
+                onChange={(e) => setEvent({ ...event, date: e.target.value })}
                 required
               />
             </div>
@@ -81,7 +122,7 @@ const UpdateEvent = () => {
                 className="input-text"
                 type="time"
                 name="time"
-                value={event.time}
+                onChange={(e) => setEvent({ ...event, time: e.target.value })}
                 required
               />
             </div>
@@ -94,8 +135,9 @@ const UpdateEvent = () => {
               className="input-text"
               type="text"
               name="position"
-              value={event.position}
               placeholder="Ex: 123 Rue de l'Exemple, 75000 Paris"
+              value={event.position}
+              onChange={(e) => setEvent({ ...event, position: e.target.value })}
               required
             />
           </div>
@@ -107,8 +149,11 @@ const UpdateEvent = () => {
               className="input-text"
               type="number"
               name="aviable_places"
-              value={event.aviable_places}
               placeholder="Ajoutez toujours un ou deux remplaçants pour plus de sécurité."
+              value={event.aviable_places}
+              onChange={(e) =>
+                setEvent({ ...event, aviable_places: e.target.value })
+              }
               required
             />
           </div>
@@ -120,10 +165,12 @@ const UpdateEvent = () => {
                   <div className="flex md:flex-col gap-2" key={category.id}>
                     <label> {category.name}</label>
                     <input
-                      type="checkbox"
+                      type="radio"
                       name="category_id"
                       value={category.id}
-                      //   onChange={selectedSport}
+                      onChange={(e) =>
+                        setEvent({ ...event, category_id: e.target.value })
+                      }
                     />
                   </div>
                 ))}
@@ -133,7 +180,12 @@ const UpdateEvent = () => {
             <h2 className="font-semibold">Details événement</h2>
           </div>
           <div>
-            <input type="file" name="image" required />
+            <input
+              type="file"
+              name="image"
+              onChange={(e) => setEvent({ ...event, image: e.target.files[0] })}
+              required
+            />
             <br />
             {error && <span className="text-red-500"> {error} </span>}
           </div>
@@ -145,6 +197,9 @@ const UpdateEvent = () => {
               className="md:h-40 rounded"
               name="description"
               value={event.description}
+              onChange={(e) =>
+                setEvent({ ...event, description: e.target.value })
+              }
               required
             ></textarea>
           </div>
