@@ -8,7 +8,7 @@ const LegalMentions = () => {
       <div className="genral-block">
         <h2 className="text-center mt-5">Mentions Légales de Sportify</h2>
         <div className="flex m-5">
-          <div className="w-1/4 flex flex-col italic">
+          <div className="md:w-1/4 flex-col italic hidden md:block">
             <a href="#editor">
               <h3 className="w-1/3 rounded hover:bg-second-color hover:text-white">
                 Éditeur du site
@@ -45,37 +45,40 @@ const LegalMentions = () => {
               </h3>
             </a>
           </div>
-          <div className="w-2/4 flex flex-col">
-            <div className="mt-5 flex flex-col gap-1">
-              <h2 id="editor">Éditeur du site</h2>
-              <h3>Le site Sportify a été conçu et développé par :</h3>
-              <div className="flex flex-col">
-                <p>
-                  <span className="font-medium">Nom :</span> Tazoukanit
-                  Salaheddine
-                </p>
-                <p>
-                  <span className="font-medium">Adresse :</span> Rue Exemple ,
-                  Chamalieres 63400 FR
-                </p>
-                <p>
-                  <span className="font-medium">Email : </span>exemple@gmail.com
-                </p>
+          <div className="md:w-2/4 flex flex-col">
+            <div className="flex flex-col md:flex-row justify-between">
+              <div className="mt-5 flex flex-col gap-1">
+                <h2 id="editor">Éditeur du site</h2>
+                <h3>Le site Sportify a été conçu et développé par :</h3>
+                <div className="flex flex-col">
+                  <p>
+                    <span className="font-medium">Nom :</span> Tazoukanit
+                    Salaheddine
+                  </p>
+                  <p>
+                    <span className="font-medium">Adresse :</span> Rue Exemple ,
+                    Chamalieres 63400 FR
+                  </p>
+                  <p>
+                    <span className="font-medium">Email : </span>
+                    exemple@gmail.com
+                  </p>
+                </div>
               </div>
-            </div>
-            <div className="mt-5 flex flex-col gap-1">
-              <h2 id="hosting">Hébergement</h2>
-              <h3>Le site Sportify est hébergé par :</h3>
-              <div className="flex flex-col">
-                <p>
-                  <span className="font-medium">Nom :</span>
-                </p>
-                <p>
-                  <span className="font-medium">Adresse :</span>
-                </p>
-                <p>
-                  <span className="font-medium">Email : </span>
-                </p>
+              <div className="mt-5 flex flex-col gap-1">
+                <h2 id="hosting">Hébergement</h2>
+                <h3>Le site Sportify est hébergé par :</h3>
+                <div className="flex flex-col">
+                  <p>
+                    <span className="font-medium">Nom :</span>
+                  </p>
+                  <p>
+                    <span className="font-medium">Adresse :</span>
+                  </p>
+                  <p>
+                    <span className="font-medium">Email : </span>
+                  </p>
+                </div>
               </div>
             </div>
             <div className="mt-5 flex flex-col gap-1">
