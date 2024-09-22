@@ -68,7 +68,7 @@ const MyEvents = () => {
                   </div>
                   <h3 className="md:w-1/6">{myEvent.name}</h3>
                   <h3 className="md:w-1/6">
-                    {new Date(myEvent.date).toLocaleDateString()}{" "}
+                    {new Date(myEvent.date).toLocaleDateString()}
                   </h3>
                   <h3 className="md:w-1/6 hidden md:block">
                     {myEvent.status && myEvent.status === "pending" ? (
