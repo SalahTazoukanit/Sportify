@@ -15,7 +15,6 @@ const Event = ({ event }) => {
               <div className="flex justify-center items-center mb-1">
                 <img
                   className="md:w-full md:h-56 rounded w-2/3"
-                  // src="src/assets/images/Football.jpg"
                   src={
                     event.image.startsWith("images/events")
                       ? getImageUrl(event.image)

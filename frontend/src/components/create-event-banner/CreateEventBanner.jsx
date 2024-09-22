@@ -2,6 +2,8 @@ import { NavLink } from "react-router-dom";
 import "./CreateEventBanner.css";
 
 const CreateEventBanner = () => {
+  const token = localStorage.getItem("token");
+
   return (
     <>
       <div className="general-block flex w-full justify-center">
@@ -14,11 +16,19 @@ const CreateEventBanner = () => {
               fuga?
             </p>
           </div>
-          <NavLink>
-            <div className="bg-second-color md:w-52 md:h-10 flex justify-center rounded">
-              <button className="">Créez un événement</button>
-            </div>
-          </NavLink>
+          {token && token ? (
+            <NavLink to={"/dashboard/my-events/add-event"}>
+              <div className="bg-second-color md:w-52 md:h-10 flex justify-center rounded">
+                <button className="">Créez un événement</button>
+              </div>
+            </NavLink>
+          ) : (
+            <NavLink to={"/sign-in"}>
+              <div className="bg-second-color md:w-52 md:h-10 flex justify-center rounded">
+                <button className="">Créez un événement</button>
+              </div>
+            </NavLink>
+          )}
         </div>
       </div>
     </>

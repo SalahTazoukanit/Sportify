@@ -70,6 +70,10 @@ const EventDetail = () => {
           <div>{event.description && event.description}</div>
         </div>
       </div>
+      <div>
+
+      EVENEMENTS DE LA MEME CATEGORIE
+      </div>
       <Footer />
     </>
   );

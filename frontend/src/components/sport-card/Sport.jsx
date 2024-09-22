@@ -63,7 +63,10 @@ const Sport = () => {
           >
             {sports &&
               sports.map((sport) => (
-                <SwiperSlide className="mb-10" key={sport.id}>
+                <SwiperSlide
+                  className="mb-10 flex justify-center"
+                  key={sport.id}
+                >
                   <div className="flex flex-col justify-center items-center sm:w-full gap-1">
                     <img
                       className="rounded-md"
