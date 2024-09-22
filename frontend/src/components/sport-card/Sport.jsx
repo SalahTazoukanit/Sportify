@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import SeeMoreButton from "../see-more-button/SeeMoreButton";
 import { NavLink } from "react-router-dom";
+import "../../index.css";
 
 //swiper
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -34,7 +35,7 @@ const Sport = () => {
             Découvrez tous les sports disponibles
           </h2>
           <Swiper
-            slidesPerView={5}
+            slidesPerView={1}
             spaceBetween={10}
             pagination={{
               clickable: true,
@@ -60,21 +61,19 @@ const Sport = () => {
             modules={[Pagination, Autoplay]}
             className="mySwiper general-block"
           >
-            <div className="flex flex-col md:flex-row gap-5 m-5 md:gap-5 md:m-10">
-              {sports &&
-                sports.map((sport) => (
-                  <SwiperSlide className="mb-10" key={sport.id}>
-                    <div className="flex flex-col justify-center items-center sm:w-full gap-1">
-                      <img
-                        className="rounded-md"
-                        src="src/assets/images/piotr-osmenda-20K-JZ2ppbE-unsplash.jpg"
-                        alt=""
-                      />
-                      <h3 className="font-medium "> {sport.name}</h3>
-                    </div>
-                  </SwiperSlide>
-                ))}
-            </div>
+            {sports &&
+              sports.map((sport) => (
+                <SwiperSlide className="mb-10" key={sport.id}>
+                  <div className="flex flex-col justify-center items-center sm:w-full gap-1">
+                    <img
+                      className="rounded-md"
+                      src="src/assets/images/piotr-osmenda-20K-JZ2ppbE-unsplash.jpg"
+                      alt=""
+                    />
+                    <h3 className="font-medium "> {sport.name}</h3>
+                  </div>
+                </SwiperSlide>
+              ))}
           </Swiper>
         </div>
         <div className="mt-5">
