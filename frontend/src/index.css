@@ -50,3 +50,8 @@ h2{
   min-height: 40rem;
   
 }
+
+/* slider sport component  */
+.swiper {
+  width: 83%;
+}

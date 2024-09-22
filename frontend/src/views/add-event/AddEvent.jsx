@@ -141,7 +141,7 @@ const AddEvent = () => {
                   <div className="flex md:flex-col gap-2" key={category.id}>
                     <label> {category.name}</label>
                     <input
-                      type="checkbox"
+                      type="radio"
                       name="category_id"
                       value={category.id}
                       onChange={selectedSport}

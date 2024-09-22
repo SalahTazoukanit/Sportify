@@ -53,7 +53,7 @@ const MyEvents = () => {
               myEvents.map((myEvent) => (
                 <div
                   key={myEvent.id}
-                  className="flex justify-center items-center border-b"
+                  className="flex justify-center items-center border-b md:p-2"
                 >
                   <div className="md:w-1/6 hidden md:block">
                     <img
