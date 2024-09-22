@@ -54,6 +54,15 @@ class EventController extends Controller
         ],200);
     }
 
+    public function showMyParticipatedEvents(){
+
+        $user = Auth::user();
+
+        $myParticipatedEvents = $user->events()->get();
+        return response()->json([
+            'myParticipatedEvents' => $myParticipatedEvents
+        ],200);
+    }
 
     //function to get own events ;
     public function getOwnEvents(){

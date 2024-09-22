@@ -56,6 +56,7 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::delete('/delete/{id}', [EventController::class, 'destroy'])->name('destroy.event');
             Route::post('/{id}/addParticipantToEvent', [EventController::class, 'participate'])->name('participate.event');
             Route::post('/{id}/showParticipantsEvent', [EventController::class, 'showParticipantsEvent'])->name('showParticipants.event');
+            Route::post('/showMyParticipatedEvents', [EventController::class, 'showMyParticipatedEvents'])->name('showMyParticipatedEvents.event');
         });
 
         //Categories Routes
