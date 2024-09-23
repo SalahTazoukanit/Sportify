@@ -161,6 +161,14 @@ class EventController extends Controller
      */
     public function update(Request $request, Event $event, String $id)
     {
+        $user = Auth::user();
+
+        if(!$user){
+            return response()->json([
+                "message" => "Vous n'etes pas connecté(e) ."
+            ]);
+        }
+
         $request->validate([
             'name' => 'string|sometimes|max:200',
             'category_id' => 'sometimes',
@@ -183,6 +191,27 @@ class EventController extends Controller
             'event' => $event,
             'message' => "L'evenement " . $event->name . " a été mis à jour."
         ], 200);
+    }
+
+    // function to change event status only for admins
+    public function changeStatus (Request $request , String $id) {
+
+        $user = Auth::user();
+
+        if ($user->role == "admin") {
+
+            $request->validate([
+                "status" => "in:pending,published",
+            ]);
+
+        }
+
+        $event = Event::findOrFail($id) ;
+        $event->update($request->all());
+
+        return response()->json([
+            "message" => "Status de l'événement changé en " . $request->status ,
+        ],200);
     }
 
     /**

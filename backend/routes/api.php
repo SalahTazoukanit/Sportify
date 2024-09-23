@@ -54,7 +54,8 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::post('/store', [EventController::class, 'store'])->name('store.event');
             Route::put('/update/{id}', [EventController::class, 'update'])->name('update.event');
             Route::delete('/delete/{id}', [EventController::class, 'destroy'])->name('destroy.event');
-            Route::post('/{id}/addParticipantToEvent', [EventController::class, 'participate'])->name('participate.event');
+            Route::put('/changeStatus/{id}', [EventController::class, 'changeStatus'])->name('changeStatus.event');
+            Route::post('/{id}/participateToEvent', [EventController::class, 'participate'])->name('participate.event');
             Route::post('/{id}/showParticipantsEvent', [EventController::class, 'showParticipantsEvent'])->name('showParticipants.event');
             Route::post('/showMyParticipatedEvents', [EventController::class, 'showMyParticipatedEvents'])->name('showMyParticipatedEvents.event');
         });

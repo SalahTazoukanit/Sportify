@@ -70,6 +70,8 @@ class UserController extends Controller
             return response()->json([
                 'message' => 'Connexion réussie ! Bienvenue ' . $user->name,
                 'user' => $user,
+                'user_id' => $user->id,
+                "user_role" => $user->role,
                 'token' => $token
             ]);
         } else {
