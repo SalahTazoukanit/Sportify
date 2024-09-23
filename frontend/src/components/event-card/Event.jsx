@@ -7,15 +7,8 @@ const Event = ({ event }) => {
     }
   };
 
-  console.log("Event status:", event.status);
-
-  if (event && event.status === "pending") {
-    return null;
-  }
-
   return (
     <>
-      {/* {event.status !== "pending" ? ( */}
       <div className="boxShadow shadow-custom bg-white rounded-xl flex flex-wrap justify-center p-1 md:p-6 ">
         <div className="flex flex-col md:w-full justify-center ">
           <NavLink to={`/events/event-details/${event.id}`}>
@@ -62,7 +55,6 @@ const Event = ({ event }) => {
           </div>
         </div>
       </div>
-      {/* ) : null} */}
     </>
   );
 };
