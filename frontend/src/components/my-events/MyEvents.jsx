@@ -6,6 +6,7 @@ const MyEvents = () => {
   const [myEvents, setMyEvents] = useState([]);
 
   const token = localStorage.getItem("token");
+  const user_role = localStorage.getItem("user_role");
 
   const headers = {
     Authorization: "Bearer " + token,
@@ -18,15 +19,21 @@ const MyEvents = () => {
   };
 
   const getMyEvents = () => {
-    axios
-      .post(
-        "http://127.0.0.1:8000/api/v1/events/getOwnEvents/",
-        {},
-        { headers }
-      )
-      .then((response) => {
+    if (user_role === "member") {
+      axios
+        .post(
+          "http://127.0.0.1:8000/api/v1/events/getOwnEvents/",
+          {},
+          { headers }
+        )
+        .then((response) => {
+          setMyEvents(response.data.events);
+        });
+    } else if (user_role === "admin") {
+      axios.get("http://127.0.0.1:8000/api/v1/events/").then((response) => {
         setMyEvents(response.data.events);
       });
+    }
   };
 
   const deleteEvent = (e, id) => {
@@ -48,7 +55,11 @@ const MyEvents = () => {
       <div className="general-block">
         <div className="flex flex-col">
           <div className="flex flex-col gap-3 w-full items-center">
-            <h2 className="font-semibold text-center">Tous vos Événements</h2>
+            {user_role === "member" ? (
+              <h2 className="font-semibold text-center">Tous vos Événements</h2>
+            ) : (
+              <h2 className="font-semibold text-center">Tous les Événements</h2>
+            )}
             {myEvents &&
               myEvents.map((myEvent) => (
                 <div
@@ -57,7 +68,7 @@ const MyEvents = () => {
                 >
                   <div className="md:w-1/6 hidden md:block">
                     <img
-                      className="md:w-40 rounded-md"
+                      className="md:w-40 md:h-24 rounded-md"
                       src={
                         myEvent.image.startsWith("images/events")
                           ? getImageUrl(myEvent.image)
@@ -72,13 +83,27 @@ const MyEvents = () => {
                   </h3>
                   <h3 className="md:w-1/6 hidden md:block">
                     {myEvent.status && myEvent.status === "pending" ? (
-                      <span className="text-orange-500 italic">En Attente</span>
+                      <span className="text-orange-500 italic flex gap-2">
+                        <span>En Attente</span>
+                        {user_role === "admin" ? (
+                          <button className="text-third-color text-sm">
+                            changer
+                          </button>
+                        ) : null}
+                      </span>
                     ) : (
-                      <span className="text-second-color italic">Publié</span>
+                      <span className="text-orange-500 italic flex gap-2">
+                        <span>Publié</span>
+                        {user_role === "admin" ? (
+                          <button className="text-third-color text-sm">
+                            changer
+                          </button>
+                        ) : null}
+                      </span>
                     )}
                   </h3>
                   <div className="flex justify-center items-center gap-10">
-                    <div className="bg-green-500 text-white p-1 rounded hover:opacity-50">
+                    <div className="bg-third-color text-white p-1 rounded hover:opacity-50">
                       <NavLink to={`/dashboard/my-events/update/${myEvent.id}`}>
                         <button>Modifier</button>
                       </NavLink>
