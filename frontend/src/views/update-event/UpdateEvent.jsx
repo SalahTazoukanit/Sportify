@@ -160,21 +160,6 @@ const UpdateEvent = () => {
           <div className="categories flex flex-col w-full flex-wrap ">
             <p className="font-medium">Sport</p>
             <div className="flex flex-col md:flex-row justify-between">
-              {/* {categories &&
-                categories.map((category) => (
-                  <div className="flex md:flex-col gap-2" key={category.id}>
-                    <label> {category.name}</label>
-                    <input
-                      type="radio"
-                      name="category_id"
-                      value={category.id}
-                      onChange={(e) =>
-                        setEvent({ ...event, category_id: e.target.value })
-                      }
-                    />
-                  </div>
-                ))} */}
-
               <select
                 name="category_id"
                 id=""

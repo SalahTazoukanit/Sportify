@@ -22,7 +22,12 @@ const SignIn = () => {
       .then((response) => {
         //get token form response and saved it in localStorage;
         const token = response.data.token;
+        const user_id = response.data.user_id;
+        const user_role = response.data.user_role;
+
         localStorage.setItem("token", token);
+        localStorage.setItem("user_id", user_id);
+        localStorage.setItem("user_role", user_role);
         //message
         alert(response.data.message);
         //redirect to dashboard if login successfully ;

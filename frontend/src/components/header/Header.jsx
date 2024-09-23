@@ -18,6 +18,8 @@ const Header = () => {
       .then((response) => {
         alert(response.data.message);
         localStorage.removeItem("token");
+        localStorage.removeItem("user_id");
+        localStorage.removeItem("user_role");
         navigate("/");
       });
   };
