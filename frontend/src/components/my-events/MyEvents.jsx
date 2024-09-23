@@ -47,13 +47,13 @@ const MyEvents = () => {
     <>
       <div className="general-block">
         <div className="flex flex-col">
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3 w-full items-center">
             <h2 className="font-semibold text-center">Tous vos Événements</h2>
             {myEvents &&
               myEvents.map((myEvent) => (
                 <div
                   key={myEvent.id}
-                  className="flex justify-center items-center border-b md:p-2"
+                  className="flex justify-center items-center md:w-2/3 border-b md:p-2"
                 >
                   <div className="md:w-1/6 hidden md:block">
                     <img
