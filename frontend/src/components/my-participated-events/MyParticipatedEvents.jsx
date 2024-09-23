@@ -39,8 +39,8 @@ const MyParticipatedEvents = () => {
               >
                 <h3 className="font-medium">{myEvent.name}</h3>
                 <h3> Date : {new Date(myEvent.date).toLocaleDateString()}</h3>
+                <p> Lieu : {myEvent.position}</p>
                 <h3>Places disponibles : {myEvent.aviable_places}</h3>
-                <p>Lieu : {myEvent.position}</p>
               </div>
             ))}
         </div>

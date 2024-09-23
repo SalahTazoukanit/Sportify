@@ -160,7 +160,7 @@ const UpdateEvent = () => {
           <div className="categories flex flex-col w-full flex-wrap ">
             <p className="font-medium">Sport</p>
             <div className="flex flex-col md:flex-row justify-between">
-              {categories &&
+              {/* {categories &&
                 categories.map((category) => (
                   <div className="flex md:flex-col gap-2" key={category.id}>
                     <label> {category.name}</label>
@@ -173,7 +173,24 @@ const UpdateEvent = () => {
                       }
                     />
                   </div>
-                ))}
+                ))} */}
+
+              <select
+                name="category_id"
+                id=""
+                onChange={(e) =>
+                  setEvent({ ...event, category_id: e.target.value })
+                }
+                className="input-text"
+              >
+                <option value="">Selctionner la categorie</option>
+                {categories &&
+                  categories.map((category) => (
+                    <option key={category.id} value={category.id}>
+                      {category.name}
+                    </option>
+                  ))}
+              </select>
             </div>
           </div>
           <div className="md:mt-5 md:mb-5 text-center">

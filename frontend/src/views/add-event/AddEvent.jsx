@@ -136,18 +136,20 @@ const AddEvent = () => {
           <div className="categories flex flex-col w-full flex-wrap ">
             <p className="font-medium">Sport</p>
             <div className="flex flex-col md:flex-row justify-between">
-              {categories &&
-                categories.map((category) => (
-                  <div className="flex md:flex-col gap-2" key={category.id}>
-                    <label> {category.name}</label>
-                    <input
-                      type="radio"
-                      name="category_id"
-                      value={category.id}
-                      onChange={selectedSport}
-                    />
-                  </div>
-                ))}
+              <select
+                name="category_id"
+                id=""
+                onChange={selectedSport}
+                className="input-text"
+              >
+                <option value="">Selctionner la categorie</option>
+                {categories &&
+                  categories.map((category) => (
+                    <option key={category.id} value={category.id}>
+                      {category.name}
+                    </option>
+                  ))}
+              </select>
             </div>
           </div>
           <div className="md:mt-5 md:mb-5 text-center">

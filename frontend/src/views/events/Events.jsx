@@ -12,13 +12,10 @@ const Events = () => {
   const [filteredEvents, setFilteredEvents] = useState("");
   const [categories, setCategories] = useState([]);
   const [categoryName, setCategoryName] = useState("");
-
   const [error, setError] = useState("");
-  // const [eventsByCategoryName, setEventsByCategoryName] = useState("");
 
   const getCategories = () => {
     axios.get("http://127.0.0.1:8000/api/v1/categories/").then((response) => {
-      console.log(response.data.categories);
       setCategories(response.data.categories);
     });
   };
@@ -30,13 +27,9 @@ const Events = () => {
           categoryName
       )
       .then((response) => {
-        console.log(response.data.allEvents);
-
         const elementFounded = response.data.allEvents;
         setFilteredEvents(elementFounded);
-
         setError("");
-
         if (elementFounded.length === 0) {
           setError("Aucun événement disponible pour ce sport.");
         } else {
@@ -47,15 +40,12 @@ const Events = () => {
 
   const handleSelect = (e) => {
     const category = e.target.value;
-    console.log(category);
-
     setCategoryName(category);
     filterEventsByCategory(category);
   };
 
   const getEvents = () => {
     axios.get("http://127.0.0.1:8000/api/v1/events/").then((response) => {
-      console.log(response.data.events);
       setEvents(response.data.events);
     });
   };
@@ -67,7 +57,6 @@ const Events = () => {
         "http://127.0.0.1:8000/api/v1/events/filterEventsByName/" + searchBar
       )
       .then((response) => {
-        console.log(response);
         setFilteredEvents(response.data.event);
         if (response.data.event.length === 0) {
           setError("Aucun événement n'a été trouvé.");
@@ -134,22 +123,28 @@ const Events = () => {
         <div className="general-block ">
           <div className="flex flex-wrap justify-center m-10 gap-2">
             {filteredEvents &&
-              filteredEvents.map((filteredEvent) => (
-                <div className="md:w-1/4" key={filteredEvent.id}>
-                  <Event className="w-40" event={filteredEvent} />
-                </div>
-              ))}
+              // Filtra eventi con stato diverso da "pending"
+              filteredEvents
+                .filter((event) => event.status !== "pending")
+                .map((filteredEvent) => (
+                  <div className="md:w-1/4" key={filteredEvent.id}>
+                    <Event className="w-40" event={filteredEvent} />
+                  </div>
+                ))}
           </div>
         </div>
       ) : (
         <div className="general-block ">
           <div className="flex flex-wrap justify-center m-10 gap-2">
             {events &&
-              events.map((event) => (
-                <div className="md:w-1/4" key={event.id}>
-                  <Event className="w-40" event={event} />
-                </div>
-              ))}
+              // Filtra eventi con stato diverso da "pending"
+              events
+                .filter((event) => event.status !== "pending")
+                .map((event) => (
+                  <div className="md:w-1/4" key={event.id}>
+                    <Event className="w-40" event={event} />
+                  </div>
+                ))}
           </div>
         </div>
       )}

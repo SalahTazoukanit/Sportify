@@ -9,6 +9,12 @@ const EventDetail = () => {
   const { id } = useParams();
   const [event, setEvent] = useState("");
 
+  const token = localStorage.getItem("token");
+
+  const headers = {
+    Authorization: "Bearer " + token,
+  };
+
   const getImageUrl = (image) => {
     return "http://127.0.0.1:8000/storage/" + image;
   };
@@ -18,6 +24,20 @@ const EventDetail = () => {
       console.log(response.data.event);
       setEvent(response.data.event);
     });
+  };
+
+  const participateToEvent = (id) => {
+    axios
+      .post(
+        `http://127.0.0.1:8000/api/v1/events/${id}/participateToEvent`,
+        {},
+        {
+          headers,
+        }
+      )
+      .then((response) => {
+        alert(response.data.message);
+      });
   };
 
   useEffect(() => {
@@ -38,13 +58,18 @@ const EventDetail = () => {
               <h2 className="font-semibold">{event.name}</h2>
             </div>
             <div className="flex justify-center btn rounded-md text-white hover:opacity-50">
-              <button className="hover:opacity-50">Participer</button>
+              <button
+                onClick={() => participateToEvent(event.id)}
+                className="hover:opacity-50"
+              >
+                Participer
+              </button>
             </div>
           </div>
           <div className="border"></div>
           <div className="flex max-sm:flex-wrap md:flex-row gap-10 mt-5">
             <img
-              className="w-1/2 md:h-80 rounded-md"
+              className="md:w-1/4 rounded-md"
               src={event.image ? getImageUrl(event.image) : ""}
               alt={event.name}
             />
@@ -70,10 +95,7 @@ const EventDetail = () => {
           <div>{event.description && event.description}</div>
         </div>
       </div>
-      <div>
-
-      EVENEMENTS DE LA MEME CATEGORIE
-      </div>
+      <div>EVENEMENTS DE LA MEME CATEGORIE</div>
       <Footer />
     </>
   );

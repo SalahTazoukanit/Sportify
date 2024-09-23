@@ -34,7 +34,7 @@ const Event = ({ event }) => {
           <div>
             <h3 className="font-bold">{event.name}</h3>
             <p className="text-third-color opacity-65">
-              {event.description.slice(0, 40) + "..."}
+              {event.description.slice(0, 30) + "..."}
             </p>
             <p className="text-third-color opacity-65 ">
               {new Date(event.date).toLocaleDateString()} à {event.time}
