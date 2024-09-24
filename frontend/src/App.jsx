@@ -12,6 +12,7 @@ import LegalMentions from "./views/legal-mentions/LegalMentions";
 import EventDetail from "./views/event-detail/EventDetail";
 import AddEvent from "./views/add-event/AddEvent";
 import UpdateEvent from "./views/update-event/UpdateEvent";
+import MyFavouritesEvents from "./views/my-favourites-events/MyFavouritesEvents";
 
 function App() {
   return (
@@ -34,6 +35,10 @@ function App() {
             element={<UpdateEvent />}
           />
           <Route path="/events/event-details/:id" element={<EventDetail />} />
+          <Route
+            path="/events/my-favourites-events"
+            element={<MyFavouritesEvents />}
+          />
         </Routes>
       </BrowserRouter>
     </>
