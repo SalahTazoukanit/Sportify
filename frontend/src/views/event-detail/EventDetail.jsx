@@ -46,56 +46,63 @@ const EventDetail = () => {
   return (
     <>
       <Header />
-      <div className="banner-event flex items-center">
-        {/* <h1 className="text-second-color font-semibold m-5 md:ml-10 max-sm:text-4xl">
-          {event.name}
-        </h1> */}
-      </div>
-      <div className="general-block flex justify-center">
-        <div className="flex flex-col md:w-5/6 md:gap-5">
-          <div className="flex md:justify-between items-center">
-            <div className="">
-              <h2 className="font-semibold">{event.name}</h2>
+      <div className="general-block w-full flex justify-center">
+        <div className="flex flex-col justify-start md:w-3/4 gap-5">
+          <h2 className="mb-5">{event.name && event.name}</h2>
+          <div className="flex flex-col gap-5 md:flex-row justify-between ">
+            <div className="w-2/3">
+              <img
+                className=""
+                src={event.image ? getImageUrl(event.image) : ""}
+              />
             </div>
-            <div className="flex justify-center btn rounded-md text-white hover:opacity-50">
-              <button
-                onClick={() => participateToEvent(event.id)}
-                className="hover:opacity-50"
-              >
-                Participer
-              </button>
-            </div>
-          </div>
-          <div className="border"></div>
-          <div className="flex max-sm:flex-wrap md:flex-row gap-10 mt-5">
-            <img
-              className="md:w-1/4 rounded-md"
-              src={event.image ? getImageUrl(event.image) : ""}
-              alt={event.name}
-            />
-            <div className="flex flex-col md:w-1/2 gap-5">
-              <div className="flex gap-2">
-                <h3 className="font-semibold italic">PLACES DISPONIBLES : </h3>
-                <span className="opacity-50"> {event.aviable_places}</span>
+            <div className="flex flex-col max-sm:w-1/2 gap-2 border bg-white p-10 h-48 rounded-md">
+              <div className="flex flex-col md:gap-2">
+                <div>
+                  <h3 className="font-bold">Date && Horaires</h3>
+                </div>
+                <div>Date : {new Date(event.date).toLocaleDateString()} </div>
+                <div>Horaires : {event.time} </div>
               </div>
-              <div className="border border-second-color"></div>
-              <div className="flex gap-2">
-                <h3 className="font-semibold italic">ÉVÉNEMENT PRÉVU LE :</h3>
-                <span className="opacity-50">
-                  {new Date(event.date).toLocaleDateString()} à {event.time}
-                </span>
-              </div>
-              <div className="border border-third-color"></div>
-              <div className="flex gap-2">
-                <h3 className="font-semibold italic">EMPLACEMENT :</h3>
-                <span className="opacity-50">{event.position}</span>
+              <div className="flex w-1/2 md:w-56 justify-center bg-third-color rounded-md text-white hover:opacity-50 p-1">
+                <button
+                  onClick={() => participateToEvent(event.id)}
+                  className="hover:opacity-50"
+                >
+                  Participer
+                </button>
               </div>
             </div>
           </div>
-          <div>{event.description && event.description}</div>
+          <div className="flex flex-col gap-3">
+            <div className="flex flex-col">
+              <h3 className="font-semibold">Description</h3>
+              <p>
+                {event.description} Lorem, ipsum dolor sit amet consectetur
+                adipisicing elit. Non nulla corporis adipisci recusandae ipsum
+                molestiae deleniti, velit alias, aspernatur ad error,
+                consequuntur cum! Recusandae similique nam voluptatum. Facere,
+                necessitatibus fugiat?
+              </p>
+            </div>
+            <div className="flex">
+              <div className="flex flex-col md:w-1/2 gap-3">
+                <div className="flex-col">
+                  <h3 className="font-semibold">Adresse événement</h3>
+                  <p className="italic">{event.position}</p>
+                </div>
+                <div className="flex-col">
+                  <h3 className="font-semibold">Publié par {event.user}</h3>
+                </div>
+              </div>
+              <div className="flex-col gap-3">
+                <h3 className="font-semibold">Sport</h3>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div>EVENEMENTS DE LA MEME CATEGORIE</div>
+      {/* <div>EVENEMENTS DE LA MEME CATEGORIE</div> */}
       <Footer />
     </>
   );
