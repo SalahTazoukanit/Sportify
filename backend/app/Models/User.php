@@ -37,6 +37,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Event::class);
     }
 
+    //Relation to define table_pivot user_favourite
+    public function eventsFavourites(){
+        return $this->belongsToMany(Event::class ,'user_favourite');
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

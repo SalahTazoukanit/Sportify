@@ -33,9 +33,15 @@ class Event extends Model
         return $this->belongsTo(User::class);
     }
 
-    // Relation between users and events ;
+    // Relation between users and events for tabe_pivot user_event (participants) ;
     public function participants()
     {
         return $this->belongsToMany(User::class);
+    }
+
+    //
+    //Relation to define table_pivot user_favourite
+    public function usersFavourites(){
+        return $this->belongsToMany(User::class ,'user_favourite');
     }
 }

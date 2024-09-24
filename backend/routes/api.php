@@ -58,6 +58,9 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::post('/{id}/participateToEvent', [EventController::class, 'participate'])->name('participate.event');
             Route::post('/{id}/showParticipantsEvent', [EventController::class, 'showParticipantsEvent'])->name('showParticipants.event');
             Route::post('/showMyParticipatedEvents', [EventController::class, 'showMyParticipatedEvents'])->name('showMyParticipatedEvents.event');
+            Route::post('/addEventToFavourites/{id}', [EventController::class, 'addEventToFavourites'])->name('addEventToFavourites.event');
+            Route::post('/removeEventFromFavourites/{id}', [EventController::class, 'removeEventFromFavourites'])->name('removeEventFromFavourites.event');
+            Route::post('/showMyFavourites', [EventController::class, 'showMyFavourites'])->name('showMyFavourites.event');
         });
 
         //Categories Routes

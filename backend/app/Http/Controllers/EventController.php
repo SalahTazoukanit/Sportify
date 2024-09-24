@@ -23,7 +23,9 @@ class EventController extends Controller
         $event = Event::findOrFail($id);
 
         if ($event->participants()->where('user_id', $user_id )->exists()) {
-            return response()->json(['error' => "Vous êtes déjà inscrit à l'événement."], 409);
+            return response()->json([
+                'message' => "Vous êtes déjà inscrit à l'événement."
+            ], 409);
         }
 
         if ($event->aviable_places > 0) {
@@ -61,6 +63,53 @@ class EventController extends Controller
         $myParticipatedEvents = $user->events()->get();
         return response()->json([
             'myParticipatedEvents' => $myParticipatedEvents
+        ],200);
+    }
+
+    //function to add an event to user favourites
+    public function addEventToFavourites( String $id){
+
+        $user = Auth::user();
+
+        $event = Event::findOrFail($id);
+
+        if($event->usersFavourites()->where('user_id', $user->id )->exists()){
+            return response()->json([
+                "message" => "Événement déja ajouté aux favoris."
+            ],409);
+        }
+
+        $event->usersFavourites()->attach($user->id);
+
+        return response()->json([
+            "message" => "Événement " . $event->name . " ajouté aux favoris."
+        ],200);
+
+    }
+
+    //function to remove events from favourites
+    public function removeEventFromFavourites(String $id){
+
+        $user = Auth::user();
+
+        $event = Event::findOrFail($id);
+
+        $event->usersFavourites()->detach($user->id);
+
+        return response()->json([
+            "message" => "Événement supprimé des favoris."
+        ],200) ;
+    }
+
+    //function to show favourites
+    public function showMyFavourites(){
+
+        $user = Auth::user();
+
+        $favourites_events = $user->eventsFavourites()->get();
+
+        return response()->json([
+            "favourites_events" => $favourites_events
         ],200);
     }
 
@@ -150,7 +199,7 @@ class EventController extends Controller
      */
     public function show(Request $request, String $id)
     {
-        $event = Event::with('user')->findOrFail($id);
+        $event = Event::with('user' , 'category')->findOrFail($id);
         return response()->json([
             "event" => $event ,
         ],200);
