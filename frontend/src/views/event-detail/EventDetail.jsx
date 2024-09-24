@@ -8,6 +8,8 @@ import Footer from "../../components/footer/Footer";
 const EventDetail = () => {
   const { id } = useParams();
   const [event, setEvent] = useState("");
+  const [event_user, setEventUser] = useState("");
+  const [event_category, setEventCategory] = useState("");
 
   const token = localStorage.getItem("token");
 
@@ -23,6 +25,8 @@ const EventDetail = () => {
     axios.get("http://127.0.0.1:8000/api/v1/events/" + id).then((response) => {
       console.log(response.data.event);
       setEvent(response.data.event);
+      setEventUser(response.data.event.user.name);
+      setEventCategory(response.data.event.category.name);
     });
   };
 
@@ -56,7 +60,7 @@ const EventDetail = () => {
                 src={event.image ? getImageUrl(event.image) : ""}
               />
             </div>
-            <div className="flex flex-col max-sm:w-1/2 gap-2 border bg-white p-10 h-48 rounded-md">
+            <div className="date-block flex flex-col max-sm:w-1/2 gap-2 bg-white p-10 h-48 rounded-md">
               <div className="flex flex-col md:gap-2">
                 <div>
                   <h3 className="font-bold">Date && Horaires</h3>
@@ -92,11 +96,15 @@ const EventDetail = () => {
                   <p className="italic">{event.position}</p>
                 </div>
                 <div className="flex-col">
-                  <h3 className="font-semibold">Publié par {event.user}</h3>
+                  <h3 className="font-semibold">
+                    Publié par{" "}
+                    <span className="italic font-normal">{event_user}</span>
+                  </h3>
                 </div>
               </div>
               <div className="flex-col gap-3">
                 <h3 className="font-semibold">Sport</h3>
+                <p className="italic ">{event_category}</p>
               </div>
             </div>
           </div>

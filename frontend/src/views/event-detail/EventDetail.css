@@ -1,6 +1,3 @@
-.banner-event{ 
-    background-image: url(/src/assets/images/folco-masi-erUcICg2LYE-unsplash.jpg);
-    background-position: center;
-    background-size: cover;
-    height: 45vh;
+.date-block{
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
 }
