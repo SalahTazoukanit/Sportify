@@ -150,10 +150,11 @@ class EventController extends Controller
      */
     public function show(Request $request, String $id)
     {
-        $event = Event::findOrFail($id);
+        $event = Event::with('user')->findOrFail($id);
         return response()->json([
-            'event' => $event
-        ], 200);
+            "event" => $event ,
+        ],200);
+
     }
 
     /**
