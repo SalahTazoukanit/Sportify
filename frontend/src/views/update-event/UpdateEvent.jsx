@@ -60,6 +60,8 @@ const UpdateEvent = () => {
       setError("L'image ne doit pas dépasser 2 Mo.");
     }
 
+    console.log(event.image);
+
     axios
       .post(
         `http://127.0.0.1:8000/api/v1/events/update/${id}?_method=PUT`,

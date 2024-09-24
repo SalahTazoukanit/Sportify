@@ -86,21 +86,33 @@ const Header = () => {
           >
             Mon Profil
           </NavLink>
-        ) : (
-          ""
+        ) : null}
+        {!token && (
+          <NavLink
+            className={(nav) => (nav.isActive ? "nav-active" : "")}
+            to={"/a-propos"}
+          >
+            À propos
+          </NavLink>
         )}
-        <NavLink
-          className={(nav) => (nav.isActive ? "nav-active" : "")}
-          to={"/a-propos"}
-        >
-          À propos
-        </NavLink>
-        <NavLink
-          className={(nav) => (nav.isActive ? "nav-active" : "")}
-          to={"/contact"}
-        >
-          Contact
-        </NavLink>
+        {!token && (
+          <NavLink
+            className={(nav) => (nav.isActive ? "nav-active" : "")}
+            to={"/contact"}
+          >
+            Contact
+          </NavLink>
+        )}
+        {token && (
+          <NavLink to={"/events/my-favourites-events"}>
+            <img
+              className="w-7"
+              src="/src/assets/images/heart-green.png"
+              alt=""
+            />
+          </NavLink>
+        )}
+
         {!token ? (
           <div className="btn flex justify-center items-center rounded">
             <NavLink to={"/sign-in"}>Connexion</NavLink>

@@ -39,9 +39,9 @@ const MyFavouritesEvents = () => {
           Mes Favoris
         </h1>
       </div>
-      <div className="general-block flex justify-center favourites">
-        <div className="flex justify-center items-center ">
-          <div className="flex justify-center w-10/12 gap-10">
+      <div className="general-block flex justify-center items-start">
+        <div className="flex justify-center items-center">
+          <div className="flex flex-wrap justify-center gap-10">
             {favouritesEvents &&
               favouritesEvents.map((favouriteEvent) => (
                 <FavouriteEventCard

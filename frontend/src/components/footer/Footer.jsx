@@ -44,6 +44,7 @@ const Footer = () => {
               <NavLink to={"/sports"}>Sports</NavLink>
               <NavLink to={"/a-propos"}>A propos</NavLink>
               <NavLink to={"/legal-mentions"}>Mentions légales</NavLink>
+              <NavLink to={"/contact"}>Contact</NavLink>
             </div>
           </div>
           <div className="flex">

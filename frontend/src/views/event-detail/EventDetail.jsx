@@ -51,7 +51,7 @@ const EventDetail = () => {
     <>
       <Header />
       <div className="general-block w-full flex justify-center">
-        <div className="flex flex-col justify-start md:w-3/4 gap-5">
+        <div className="flex flex-col justify-start md:w-3/6 gap-5">
           <h2 className="mb-5">{event.name && event.name}</h2>
           <div className="flex flex-col gap-5 md:flex-row justify-between ">
             <div className="w-2/3">
@@ -60,7 +60,7 @@ const EventDetail = () => {
                 src={event.image ? getImageUrl(event.image) : ""}
               />
             </div>
-            <div className="date-block flex flex-col max-sm:w-1/2 gap-2 bg-white p-10 h-48 rounded-md">
+            <div className="date-block flex flex-col max-sm:w-1/2 gap-2 bg-white p-5 h-48 rounded-md">
               <div className="flex flex-col md:gap-2">
                 <div>
                   <h3 className="font-bold">Date && Horaires</h3>
@@ -68,7 +68,7 @@ const EventDetail = () => {
                 <div>Date : {new Date(event.date).toLocaleDateString()} </div>
                 <div>Horaires : {event.time} </div>
               </div>
-              <div className="flex w-1/2 md:w-56 justify-center bg-third-color rounded-md text-white hover:opacity-50 p-1">
+              <div className="flex w-1/2 md:w-56 justify-center bg-third-color rounded-md text-white hover:opacity-50 p-2">
                 <button
                   onClick={() => participateToEvent(event.id)}
                   className="hover:opacity-50"
