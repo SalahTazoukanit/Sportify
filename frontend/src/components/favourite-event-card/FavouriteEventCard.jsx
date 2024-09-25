@@ -27,10 +27,11 @@ const FavouriteEventCard = ({ event }) => {
         window.location.reload();
       });
   };
+
   return (
     <>
       <div className="flex rounded-2xl w-80 bg-[#ffffff] shadow-xl">
-        <div className="flex flex-col justify-between p-8">
+        <div className="flex flex-col justify-between p-8 ">
           <NavLink to={`/events/event-details/${event.id}`}>
             <div className="text-2xl font-bold pb-6">
               <h3>{event.name}</h3>
