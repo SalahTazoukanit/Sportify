@@ -18,13 +18,13 @@ class EventFactory extends Factory
     {
         return [
             "user_id" => 1,
-            "category_id" => random_int(1,5),
+            "category_id" => random_int(1,8),
             "status"=> "published",
-            'name' => fake()->name(),
+            'name' => fake()->title(),
             'image' => fake()->image(),
             'description' => fake()->sentence(20),
             'date' => fake()->date(),
-            'position' => fake()->text(10),
+            'position' => fake()->sentence(10),
             'aviable_places' => fake()->numberBetween(2, 24),
             'time' => fake()->time()
         ];

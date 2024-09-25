@@ -19,7 +19,7 @@ class UserController extends Controller
         $request->validate([
             "name" => "string|required|max:255",
             "email" => "required|string|max:255|unique:users|email",
-            "image_profile" => "image|nullable|mimes:jpeg,png,jpg|max:2048",
+            "image_profile" => "image|sometimes|mimes:jpeg,png,jpg|max:2048",
             'password' => [
                 'required',
                 'string',
@@ -32,7 +32,7 @@ class UserController extends Controller
         $user = User::create([
             "name" => $request->name,
             "email" => $request->email,
-            "image_profile" => $request->image_profile,
+            'image_profile' =>  $request->file('image_profile')->store('images/profiles', 'public'),
             "password" => bcrypt($request->password),
             "password_confirmation" => bcrypt($request->password_confirmation),
         ]);
@@ -125,17 +125,49 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show()
     {
-        //
+        $user = Auth::user();
+        return response()->json(["user" => $user],200);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function updateUser(Request $request)
     {
-        //
+        $user = Auth::user();
+
+        $validatedData = $request->validate([
+            "name" => "string|nullable|max:255",
+            "email" => "nullable|string|max:255|unique:users|email",
+            "image_profile" => "image|nullable|mimes:jpeg,png,jpg|max:2048",
+            'password' => [
+                'nullable',
+                'string',
+                'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/',
+                'confirmed',
+            ],
+            'password_confirmation' => 'nullable|same:password'
+        ]);
+
+        if ($request->hasFile('image_profile')) {
+            $validatedData['image_profile'] = $request->file('image_profile')->store('images/profiles', 'public');
+        }
+
+
+        // $user->name = $request->name;
+        // $user->email = $request->email;
+        // $user->image_profile = $request->image_profile;
+        // $user->password = $request->password;
+        // $user->password_confirmation = $request->password_confirmation;
+
+        $user->update($validatedData);
+
+        return response()->json([
+            "user_updated" => $user ,
+            "message" => "Vous avez modifié votre compte.",
+        ],200);
     }
 
     /**
