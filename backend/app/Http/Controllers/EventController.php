@@ -76,7 +76,7 @@ class EventController extends Controller
         if($event->usersFavourites()->where('user_id', $user->id )->exists()){
             return response()->json([
                 "message" => "Événement déja ajouté aux favoris."
-            ],409);
+            ],200);
         }
 
         $event->usersFavourites()->attach($user->id);
@@ -210,38 +210,40 @@ class EventController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, Event $event, String $id)
-    {
-        $user = Auth::user();
+{
+    $user = Auth::user();
 
-        if(!$user){
-            return response()->json([
-                "message" => "Vous n'etes pas connecté(e) ."
-            ]);
-        }
+    $event = Event::find($id);
 
-        $request->validate([
-            'name' => 'string|sometimes|max:200',
-            'category_id' => 'sometimes',
-            'description' => 'sometimes|max:1000',
-            'date' => 'date|sometimes',
-            'position' => "string",
-            'aviable_places' => "sometimes",
-            'image' => "image|sometimes|mimes:jpeg,png,jpg|max:2048",
-            'time' => "sometimes|date_format:H:i",
-        ]);
-
-        $event = Event::find($id);
-        if ($request->hasFile('image')) {
-            $event->image = $request->file('image')->store('images/events', 'public');
-        }
-
-        $event->update($request->all());
-
+    if (!$user) {
         return response()->json([
-            'event' => $event,
-            'message' => "L'evenement " . $event->name . " a été mis à jour."
-        ], 200);
+            "message" => "Vous n'êtes pas connecté(e)."
+        ]);
     }
+
+    $validatedData = $request->validate([
+        'name' => 'string|sometimes|max:200',
+        'category_id' => 'sometimes',
+        'description' => 'sometimes|max:1000',
+        'date' => 'date|sometimes',
+        'position' => "string|sometimes",
+        'available_places' => "sometimes|integer",
+        'image' => "image|sometimes|mimes:jpeg,png,jpg|max:2048",
+        'time' => "sometimes|date_format:H:i",
+    ]);
+
+    if ($request->hasFile('image')) {
+        $validatedData['image'] = $request->file('image')->store('images/events', 'public');
+    }
+
+    $event->update($validatedData);
+
+    return response()->json([
+        'event' => $event,
+        'message' => "L'événement " . $event->name . " a été mis à jour."
+    ], 200);
+}
+
 
     // function to change event status only for admins
     public function changeStatus (Request $request , String $id) {
