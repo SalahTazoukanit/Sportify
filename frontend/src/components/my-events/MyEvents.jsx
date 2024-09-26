@@ -77,17 +77,15 @@ const MyEvents = () => {
 
   return (
     <>
+      <div className="general-block ">
+        {user_role === "member" ? (
+          <h2 className="font-semibold text-center ">Mes Événements</h2>
+        ) : (
+          <h2 className="font-semibold text-center">Tous les Événements</h2>
+        )}
+      </div>
       <div className="flex general-block justify-center">
-        <div className="flex flex-col gap-5 items-center border bg-white w-10/12 pb-10">
-          <div className="md:p-2">
-            {user_role === "member" ? (
-              <h2 className="font-semibold text-center mt-5">Mes Événements</h2>
-            ) : (
-              <h2 className="font-semibold text-center mt-5">
-                Tous les Événements
-              </h2>
-            )}
-          </div>
+        <div className="flex flex-col gap-5 items-center border bg-white w-10/12 pb-10 pt-10">
           <div className="flex w-full md:w-10/12">
             <div className="w-1/6 text-center hidden md:block">
               <p>Horaires</p>
