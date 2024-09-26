@@ -46,6 +46,23 @@ class EventController extends Controller
 
     }
 
+    // function to self remove from event participation
+    public function removeMeAsParticipant(String $id){
+        $user = Auth::user();
+
+        $event  = Event::findOrFail($id);
+
+        $event->participants()->detach($user->id);
+
+        $event->save();
+
+        return response()->json([
+            "event" => $event ,
+            "message" => "Vous n'êtes plus participant."
+        ],200);
+
+    }
+
     // function that shows all event participants ;
     public function showParticipantsEvent( String $id){
 

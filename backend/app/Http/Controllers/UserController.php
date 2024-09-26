@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 
+
 class UserController extends Controller
 {
 
@@ -137,6 +138,8 @@ class UserController extends Controller
     public function updateUser(Request $request)
     {
         $user = Auth::user();
+
+        Log::info($request->all());
 
         $validatedData = $request->validate([
             "name" => "string|nullable|max:255",

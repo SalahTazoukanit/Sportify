@@ -17,14 +17,14 @@ class EventFactory extends Factory
     public function definition(): array
     {
         return [
-            "user_id" => 1,
+            "user_id" => fake()->numberBetween(1,2),
             "category_id" => random_int(1,8),
             "status"=> "published",
-            'name' => fake()->title(),
+            'name' => fake()->words(3 , true),
             'image' => fake()->image(),
             'description' => fake()->sentence(20),
             'date' => fake()->date(),
-            'position' => fake()->sentence(10),
+            'position' => fake()->streetAddress(),
             'aviable_places' => fake()->numberBetween(2, 24),
             'time' => fake()->time()
         ];

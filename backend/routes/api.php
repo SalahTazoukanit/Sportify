@@ -6,9 +6,6 @@ use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/user', function (Request $request) {
-//     return $request->user();
-// })->middleware('auth:sanctum');
 
 //Routes don't need any authentification ;
 
@@ -63,6 +60,7 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::post('/addEventToFavourites/{id}', [EventController::class, 'addEventToFavourites'])->name('addEventToFavourites.event');
             Route::post('/removeEventFromFavourites/{id}', [EventController::class, 'removeEventFromFavourites'])->name('removeEventFromFavourites.event');
             Route::post('/showMyFavourites', [EventController::class, 'showMyFavourites'])->name('showMyFavourites.event');
+            Route::post('/removeMeAsParticipant/{id}', [EventController::class, 'removeMeAsParticipant'])->name('removeMeAsParticipant.event');
         });
 
         //Categories Routes
