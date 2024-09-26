@@ -4,6 +4,9 @@ import { useEffect, useState } from "react";
 const SettingUser = () => {
   const [user, setUser] = useState({});
 
+  const [message, setMessage] = useState("");
+  const [isVisible, setIsVisible] = useState(false);
+
   const [userUpload, setUserUpload] = useState({
     name: "",
     email: "",
@@ -74,10 +77,14 @@ const SettingUser = () => {
         }
       )
       .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.error("Errore durante l'aggiornamento dell'utente:", error);
+        setMessage(response.data.message);
+
+        setIsVisible(true);
+        const timer = setTimeout(() => {
+          setIsVisible(null);
+        }, 3000);
+
+        return () => clearTimeout(timer);
       });
   };
 
@@ -185,6 +192,7 @@ const SettingUser = () => {
                 <div className="flex justify-center bg-second-color text-white p-1 border rounded-full border-second-color w-1/3 mt-5">
                   <button type="submit">Sauvegarder</button>
                 </div>
+                {isVisible && <div className="message">{message}</div>}
               </div>
               <div className="flex flex-col justify-center items-center gap-5">
                 <div>

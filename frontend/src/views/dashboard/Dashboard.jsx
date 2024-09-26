@@ -1,4 +1,3 @@
-import { useState } from "react";
 import AddEventButton from "../../components/add-event-button/AddEventButton";
 import Footer from "../../components/footer/Footer";
 import Header from "../../components/header/Header";
