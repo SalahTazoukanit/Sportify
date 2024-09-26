@@ -13,6 +13,7 @@ import EventDetail from "./views/event-detail/EventDetail";
 import AddEvent from "./views/add-event/AddEvent";
 import UpdateEvent from "./views/update-event/UpdateEvent";
 import MyFavouritesEvents from "./views/my-favourites-events/MyFavouritesEvents";
+import ProtectedRoute from "./components/protected-route/ProtectedRoutes";
 
 function App() {
   return (
@@ -28,16 +29,38 @@ function App() {
           <Route path="/legal-mentions" element={<LegalMentions />} />
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/dashboard/my-events/add-event" element={<AddEvent />} />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/dashboard/my-events/add-event"
+            element={
+              <ProtectedRoute>
+                <AddEvent />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/dashboard/my-events/update/:id"
-            element={<UpdateEvent />}
+            element={
+              <ProtectedRoute>
+                <UpdateEvent />
+              </ProtectedRoute>
+            }
           />
           <Route path="/events/event-details/:id" element={<EventDetail />} />
           <Route
             path="/events/my-favourites-events"
-            element={<MyFavouritesEvents />}
+            element={
+              <ProtectedRoute>
+                <MyFavouritesEvents />
+              </ProtectedRoute>
+            }
           />
         </Routes>
       </BrowserRouter>
