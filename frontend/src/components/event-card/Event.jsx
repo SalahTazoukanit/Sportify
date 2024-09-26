@@ -34,7 +34,7 @@ const Event = ({ event }) => {
               {new Date(event.date).toLocaleDateString()} à {event.time}
             </p>
             <p className="text-third-color opacity-65 ">
-              Lieu : {event.position && event.position}
+              Lieu : {event.position && event.position.slice(0, 15)}
             </p>
             <div className="flex gap-5 md:justify-between">
               {event.aviable_places > 0 ? (

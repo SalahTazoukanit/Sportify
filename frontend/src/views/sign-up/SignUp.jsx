@@ -62,7 +62,7 @@ const SignUp = () => {
               </NavLink>
             </div>
           </div>
-          <div className="flex flex-col justify-center items-center gap-10 w-2/3">
+          <div className="flex flex-col justify-center items-center w-2/3">
             <div className="flex">
               <NavLink to={"/"}>
                 <img
@@ -76,7 +76,7 @@ const SignUp = () => {
               <h2 className="font-medium">Créer mon compte</h2>
               <form
                 onSubmit={(e) => register(e)}
-                className="flex flex-col gap-10"
+                className="flex flex-col gap-5"
                 encType="multipart/form-data"
               >
                 <div className="flex items-center justify-center">

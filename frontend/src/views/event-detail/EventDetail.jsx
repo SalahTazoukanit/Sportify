@@ -57,7 +57,11 @@ const EventDetail = () => {
             <div className="w-2/3">
               <img
                 className=""
-                src={event.image ? getImageUrl(event.image) : ""}
+                src={
+                  event.image
+                    ? getImageUrl(event.image)
+                    : "/src/assets/images/sports-removebg-preview.png"
+                }
               />
             </div>
             <div className="date-block flex flex-col max-sm:w-1/2 gap-2 bg-white p-5 h-48 rounded-md">
