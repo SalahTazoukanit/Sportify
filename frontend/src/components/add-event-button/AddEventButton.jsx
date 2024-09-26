@@ -5,7 +5,7 @@ const AddEventButton = () => {
   return (
     <>
       {token ? (
-        <div className="flex justify-center hover:bg-second-color hover:text-white italic rounded-full w-40 md:w-56">
+        <div className="flex justify-center hover:bg-second-color hover:text-white italic rounded-full w-40 md:w-56 mt-10">
           <NavLink to={"/dashboard/my-events/add-event"}>
             Ajouter événement{" "}
           </NavLink>

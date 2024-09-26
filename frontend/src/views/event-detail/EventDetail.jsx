@@ -72,13 +72,11 @@ const EventDetail = () => {
                 <div>Date : {new Date(event.date).toLocaleDateString()} </div>
                 <div>Horaires : {event.time} </div>
               </div>
-              <div className="flex w-1/2 md:w-56 justify-center bg-third-color rounded-md text-white hover:opacity-50 p-2">
-                <button
-                  onClick={() => participateToEvent(event.id)}
-                  className="hover:opacity-50"
-                >
-                  Participer
-                </button>
+              <div
+                onClick={() => participateToEvent(event.id)}
+                className="flex w-1/2 md:w-56 justify-center bg-third-color rounded-md text-white hover:opacity-50 hover:cursor-pointer p-2"
+              >
+                <p>Participer</p>
               </div>
             </div>
           </div>

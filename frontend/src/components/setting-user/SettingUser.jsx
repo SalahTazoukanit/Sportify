@@ -110,90 +110,100 @@ const SettingUser = () => {
 
   return (
     <>
-      <form
-        onSubmit={(e) => {
-          updateUser(e);
-        }}
-        encType="multipart/form-data"
-        className="flex border rounded bg-white w-3/4 p-20 items-center gap-20"
-      >
-        <div className="flex flex-col w-1/2 gap-5">
-          <h2 className="font-medium ">Configuration</h2>
-          <div className="hidden md:block border"></div>
-          <div className="flex flex-col gap-1">
-            <input
-              className="w-10/12 rounded border h-8 text-sm text-opacity-35"
-              type="text"
-              // placeholder={user.name}
-              name="name"
-              defaultValue={user.name}
-              // value={user.name}
-              onChange={(e) =>
-                setUserUpload({ ...userUpload, name: e.target.value })
-              }
-            />
-          </div>
-          <div className="flex flex-col gap-1">
-            <input
-              className="w-10/12 rounded border h-8 text-sm"
-              type="email"
-              placeholder={user.email}
-              name="email"
-              defaultValue={user.email}
-              onChange={(e) =>
-                setUserUpload({ ...userUpload, email: e.target.value })
-              }
-            />
-          </div>
-          <div className="flex flex-col gap-1">
-            <input
-              className="w-10/12 rounded border h-8 text-sm"
-              type="password"
-              placeholder="password"
-              name="password"
-              defaultValue={user.password}
-              onChange={(e) =>
-                setUserUpload({ ...userUpload, password: e.target.value })
-              }
-            />
-          </div>
-          <div className="flex flex-col gap-1">
-            <input
-              className="w-10/12 rounded border h-8 text-sm"
-              type="password"
-              placeholder="password_confirmation"
-              name="password_confirmation"
-              defaultValue={user.password_confirmation}
-              onChange={(e) =>
-                setUserUpload({
-                  ...userUpload,
-                  password_confirmation: e.target.value,
-                })
-              }
-            />
-          </div>
-          <div className="flex justify-center bg-second-color text-white p-1 border rounded-full border-second-color w-1/3 mt-5">
-            <button type="submit">Sauvegarder</button>
-          </div>
+      <div className="flex w-full justify-center">
+        <div className="flex flex-col w-1/4 ml-10">
+          <h3>Configuration</h3>
+          <h3>Mes Favoris</h3>
+          <div>Regalges</div>
+          <div>myEvents</div>
+          <div>myPartecipatedEvents</div>
         </div>
-        <div className="flex flex-col justify-center items-center gap-5">
-          <div>
-            {user.image_profile ? (
-              <img
-                className="rounded-full border-black md:w-40 md:h-40 hidden md:block "
-                src={getImageUrl(user.image_profile)}
-                alt=""
-              />
-            ) : (
-              <img
-                className="rounded-full border-black  md:w-40 md:h-40 hidden md:block "
-                src="/src/assets/images/user.png"
-                alt=""
-              />
-            )}
-          </div>
+        <div className="flex flex-col w-3/4 mr-10">
+          <div className="flex flex-col gap-10">
+            <form
+              onSubmit={(e) => {
+                updateUser(e);
+              }}
+              encType="multipart/form-data"
+              className="flex border rounded bg-white w-3/4 p-20 items-center gap-20"
+            >
+              <div className="flex flex-col w-1/2 gap-5">
+                <h2 className="font-medium ">Configuration</h2>
+                <div className="hidden md:block border"></div>
+                <div className="flex flex-col gap-1">
+                  <input
+                    className="w-10/12 rounded border h-8 text-sm text-opacity-35"
+                    type="text"
+                    // placeholder={user.name}
+                    name="name"
+                    defaultValue={user.name}
+                    // value={user.name}
+                    onChange={(e) =>
+                      setUserUpload({ ...userUpload, name: e.target.value })
+                    }
+                  />
+                </div>
+                <div className="flex flex-col gap-1">
+                  <input
+                    className="w-10/12 rounded border h-8 text-sm"
+                    type="email"
+                    placeholder={user.email}
+                    name="email"
+                    defaultValue={user.email}
+                    onChange={(e) =>
+                      setUserUpload({ ...userUpload, email: e.target.value })
+                    }
+                  />
+                </div>
+                <div className="flex flex-col gap-1">
+                  <input
+                    className="w-10/12 rounded border h-8 text-sm"
+                    type="password"
+                    placeholder="password"
+                    name="password"
+                    defaultValue={user.password}
+                    onChange={(e) =>
+                      setUserUpload({ ...userUpload, password: e.target.value })
+                    }
+                  />
+                </div>
+                <div className="flex flex-col gap-1">
+                  <input
+                    className="w-10/12 rounded border h-8 text-sm"
+                    type="password"
+                    placeholder="password_confirmation"
+                    name="password_confirmation"
+                    defaultValue={user.password_confirmation}
+                    onChange={(e) =>
+                      setUserUpload({
+                        ...userUpload,
+                        password_confirmation: e.target.value,
+                      })
+                    }
+                  />
+                </div>
+                <div className="flex justify-center bg-second-color text-white p-1 border rounded-full border-second-color w-1/3 mt-5">
+                  <button type="submit">Sauvegarder</button>
+                </div>
+              </div>
+              <div className="flex flex-col justify-center items-center gap-5">
+                <div>
+                  {user.image_profile ? (
+                    <img
+                      className="rounded-full border-black md:w-40 md:h-40 hidden md:block "
+                      src={getImageUrl(user.image_profile)}
+                      alt=""
+                    />
+                  ) : (
+                    <img
+                      className="rounded-full border-black  md:w-40 md:h-40 hidden md:block "
+                      src="/src/assets/images/user.png"
+                      alt=""
+                    />
+                  )}
+                </div>
 
-          {/* <div className="flex flex-col items-center gap-5">
+                {/* <div className="flex flex-col items-center gap-5">
             <div className="rounded-full border font-medium text-second-color border-second-color p-2">
               <label htmlFor="imgProfile" className="cursor-pointer">
                 Choisir Image
@@ -212,8 +222,11 @@ const SettingUser = () => {
               <p className="text-sm text-gray-600 mt-2">{fileName}</p>
             )}
           </div> */}
+              </div>
+            </form>
+          </div>
         </div>
-      </form>
+      </div>
     </>
   );
 };

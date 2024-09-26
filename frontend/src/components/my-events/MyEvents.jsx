@@ -90,7 +90,7 @@ const MyEvents = () => {
           </div>
           <div className="flex w-full md:w-10/12">
             <div className="w-1/6 text-center hidden md:block">
-              <p>Horaire</p>
+              <p>Horaires</p>
             </div>
             <div className="w-1/6 text-center hidden md:block">
               <p>Date</p>

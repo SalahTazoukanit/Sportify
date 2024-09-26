@@ -11,25 +11,8 @@ const Dashboard = () => {
   return (
     <>
       <Header />
-      <div className=" p-5">
-        <AddEventButton />
-      </div>
-      <div className="flex w-full justify-center">
-        <div className="flex flex-col w-1/4 ml-10">
-          <h3>Configuration</h3>
-          <h3>Mes Favoris</h3>
-          <div>Regalges</div>
-          <div>myEvents</div>
-          <div>myPartecipatedEvents</div>
-        </div>
-        <div className="flex flex-col w-3/4 mr-10">
-          <div className="flex flex-col gap-10">
-            <SettingUser />
-            {/* <div>myEvents</div>
-            <div>myPartecipatedEvents</div> */}
-          </div>
-        </div>
-      </div>
+      <AddEventButton />
+      <SettingUser />
       <MyEvents />
       <MyParticipatedEvents />
       <Footer />
