@@ -7,9 +7,15 @@ import Footer from "../../components/footer/Footer";
 
 const EventDetail = () => {
   const { id } = useParams();
+
   const [event, setEvent] = useState("");
   const [event_user, setEventUser] = useState("");
+
   const [event_category, setEventCategory] = useState("");
+
+  const [participants, setParticipants] = useState([]);
+
+  const [message, setMessage] = useState("");
 
   const token = localStorage.getItem("token");
 
@@ -30,6 +36,19 @@ const EventDetail = () => {
     });
   };
 
+  const getParticipants = (id) => {
+    axios
+      .post(
+        `http://127.0.0.1:8000/api/v1/events/${id}/showParticipantsEvent`,
+        {},
+        { headers }
+      )
+      .then((response) => {
+        console.log(response.data.event.participants);
+        setParticipants(response.data.event.participants);
+      });
+  };
+
   const participateToEvent = (id) => {
     axios
       .post(
@@ -41,11 +60,13 @@ const EventDetail = () => {
       )
       .then((response) => {
         alert(response.data.message);
+        window.location.reload();
       });
   };
 
   useEffect(() => {
     getEventDetail(id);
+    getParticipants(id);
   }, [id]);
   return (
     <>
@@ -97,16 +118,41 @@ const EventDetail = () => {
                   <h3 className="font-semibold">Adresse événement</h3>
                   <p className="italic">{event.position}</p>
                 </div>
+                <div className="flex flex-col">
+                  <h3 className="font-semibold">Participants</h3>
+                  <div className="flex gap-2">
+                    {participants &&
+                      participants.map((participant) => (
+                        <div key={participant.id}>
+                          <p className="italic">{participant.name + " ,"}</p>
+                        </div>
+                      ))}
+                  </div>
+                </div>
                 <div className="flex-col">
                   <h3 className="font-semibold">
-                    Publié par{" "}
-                    <span className="italic font-normal">{event_user}</span>
+                    Publié par
+                    <p className="italic">{event_user}</p>
                   </h3>
                 </div>
               </div>
-              <div className="flex-col gap-3">
-                <h3 className="font-semibold">Sport</h3>
-                <p className="italic ">{event_category}</p>
+              <div className="flex flex-col gap-3">
+                <div className="flex-col gap-3">
+                  <h3 className="font-semibold">Sport</h3>
+                  <p className="italic ">{event_category}</p>
+                </div>
+                {event.aviable_places > 0 ? (
+                  <div className="flex-col gap-3">
+                    <h3 className="font-semibold">Places encore disponibles</h3>
+                    <p className="italic ">{event.aviable_places}</p>
+                  </div>
+                ) : (
+                  <div>
+                    <p className="italic text-red-500">
+                      Il ne reste plus de places.
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
           </div>
