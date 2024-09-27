@@ -54,10 +54,12 @@ class EventController extends Controller
 
         $event->participants()->detach($user->id);
 
+        $event->aviable_places += 1 ;
+
         $event->save();
 
         return response()->json([
-            "event" => $event ,
+            "event_updated" => $event ,
             "message" => "Vous n'êtes plus participant."
         ],200);
 

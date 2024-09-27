@@ -6,6 +6,8 @@ use App\Models\Category;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -21,14 +23,14 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
             'password' => 'test',
             "role" => "admin",
-            "image_profile" => fake()->image()
+            "image_profile" => 'images/profiles/admin-img.jpg'
         ]);
 
         User::factory()->create([
             'name' => 'Test Member',
             'email' => 'member@example.com',
             'password' => 'member',
-            "image_profile" => fake()->image()
+            "image_profile" => 'images/profiles/member.jpg',
         ]);
 
         $this->call([

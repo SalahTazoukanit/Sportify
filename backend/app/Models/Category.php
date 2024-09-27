@@ -10,7 +10,10 @@ class Category extends Model
     use HasFactory;
 
     protected $fillable = [
-        "name"
+        "name",
+        "history",
+        "sport_rules",
+        "images"
     ];
 
     // Relation between event and category ;

@@ -20,7 +20,7 @@ class UserController extends Controller
         $request->validate([
             "name" => "string|required|max:255",
             "email" => "required|string|max:255|unique:users|email",
-            "image_profile" => "image|sometimes|mimes:jpeg,png,jpg|max:2048",
+            "image_profile" => "image|nullable|mimes:jpeg,png,jpg|max:2048",
             'password' => [
                 'required',
                 'string',
@@ -30,13 +30,23 @@ class UserController extends Controller
             'password_confirmation' => 'required|same:password'
         ]);
 
+        $imagePath = $request->file('image_profile') ? $request->file('image_profile')->store('images/profiles', 'public') : null ;
+
         $user = User::create([
             "name" => $request->name,
             "email" => $request->email,
-            'image_profile' =>  $request->file('image_profile')->store('images/profiles', 'public'),
+            'image_profile' =>  $imagePath,
             "password" => bcrypt($request->password),
             "password_confirmation" => bcrypt($request->password_confirmation),
         ]);
+
+        // $user = User::create([
+        //     "name" => $request->name,
+        //     "email" => $request->email,
+        //     'image_profile' =>  $request->file('image_profile')->store('images/profiles', 'public'),
+        //     "password" => bcrypt($request->password),
+        //     "password_confirmation" => bcrypt($request->password_confirmation),
+        // ]);
 
         // if($user){
             return response()->json([
@@ -169,7 +179,7 @@ class UserController extends Controller
 
         return response()->json([
             "user_updated" => $user ,
-            "message" => "Vous avez modifié votre compte.",
+            "message" => "Vous avez modifié votre compte !",
         ],200);
     }
 
