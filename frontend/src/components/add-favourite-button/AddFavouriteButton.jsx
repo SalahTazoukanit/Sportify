@@ -27,7 +27,7 @@ const AddFavouriteButton = ({ eventId }) => {
         <button onClick={() => addEventToFavourites(eventId)}>
           <img
             className="w-5"
-            src="src/assets/images/heart.png"
+            src="/src/assets/images/heart.png"
             alt="heart icon"
           />
         </button>

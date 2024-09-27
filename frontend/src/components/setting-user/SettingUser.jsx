@@ -59,6 +59,7 @@ const SettingUser = () => {
     if (userUpload.image_profile) {
       formData.append("image_profile", userUpload.image_profile);
     }
+    console.log(userUpload.image_profile);
 
     if (userUpload.password) {
       formData.append("password", userUpload.password);
@@ -80,36 +81,12 @@ const SettingUser = () => {
         setMessage(response.data.message);
 
         setIsVisible(true);
-        const timer = setTimeout(() => {
+        setTimeout(() => {
           setIsVisible(null);
         }, 3000);
-
-        return () => clearTimeout(timer);
+        // window.location.reload();
       });
   };
-
-  // const user = new FormData();
-
-  // user.append("name", userUpload.name);
-  // user.append("email", userUpload.email);
-  // user.append("image_profile", userUpload.image_profile);
-  // user.append("password", userUpload.password);
-  // user.append("password_confirmation", userUpload.password_confirmation);
-
-  // console.log("name => " + userUpload.name);
-  // console.log("email => " + userUpload.email);
-  // console.log("image_profile => " + userUpload.image_profile);
-  // console.log("password => " + userUpload.password);
-  // console.log("password_confirmation => " + userUpload.password_confirmation);
-
-  // axios
-  //   .post("http://127.0.0.1:8000/api/v1/users/updateUser?_method=PUT", user, {
-  //     headers,
-  //   })
-  //   .then((response) => {
-  //     console.log(response);
-  //   });
-  // };
 
   useEffect(() => {
     getUserInfos();
@@ -198,7 +175,7 @@ const SettingUser = () => {
                 <div>
                   {user.image_profile ? (
                     <img
-                      className="rounded-full border-black md:w-40 md:h-40 hidden md:block "
+                      className="rounded-full border-black  md:w-40 md:h-40 hidden md:block "
                       src={getImageUrl(user.image_profile)}
                       alt=""
                     />
@@ -206,30 +183,27 @@ const SettingUser = () => {
                     <img
                       className="rounded-full border-black  md:w-40 md:h-40 hidden md:block "
                       src="/src/assets/images/user.png"
-                      alt=""
+                      alt="image utilisateur"
                     />
                   )}
                 </div>
 
-                {/* <div className="flex flex-col items-center gap-5">
-            <div className="rounded-full border font-medium text-second-color border-second-color p-2">
-              <label htmlFor="imgProfile" className="cursor-pointer">
-                Choisir Image
-              </label>
-              <input
-                type="file"
-                id="imgProfile"
-                className="hidden"
-                name="image_profile"
-                defaultValue={user.image_profile}
-                onChange={handleImageChange} // Aggiorna il nome del file quando cambia
-              />
-            </div>
-
-            {fileName && (
-              <p className="text-sm text-gray-600 mt-2">{fileName}</p>
-            )}
-          </div> */}
+                <div className="flex flex-col border p-2 border-black rounded-full hover:opacity-50">
+                  <label htmlFor="input-image">Choisir une image</label>
+                  <input
+                    id="input-image"
+                    type="file"
+                    className="hidden px-3 py-2 text-lg  rounded-lg border focus:outline focus:outline-2 focus:outline-offset-2 bg-[#ffffff] text-[#444444] focus:outline-[#aaaaaa] border-[#ffffff]"
+                    placeholder="Type your name.."
+                    name="image_profile"
+                    onChange={(e) =>
+                      setUserUpload({
+                        ...userUpload,
+                        image_profile: e.target.files[0],
+                      })
+                    }
+                  />
+                </div>
               </div>
             </form>
           </div>

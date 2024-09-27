@@ -1,16 +1,27 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false); // État pour gérer l'ouverture/fermeture du menu
 
+  const [isVisibleSettings, setIsVisibleSettings] = useState(false);
+
+  const [userInfos, setUserInfos] = useState("");
+
   const token = localStorage.getItem("token");
+
   const headers = {
     Authorization: "Bearer " + token,
   };
 
   const navigate = useNavigate();
+
+  const getImageUrl = (image) => {
+    if (image) {
+      return "http://127.0.0.1:8000/storage/" + image;
+    }
+  };
 
   const logout = () => {
     axios
@@ -23,6 +34,19 @@ const Header = () => {
         navigate("/");
       });
   };
+
+  const getUserInfos = () => {
+    axios
+      .post("http://127.0.0.1:8000/api/v1/users/show", {}, { headers })
+      .then((response) => {
+        console.log(response);
+        setUserInfos(response.data.user);
+      });
+  };
+
+  useEffect(() => {
+    getUserInfos();
+  }, []);
 
   return (
     <div className="bg-third-color flex flex-col md:flex-row p-4">
@@ -79,14 +103,6 @@ const Header = () => {
         >
           Sports
         </NavLink>
-        {token ? (
-          <NavLink
-            className={(nav) => (nav.isActive ? "nav-active" : "")}
-            to={"/dashboard"}
-          >
-            Mon Profil
-          </NavLink>
-        ) : null}
         {!token && (
           <NavLink
             className={(nav) => (nav.isActive ? "nav-active" : "")}
@@ -103,25 +119,52 @@ const Header = () => {
             Contact
           </NavLink>
         )}
-        {token && (
-          <NavLink to={"/events/my-favourites-events"}>
-            <img
-              className="w-7"
-              src="/src/assets/images/heart-green.png"
-              alt=""
-            />
-          </NavLink>
-        )}
-
-        {!token ? (
+        {!token && (
           <div className="btn flex justify-center items-center rounded">
             <NavLink to={"/sign-in"}>Connexion</NavLink>
           </div>
-        ) : (
-          <div className="bg-orange-500 p-1 flex justify-center items-center rounded">
-            <button onClick={logout}>Déconnexion</button>
-          </div>
         )}
+        {token ? (
+          <div className="flex flex-col relative">
+            <div
+              onClick={() => setIsVisibleSettings((prev) => !prev)}
+              className=""
+            >
+              {!userInfos.image_profile ? (
+                <img
+                  className="w-20 h-20 rounded-full hover:opacity-50 hover:cursor-pointer"
+                  src="/src/assets/images/user.png"
+                  alt="image utilisateur"
+                />
+              ) : (
+                <img
+                  className="w-20 h-20 rounded-full hover:opacity-50 hover:cursor-pointer"
+                  src={getImageUrl(userInfos.image_profile)}
+                  alt="image utilisateur"
+                />
+              )}
+            </div>
+            {isVisibleSettings ? (
+              <div className="absolute text-black top-full right-0 mt-2 bg-white shadow-lg rounded-lg p-4 flex flex-col italic z-10">
+                <NavLink
+                  className={(nav) => (nav.isActive ? "nav-active" : "")}
+                  to={"/dashboard"}
+                >
+                  Mon profil
+                </NavLink>
+                <NavLink
+                  to={"/events/my-favourites-events"}
+                  className={(nav) => (nav.isActive ? "nav-active" : "")}
+                >
+                  Mes favoris
+                </NavLink>
+                <button onClick={logout} className="mt-2 text-red-600">
+                  Déconnexion
+                </button>
+              </div>
+            ) : null}
+          </div>
+        ) : null}
       </div>
     </div>
   );

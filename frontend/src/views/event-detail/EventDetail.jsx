@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import Header from "../../components/header/Header";
 import "./EventDetail.css";
 import Footer from "../../components/footer/Footer";
+import AddFavouriteButton from "../../components/add-favourite-button/AddFavouriteButton";
 
 const EventDetail = () => {
   const { id } = useParams();
@@ -16,6 +17,7 @@ const EventDetail = () => {
   const [participants, setParticipants] = useState([]);
 
   const [message, setMessage] = useState("");
+  const [isVisible, setIsVisible] = useState(false);
 
   const token = localStorage.getItem("token");
 
@@ -61,7 +63,17 @@ const EventDetail = () => {
       .then((response) => {
         alert(response.data.message);
         window.location.reload();
+      })
+      .catch((error) => {
+        if (error) {
+          setMessage("Vous êtes déjà inscrit à cet événement .");
+          setIsVisible(true);
+          setTimeout(() => {
+            setIsVisible(false);
+          }, 3000);
+        }
       });
+    // alert(response.data.message);
   };
 
   useEffect(() => {
@@ -73,6 +85,9 @@ const EventDetail = () => {
       <Header />
       <div className="general-block w-full flex justify-center">
         <div className="flex flex-col justify-start md:w-3/6 gap-5">
+          {/* mex */}
+          {isVisible && <p className="italic">{message}</p>}
+          {/* mex */}
           <h2 className="mb-5">{event.name && event.name}</h2>
           <div className="flex flex-col gap-5 md:flex-row justify-between ">
             <div className="w-2/3">
@@ -93,11 +108,14 @@ const EventDetail = () => {
                 <div>Date : {new Date(event.date).toLocaleDateString()} </div>
                 <div>Horaires : {event.time} </div>
               </div>
-              <div
-                onClick={() => participateToEvent(event.id)}
-                className="flex w-1/2 md:w-56 justify-center bg-third-color rounded-md text-white hover:opacity-50 hover:cursor-pointer p-2"
-              >
-                <p>Participer</p>
+              <div className="flex items-center gap-2">
+                <div
+                  onClick={() => participateToEvent(event.id)}
+                  className="flex w-1/2 md:w-56 justify-center bg-third-color rounded-md text-white hover:opacity-50 hover:cursor-pointer p-2"
+                >
+                  <p>Participer</p>
+                </div>
+                <AddFavouriteButton eventId={event.id} />
               </div>
             </div>
           </div>

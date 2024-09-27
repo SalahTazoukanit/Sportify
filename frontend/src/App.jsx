@@ -14,6 +14,7 @@ import AddEvent from "./views/add-event/AddEvent";
 import UpdateEvent from "./views/update-event/UpdateEvent";
 import MyFavouritesEvents from "./views/my-favourites-events/MyFavouritesEvents";
 import ProtectedRoute from "./components/protected-route/ProtectedRoutes";
+// import Chat from "./views/chat-view/Chat";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Routes>
           {/* Routes navbar */}
           <Route path="/" element={<Homepage />} />
+          {/* <Route path="/chat" element={<Chat />} /> */}
           <Route path="/events" element={<Events />} />
           <Route path="/sports" element={<Sports />} />
           <Route path="/a-propos" element={<About />} />

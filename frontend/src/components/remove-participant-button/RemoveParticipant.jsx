@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const RemoveParticipant = ({eventId}) => {
+//props eventId gived from MyParticipatedEvents.jsx
+const RemoveParticipant = ({ eventId }) => {
   const token = localStorage.getItem("token");
 
   const headers = {

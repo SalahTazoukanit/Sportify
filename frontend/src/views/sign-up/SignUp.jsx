@@ -12,6 +12,8 @@ const SignUp = () => {
     password_confirmation: "",
   });
 
+  const [errorMex, setErrorMex] = useState("");
+
   const [imagePreview, setImagePreview] = useState(null); // Nuovo stato per l'anteprima dell'immagine
 
   const navigate = useNavigate();
@@ -22,15 +24,21 @@ const SignUp = () => {
     const userAdded = new FormData();
     userAdded.append("name", user.name);
     userAdded.append("email", user.email);
-    userAdded.append("image_profile", user.image_profile);
+
+    if (user.image_profile) {
+      userAdded.append("image_profile", user.image_profile);
+    }
+
     userAdded.append("password", user.password);
     userAdded.append("password_confirmation", user.password_confirmation);
 
     axios
       .post("http://127.0.0.1:8000/api/v1/users/register", userAdded)
       .then((response) => {
-        alert(response.data.message);
-        navigate("/sign-in");
+        console.log(response);
+
+        // alert(response.data.message);
+        // navigate("/sign-in");
       });
   };
 
@@ -89,7 +97,10 @@ const SignUp = () => {
                           className="w-full h-full object-cover"
                         />
                       ) : (
-                        <img src="src/assets/images/user.png" alt="" />
+                        <img
+                          src="src/assets/images/user.png"
+                          alt="image user"
+                        />
                       )}
                     </div>
                   </label>
@@ -99,8 +110,8 @@ const SignUp = () => {
                     name="image_profile"
                     className="hidden"
                     onChange={handleImageChange} // Usa la funzione per gestire il cambiamento
-                    required
                   />
+                  {errorMex ? errorMex : null}
                 </div>
                 <div>
                   <label htmlFor="">USERNAME</label>

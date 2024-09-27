@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import AddFavouriteButton from "../add-favourite-button/AddFavouriteButton";
 
+//props event gived from LastEvents.jsx
 const Event = ({ event }) => {
   const getImageUrl = (image) => {
     if (image) {
@@ -49,9 +50,6 @@ const Event = ({ event }) => {
                   Événement complet .
                 </p>
               )}
-              {/* <button className="md:border md:p-1 md:rounded bg-second-color md:text-white">
-                Participer
-              </button> */}
               <AddFavouriteButton eventId={event.id} />
             </div>
           </div>

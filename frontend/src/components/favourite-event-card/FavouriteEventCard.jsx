@@ -1,6 +1,7 @@
 import axios from "axios";
 import { NavLink } from "react-router-dom";
 
+//props event gived from LastEvents.jsx
 const FavouriteEventCard = ({ event }) => {
   const token = localStorage.getItem("token");
   const user_id = localStorage.getItem("user_id");
