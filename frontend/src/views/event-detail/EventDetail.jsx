@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import Header from "../../components/header/Header";
 import "./EventDetail.css";
 import Footer from "../../components/footer/Footer";
@@ -109,12 +109,20 @@ const EventDetail = () => {
                 <div>Horaires : {event.time} </div>
               </div>
               <div className="flex items-center gap-2">
-                <div
-                  onClick={() => participateToEvent(event.id)}
-                  className="flex w-1/2 md:w-56 justify-center bg-third-color rounded-md text-white hover:opacity-50 hover:cursor-pointer p-2"
-                >
-                  <p>Participer</p>
-                </div>
+                {token ? (
+                  <div
+                    onClick={() => participateToEvent(event.id)}
+                    className="flex w-1/2 md:w-56 justify-center bg-third-color rounded-md text-white hover:opacity-50 hover:cursor-pointer p-2"
+                  >
+                    <p>Participer</p>
+                  </div>
+                ) : (
+                  <NavLink to={"/sign-in"}>
+                    <div className="flex w-1/2 md:w-56 justify-center bg-third-color rounded-md text-white hover:opacity-50 hover:cursor-pointer p-2">
+                      <p>Participer</p>
+                    </div>
+                  </NavLink>
+                )}
                 <AddFavouriteButton eventId={event.id} />
               </div>
             </div>
@@ -122,13 +130,7 @@ const EventDetail = () => {
           <div className="flex flex-col gap-3">
             <div className="flex flex-col">
               <h3 className="font-semibold">Description</h3>
-              <p>
-                {event.description} Lorem, ipsum dolor sit amet consectetur
-                adipisicing elit. Non nulla corporis adipisci recusandae ipsum
-                molestiae deleniti, velit alias, aspernatur ad error,
-                consequuntur cum! Recusandae similique nam voluptatum. Facere,
-                necessitatibus fugiat?
-              </p>
+              <p>{event.description}</p>
             </div>
             <div className="flex">
               <div className="flex flex-col md:w-1/2 gap-3">

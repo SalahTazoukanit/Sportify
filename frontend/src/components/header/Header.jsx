@@ -31,7 +31,7 @@ const Header = () => {
         localStorage.removeItem("token");
         localStorage.removeItem("user_id");
         localStorage.removeItem("user_role");
-        navigate("/");
+        navigate("/sign-in");
       });
   };
 
@@ -158,7 +158,7 @@ const Header = () => {
                 >
                   Mes favoris
                 </NavLink>
-                <button onClick={logout} className="mt-2 text-red-600">
+                <button onClick={logout} className="text-red-600">
                   Déconnexion
                 </button>
               </div>

@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 
 const LastEvents = () => {
   const [events, setEvents] = useState([]);
+
   const getEvents = () => {
     axios.get("http://127.0.0.1:8000/api/v1/events/").then((response) => {
       console.log(response.data.events);
@@ -25,9 +26,11 @@ const LastEvents = () => {
           </h2>
           <div className="general-block grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 ">
             {events &&
-              events
-                .slice(0, 4)
-                .map((event) => <Event key={event.id} event={event} />)}
+              events.slice(0, 4).map((event) => {
+                // event.status === "published" ? (
+                <Event key={event.id} event={event} />;
+                // ) : null;
+              })}
           </div>
         </div>
         <div className="general-block">

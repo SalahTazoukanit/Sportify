@@ -118,10 +118,8 @@ const SettingUser = () => {
                   <input
                     className="w-10/12 rounded border h-8 text-sm text-opacity-35"
                     type="text"
-                    // placeholder={user.name}
                     name="name"
                     defaultValue={user.name}
-                    // value={user.name}
                     onChange={(e) =>
                       setUserUpload({ ...userUpload, name: e.target.value })
                     }
@@ -131,7 +129,6 @@ const SettingUser = () => {
                   <input
                     className="w-10/12 rounded border h-8 text-sm"
                     type="email"
-                    placeholder={user.email}
                     name="email"
                     defaultValue={user.email}
                     onChange={(e) =>
@@ -143,7 +140,7 @@ const SettingUser = () => {
                   <input
                     className="w-10/12 rounded border h-8 text-sm"
                     type="password"
-                    placeholder="password"
+                    placeholder="********"
                     name="password"
                     defaultValue={user.password}
                     onChange={(e) =>
@@ -155,7 +152,7 @@ const SettingUser = () => {
                   <input
                     className="w-10/12 rounded border h-8 text-sm"
                     type="password"
-                    placeholder="password_confirmation"
+                    placeholder="********"
                     name="password_confirmation"
                     defaultValue={user.password_confirmation}
                     onChange={(e) =>
@@ -196,6 +193,7 @@ const SettingUser = () => {
                     className="hidden px-3 py-2 text-lg  rounded-lg border focus:outline focus:outline-2 focus:outline-offset-2 bg-[#ffffff] text-[#444444] focus:outline-[#aaaaaa] border-[#ffffff]"
                     placeholder="Type your name.."
                     name="image_profile"
+                    defaultValue={user.image_profile}
                     onChange={(e) =>
                       setUserUpload({
                         ...userUpload,
