@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("name");
             $table->text('history')->nullable();
-            $table->text('sport_rules')->nullable();
+            $table->text('rules')->nullable();
             $table->string('image')->nullable();
             $table->timestamps();
         });

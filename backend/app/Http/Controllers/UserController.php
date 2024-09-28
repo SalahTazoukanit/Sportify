@@ -166,6 +166,8 @@ class UserController extends Controller
 
         if ($request->hasFile('image_profile')) {
             $validatedData['image_profile'] = $request->file('image_profile')->store('images/profiles', 'public');
+        }else {
+            $validatedData['image_profile'] = null ;
         }
 
 

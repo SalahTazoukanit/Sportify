@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Event;
 
 class CategoryController extends Controller
@@ -46,14 +47,27 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $category = new Category;
-        $category->name = $request->name;
+        $user = Auth::user();
+
+        if ($user->role === "admin") {
+            $category = new Category;
+            $category->name = $request->name;
+            $category->history = $request->history;
+            $category->rules = $request->rules;
+
+            if ($request->hasFile('image')) {
+                $category->image = $request->file('image')->store('images/categories', 'public');
+            }
+        }else {
+            return response()->json([ 'message' => "Vous n'êtes pas administrateur."],409);
+        }
+
         $category->save();
 
         return response()->json([
             "category" => $category,
             "message" => "La categorie " . $category->name . " a été ajouté avec succes."
-        ]);
+        ],200);
     }
 
     /**
@@ -72,14 +86,31 @@ class CategoryController extends Controller
      */
     public function update(Request $request, String $id)
     {
+
+        $user = Auth::user();
         $category = Category::findOrFail($id);
-        $category->name = $request->name;
+
+        if ($user->role === "admin") {
+
+            $category->name = $request->name;
+            $category->history = $request->history;
+            $category->rules = $request->rules;
+            $category->name = $request->name;
+
+            if ($request->hasFile('image')) {
+               $category->image = $request->file('image')->store("images/categories" , "public") ;
+            }
+        }else{
+            return response()->json([ 'message' => "Vous n'êtes pas administrateur."],409);
+        }
+
+
         $category->update();
 
         return response()->json([
             "category" => $category,
-            "message" => 'La categorie a étée mise à jour .'
-        ]);
+            "message" => 'La categorie ' . $category->name . ' a étée mise à jour .'
+        ],200);
     }
 
     /**
@@ -87,8 +118,14 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category, String $id)
     {
+        $user = Auth::user();
         $category = Category::find($id);
-        $category->delete();
+
+        if ($user->role === "admin") {
+            $category->delete();
+        }else{
+            return response()->json([ 'message' => "Vous n'êtes pas administrateur."],409);
+        }
         return response()->json([
             "message" => "La categorie " . $category->name . " a été supprimé ."
         ], 200);

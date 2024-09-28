@@ -12,7 +12,7 @@ class Category extends Model
     protected $fillable = [
         "name",
         "history",
-        "sport_rules",
+        "rules",
         "images"
     ];
 

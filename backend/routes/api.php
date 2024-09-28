@@ -65,7 +65,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
         //Categories Routes
         Route::prefix('/categories')->group(function () {
-            Route::post('/', [CategoryController::class, 'index'])->name('index.categories');
             Route::post('/store', [CategoryController::class, 'store'])->name('store.categories');
             Route::put('/update/{id}', [CategoryController::class, 'update'])->name('update.categories');
             Route::delete('/delete/{id}', [CategoryController::class, 'destroy'])->name('delete.categories');
