@@ -14,6 +14,7 @@ import AddEvent from "./views/add-event/AddEvent";
 import UpdateEvent from "./views/update-event/UpdateEvent";
 import MyFavouritesEvents from "./views/my-favourites-events/MyFavouritesEvents";
 import ProtectedRoute from "./components/protected-route/ProtectedRoutes";
+import SportDetails from "./views/sport-detail/SportDetails";
 // import Chat from "./views/chat-view/Chat";
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           {/* <Route path="/chat" element={<Chat />} /> */}
           <Route path="/events" element={<Events />} />
           <Route path="/sports" element={<Sports />} />
+          <Route path="/sport-details/:id" element={<SportDetails />} />
           <Route path="/a-propos" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/legal-mentions" element={<LegalMentions />} />

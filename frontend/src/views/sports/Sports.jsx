@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom";
 
 const Sports = () => {
   const [categories, setCategories] = useState([]);
-  const [categoryName, setCategoryName] = useState("");
+  const [searchBarValue, setSearchBarValue] = useState("");
 
   const getCategories = () => {
     axios.get("http://127.0.0.1:8000/api/v1/categories/").then((response) => {
@@ -16,26 +16,12 @@ const Sports = () => {
     });
   };
 
-  const filterEventsByCategory = (categoryName) => {
-    axios
-      .get(
-        "http://127.0.0.1:8000/api/v1/categories/filterEventsByCategory/" +
-          categoryName
-      )
-      .then((response) => {
-        console.log(response);
-      });
-  };
+  const filteredCategories = categories.filter((category) =>
+    category.name.toLowerCase().includes(searchBarValue.toLowerCase())
+  );
+
   const getImageUrl = (image) => {
     return "http://127.0.0.1:8000/storage/" + image;
-  };
-
-  const handleSelect = (e) => {
-    const category = e.target.value;
-    console.log(category);
-
-    setCategoryName(category);
-    filterEventsByCategory(category);
   };
 
   useEffect(() => {
@@ -54,26 +40,27 @@ const Sports = () => {
           <input
             className="rounded-md w-1/2 md:h-10"
             type="text"
-            name=""
-            id=""
-            placeholder="Cherchez votre categorie"
+            name="searchBar"
+            placeholder="Cherchez votre catégorie"
+            onChange={(e) => setSearchBarValue(e.target.value)}
+            value={searchBarValue}
           />
         </div>
       </div>
       <div className="flex justify-center">
         <div className="general-block flex flex-wrap justify-center w-9/12 gap-10">
-          {categories &&
-            categories.map((category) => (
+          {filteredCategories.length > 0 ? (
+            filteredCategories.map((category) => (
               <div
                 key={category.id}
                 className="block max-w-[18rem] rounded-lg bg-white text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-white"
               >
-                <NavLink>
+                <NavLink to={`/sport-details/${category.id}`}>
                   <div className="relative overflow-hidden bg-cover bg-no-repeat">
                     <img
                       className="rounded-t-lg"
                       src={
-                        category.imagge
+                        category.image
                           ? getImageUrl(category.image)
                           : "/src/assets/images/835001-best-of-2022-les-exploits-sportifs-de-nos-francais-cette-annee.jpg"
                       }
@@ -85,11 +72,17 @@ const Sports = () => {
                   </div>
                 </NavLink>
               </div>
-            ))}
+            ))
+          ) : (
+            <div>
+              <p className="text-red-600">Aucune catégorie trouvée</p>
+            </div>
+          )}
         </div>
       </div>
       <Footer />
     </>
   );
 };
+
 export default Sports;
