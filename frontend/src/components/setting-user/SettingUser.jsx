@@ -100,7 +100,7 @@ const SettingUser = () => {
             <form
               onSubmit={(e) => updateUser(e)}
               encType="multipart/form-data"
-              className="flex flex-col lg:flex-row border rounded bg-white w-full lg:w-3/4 p-5 md:p-10 lg:p-20 items-center gap-10 lg:gap-20"
+              className="flex flex-col lg:flex-row border rounded bg-white w-full w-3/4 p-5 md:p-10 lg:p-20 items-center gap-10 lg:gap-20"
             >
               <div className="flex flex-col w-full lg:w-1/2 gap-5">
                 <h2 className="font-medium maw-sm:text-lg" id="configuration">

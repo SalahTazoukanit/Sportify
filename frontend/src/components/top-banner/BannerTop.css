@@ -1,3 +1,12 @@
 .banner-top-text{
     text-shadow: 5px 5px 5px black ;
 }
+.banner-top-text h1{
+
+}
+
+@media screen and (max-width: 485px){
+    .banner-top-text{
+        font-size: xx-large;
+    }
+}

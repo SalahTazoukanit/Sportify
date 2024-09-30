@@ -13,7 +13,7 @@ const Dashboard = () => {
     <>
       <Header />
       <div className="general-block flex flex-col md:flex-row max-sm:items-center">
-        <div className="md:pl-20 max-sm:w-full">
+        <div className="md:pl-20 max-sm:w-full w-1/4">
           <SideBarSetting />
         </div>
         <SettingUser />
