@@ -84,12 +84,14 @@ const EventDetail = () => {
     <>
       <Header />
       <div className="general-block w-full flex justify-center">
-        <div className="flex flex-col justify-start md:w-3/6 gap-5">
+        <div className="flex flex-col justify-center md:justify-start md:w-3/6 gap-5">
           {/* mex */}
           {isVisible && <p className="italic">{message}</p>}
           {/* mex */}
-          <h2 className="mb-5">{event.name && event.name}</h2>
-          <div className="flex flex-col gap-5 md:flex-row justify-between ">
+          <h2 className="mb-5 max-sm:text-center">
+            {event.name && event.name}
+          </h2>
+          <div className="flex flex-col gap-5 md:flex-row justify-between items-center md:items-start">
             <div className="w-2/3">
               <img
                 className=""
@@ -128,12 +130,12 @@ const EventDetail = () => {
               </div>
             </div>
           </div>
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3 max-sm:items-center ">
             <div className="flex flex-col">
               <h3 className="font-semibold">Description</h3>
               <p>{event.description}</p>
             </div>
-            <div className="flex">
+            <div className="flex gap-10 md:gap-0">
               <div className="flex flex-col md:w-1/2 gap-3">
                 <div className="flex-col">
                   <h3 className="font-semibold">Adresse événement</h3>

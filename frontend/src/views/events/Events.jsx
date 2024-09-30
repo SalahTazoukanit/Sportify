@@ -84,10 +84,10 @@ const Events = () => {
         </h1>
       </div>
       <div className="general-block flex justify-center">
-        <div className="flex justify-center md:w-5/6 bg-third-color border rounded-xl ">
-          <div className="flex flex-col gap-2 md:flex-row justify-center items-center md:w-3/5 p-10 rounded-l-lg md:gap-10">
+        <div className="flex justify-center w-11/12 md:w-5/6 bg-third-color border rounded-xl ">
+          <div className="flex flex-col gap-2 md:flex-row justify-center items-center w-full md:w-3/5 p-10 rounded-l-lg md:gap-10">
             <select
-              className="rounded md:w-full max-sm:w-3/4 text-center text-sm md:h-10"
+              className="rounded md:w-full max-sm:w-3/4 text-center md:text-sm md:h-10"
               name="select"
               id=""
               onChange={handleSelect}

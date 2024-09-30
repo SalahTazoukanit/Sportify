@@ -20,7 +20,6 @@ const SignIn = () => {
     axios
       .post("http://127.0.0.1:8000/api/v1/users/login", user)
       .then((response) => {
-        //get token form response and saved it in localStorage;
         const token = response.data.token;
         const user_id = response.data.user_id;
         const user_role = response.data.user_role;
@@ -28,9 +27,9 @@ const SignIn = () => {
         localStorage.setItem("token", token);
         localStorage.setItem("user_id", user_id);
         localStorage.setItem("user_role", user_role);
-        //message
+
         alert(response.data.message);
-        //redirect to dashboard if login successfully ;
+
         navigate("/dashboard");
       });
   };
@@ -38,7 +37,7 @@ const SignIn = () => {
   return (
     <>
       <div className="block-signin flex justify-center items-center w-full bg-gray-100">
-        <div className="flex w-full h-full">
+        <div className="flex w-full h-full ">
           <div className="flex flex-col justify-center items-center gap-10 w-2/3">
             <div className="flex">
               <NavLink to={"/"}>

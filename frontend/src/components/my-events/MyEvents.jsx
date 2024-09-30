@@ -88,19 +88,20 @@ const MyEvents = () => {
           </h2>
         )}
       </div>
+
       <div className="flex general-block justify-center">
-        <div className="flex flex-col gap-5 items-center border bg-white w-10/12 pb-10 pt-10">
-          <div className="flex w-full md:w-10/12">
+        <div className="flex flex-col gap-5 items-center border bg-white w-full md:w-10/12 pb-10 pt-10 px-5">
+          <div className="flex w-full text-xs md:w-10/12">
             <div className="w-1/6 text-center hidden md:block">
               <p>Horaires</p>
             </div>
             <div className="w-1/6 text-center hidden md:block">
               <p>Date</p>
             </div>
-            <div className="w-1/6 text-center">
+            <div className="w-1/6 text-center hidden md:block">
               <p>Événement</p>
             </div>
-            <div className="w-1/6 text-center">
+            <div className="w-1/6 text-center hidden md:block">
               <p>Status</p>
             </div>
             <div className="w-1/6 text-center">
@@ -114,16 +115,18 @@ const MyEvents = () => {
             myEvents.map((myEvent) => (
               <div
                 key={myEvent.id}
-                className="flex justify-between items-center  w-full md:w-10/12"
+                className="flex flex-col md:flex-row justify-between items-center w-full md:w-10/12 gap-4 max-sm:border max-sm:p-5"
               >
-                <h3 className="w-1/6 text-center hidden md:block">
+                <h3 className="w-1/6 text-center hidden md:block ">
                   {myEvent.time}
                 </h3>
                 <h3 className="w-1/6 text-center hidden md:block">
                   {new Date(myEvent.date).toLocaleDateString()}
                 </h3>
-                <h3 className="w-1/6 text-start">{myEvent.name}</h3>
-                <h3 className="w-1/6 text-center">
+                <h3 className="w-full md:w-1/6 text-start max-sm:font-medium">
+                  {myEvent.name}
+                </h3>
+                <h3 className="w-full md:w-1/6 text-center">
                   {editingEventId === myEvent.id ? (
                     <>
                       <select
@@ -136,7 +139,7 @@ const MyEvents = () => {
                       </select>
                       <button
                         className="ml-2 text-green-500 text-xs hover:opacity-50"
-                        onClick={() => handleStatusChange(myEvent.id)} // Salva lo stato selezionato
+                        onClick={() => handleStatusChange(myEvent.id)}
                       >
                         Enregistrer
                       </button>
@@ -149,15 +152,15 @@ const MyEvents = () => {
                       {user_role === "admin" ? (
                         <button
                           onClick={() => {
-                            setEditingEventId(myEvent.id); // Mostra il select per questo evento
-                            setUpdatedStatus(myEvent.status); // Imposta lo stato corrente come predefinito
+                            setEditingEventId(myEvent.id);
+                            setUpdatedStatus(myEvent.status);
                           }}
                           className="text-third-color text-xs hover:opacity-50"
                         >
                           changer
                         </button>
                       ) : (
-                        <span className="text-xs invisible">changer</span> // Segnaposto invisibile
+                        <span className="text-xs invisible">changer</span>
                       )}
                     </span>
                   )}

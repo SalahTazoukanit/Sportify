@@ -36,9 +36,9 @@ const Sports = () => {
         </h1>
       </div>
       <div className="flex w-full justify-center">
-        <div className="general-block flex justify-center rounded-md p-5 bg-third-color w-1/2">
+        <div className="general-block flex justify-center rounded-md p-5 bg-third-color w-11/12 md:w-1/2">
           <input
-            className="rounded-md w-1/2 md:h-10 text-center"
+            className="rounded-md w-full md:w-1/2 md:h-10 text-center"
             type="text"
             name="searchBar"
             placeholder="Cherchez votre sport"
@@ -48,7 +48,7 @@ const Sports = () => {
         </div>
       </div>
       <div className="flex justify-center">
-        <div className="general-block flex flex-wrap justify-center w-9/12 gap-10">
+        <div className="general-block flex flex-wrap justify-center w-9/12 gap-5 md:gap-10">
           {filteredCategories.length > 0 ? (
             filteredCategories.map((category) => (
               <div

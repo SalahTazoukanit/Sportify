@@ -33,32 +33,17 @@ const MyParticipatedEvents = () => {
       });
   };
 
-  // const removeMeAsParticipant = (id) => {
-  //   axios
-  //     .post(
-  //       `http://127.0.0.1:8000/api/v1/events/removeMeAsParticipant/${id}`,
-  //       {},
-  //       {
-  //         headers,
-  //       }
-  //     )
-  //     .then((response) => {
-  //       alert(response.data.message);
-  //       window.location.reload();
-  //     });
-  // };
-
   useEffect(() => {
     showMyParticipatedEvents();
   }, []);
   return (
     <>
       <div className="general-block flex flex-col w-full items-center ">
-        <h2 id="participes" className="">
+        <h2 id="participes" className="text-center">
           Événements participés et à venir
         </h2>
       </div>
-      <div className=" flex flex-wra justify-center ">
+      <div className="flex flex-wrap justify-center">
         <Swiper
           slidesPerView={2}
           spaceBetween={10}
@@ -89,7 +74,7 @@ const MyParticipatedEvents = () => {
           {myParticipatedEvents &&
             myParticipatedEvents.map((myEvent) => (
               <SwiperSlide key={myEvent.id}>
-                <div className="mb-10 flex flex-col rounded-lg bg-white text-center shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700 h-full ">
+                <div className="mb-10 flex flex-col rounded-lg bg-white text-center shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700 h-full">
                   <NavLink to={`/events/event-details/${myEvent.id}`}>
                     <div className="border-b-2 border-neutral-100 px-6 py-3 dark:border-neutral-600 dark:text-neutral-50 text-sm">
                       {"Le " +
@@ -97,7 +82,7 @@ const MyParticipatedEvents = () => {
                         " à " +
                         myEvent.time}
                     </div>
-                    <div className="p-6">
+                    <div className="p-6 h-32 overflow-hidden">
                       <h3 className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
                         {myEvent.name}
                       </h3>
@@ -105,7 +90,7 @@ const MyParticipatedEvents = () => {
                         {myEvent.description.slice(0, 100)}
                       </p>
                       <p className="text-xs">{myEvent.position}</p>
-                    </div>{" "}
+                    </div>
                   </NavLink>
                   <RemoveParticipant eventId={myEvent.id} />
                 </div>

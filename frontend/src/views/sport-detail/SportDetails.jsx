@@ -53,7 +53,7 @@ const SportDetails = () => {
         </h1>
       </div>
       <div className="general-block flex flex-col justify-center items-center min-h-96">
-        <div className="box-sport flex flex-col items-center w-1/2 rounded-md gap-10 p-10 border">
+        <div className="box-sport flex flex-col items-center w-11/12 md:w-1/2 rounded-md gap-10 p-10 border">
           <div>
             <h2>{category.name}</h2>
           </div>

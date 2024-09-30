@@ -94,31 +94,22 @@ const SettingUser = () => {
 
   return (
     <>
-      <div className="flex w-full justify-center">
-        {/* <div className="flex flex-col w-1/4 ml-10">
-          <h3>Configuration</h3>
-          <h3>Mes Favoris</h3>
-          <div>Regalges</div>
-          <div>myEvents</div>
-          <div>myPartecipatedEvents</div>
-        </div> */}
-        <div className="flex flex-col w-3/4 mr-10">
+      <div className="flex justify-center w-full">
+        <div className="flex flex-col w-full lg:w-3/4 p-5 lg:mr-10">
           <div className="flex flex-col gap-10">
             <form
-              onSubmit={(e) => {
-                updateUser(e);
-              }}
+              onSubmit={(e) => updateUser(e)}
               encType="multipart/form-data"
-              className="flex border rounded bg-white w-3/4 p-20 items-center gap-20"
+              className="flex flex-col lg:flex-row border rounded bg-white w-full lg:w-3/4 p-5 md:p-10 lg:p-20 items-center gap-10 lg:gap-20"
             >
-              <div className="flex flex-col w-1/2 gap-5">
-                <h2 className="font-medium " id="configuration">
+              <div className="flex flex-col w-full lg:w-1/2 gap-5">
+                <h2 className="font-medium maw-sm:text-lg" id="configuration">
                   Configuration
                 </h2>
                 <div className="hidden md:block border"></div>
                 <div className="flex flex-col gap-1">
                   <input
-                    className="w-10/12 rounded border h-8 text-sm text-opacity-35"
+                    className="w-full lg:w-10/12 rounded border h-8 text-sm"
                     type="text"
                     name="name"
                     defaultValue={user.name}
@@ -129,7 +120,7 @@ const SettingUser = () => {
                 </div>
                 <div className="flex flex-col gap-1">
                   <input
-                    className="w-10/12 rounded border h-8 text-sm"
+                    className="w-full lg:w-10/12 rounded border h-8 text-sm"
                     type="email"
                     name="email"
                     defaultValue={user.email}
@@ -140,7 +131,7 @@ const SettingUser = () => {
                 </div>
                 <div className="flex flex-col gap-1">
                   <input
-                    className="w-10/12 rounded border h-8 text-sm"
+                    className="w-full lg:w-10/12 rounded border h-8 text-sm"
                     type="password"
                     placeholder="********"
                     name="password"
@@ -152,7 +143,7 @@ const SettingUser = () => {
                 </div>
                 <div className="flex flex-col gap-1">
                   <input
-                    className="w-10/12 rounded border h-8 text-sm"
+                    className="w-full lg:w-10/12 rounded border h-8 text-sm"
                     type="password"
                     placeholder="********"
                     name="password_confirmation"
@@ -165,7 +156,7 @@ const SettingUser = () => {
                     }
                   />
                 </div>
-                <div className="flex justify-center bg-second-color text-white p-1 border rounded-full border-second-color w-1/3 mt-5">
+                <div className="flex justify-center bg-second-color text-white p-1 border rounded-full w-full lg:w-1/3 mt-5">
                   <button type="submit">Sauvegarder</button>
                 </div>
                 {isVisible && <div className="message">{message}</div>}
@@ -174,28 +165,28 @@ const SettingUser = () => {
                 <div>
                   {user.image_profile ? (
                     <img
-                      className="rounded-full border-black  md:w-40 md:h-40 hidden md:block "
+                      className="rounded-full border-black w-32 h-32 md:w-40 md:h-40"
                       src={getImageUrl(user.image_profile)}
-                      alt=""
+                      alt="Profile"
                     />
                   ) : (
                     <img
-                      className="rounded-full border-black  md:w-40 md:h-40 hidden md:block "
+                      className="rounded-full border-black w-32 h-32 md:w-40 md:h-40"
                       src="/src/assets/images/user.png"
                       alt="image utilisateur"
                     />
                   )}
                 </div>
 
-                <div className="flex flex-col border p-2 border-black rounded-full hover:opacity-50">
-                  <label htmlFor="input-image">Choisir une image</label>
+                <div className="flex flex-col border p-2 border-black rounded-full hover:opacity-75">
+                  <label htmlFor="input-image" className="cursor-pointer">
+                    Choisir une image
+                  </label>
                   <input
                     id="input-image"
                     type="file"
-                    className="hidden px-3 py-2 text-lg  rounded-lg border focus:outline focus:outline-2 focus:outline-offset-2 bg-[#ffffff] text-[#444444] focus:outline-[#aaaaaa] border-[#ffffff]"
-                    placeholder="Type your name.."
+                    className="hidden"
                     name="image_profile"
-                    defaultValue={user.image_profile}
                     onChange={(e) =>
                       setUserUpload({
                         ...userUpload,

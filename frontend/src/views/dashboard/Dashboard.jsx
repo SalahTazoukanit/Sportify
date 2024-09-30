@@ -12,8 +12,8 @@ const Dashboard = () => {
   return (
     <>
       <Header />
-      <div className="general-block flex">
-        <div className="pl-20">
+      <div className="general-block flex flex-col md:flex-row max-sm:items-center">
+        <div className="md:pl-20 max-sm:w-full">
           <SideBarSetting />
         </div>
         <SettingUser />

@@ -10,7 +10,7 @@ const BannerTop = () => {
               VOTRE RESEAU DE SPORTIFS <br />A PORTÉE DE MAIN
             </h1>
             <h2 className=" banner-top-text tracking-wider	">
-              PENSEZ QUE A JOUER
+              CONNECTEZ, JOUEZ, PROFITEZ
             </h2>
           </div>
         </div>
