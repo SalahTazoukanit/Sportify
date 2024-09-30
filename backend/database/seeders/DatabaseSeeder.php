@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
             'password' => 'test',
             "role" => "admin",
-            "image_profile" => 'images/profiles/admin-img.jpg'
+            "image_profile" => 'images/profiles/admin.jpg'
         ]);
 
         User::factory()->create([
