@@ -38,10 +38,10 @@ const Sports = () => {
       <div className="flex w-full justify-center">
         <div className="general-block flex justify-center rounded-md p-5 bg-third-color w-1/2">
           <input
-            className="rounded-md w-1/2 md:h-10"
+            className="rounded-md w-1/2 md:h-10 text-center"
             type="text"
             name="searchBar"
-            placeholder="Cherchez votre catégorie"
+            placeholder="Cherchez votre sport"
             onChange={(e) => setSearchBarValue(e.target.value)}
             value={searchBarValue}
           />

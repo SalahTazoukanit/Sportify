@@ -15,7 +15,6 @@ import UpdateEvent from "./views/update-event/UpdateEvent";
 import MyFavouritesEvents from "./views/my-favourites-events/MyFavouritesEvents";
 import ProtectedRoute from "./components/protected-route/ProtectedRoutes";
 import SportDetails from "./views/sport-detail/SportDetails";
-// import Chat from "./views/chat-view/Chat";
 
 function App() {
   return (

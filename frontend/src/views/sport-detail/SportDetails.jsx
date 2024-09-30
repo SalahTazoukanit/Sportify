@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
+import "./SportDetails.css";
 
 const SportDetails = () => {
   const { id } = useParams();
@@ -51,17 +52,17 @@ const SportDetails = () => {
           {category.name}
         </h1>
       </div>
-      <div className="flex flex-col justify-center items-center min-h-96">
-        <div className="flex flex-col items-center w-1/2 rounded-md gap-10 p-5">
+      <div className="general-block flex flex-col justify-center items-center min-h-96">
+        <div className="box-sport flex flex-col items-center w-1/2 rounded-md gap-10 p-10 border">
           <div>
             <h2>{category.name}</h2>
           </div>
           <div className="flex flex-col gap-2">
-            <h3>Histoire</h3>
+            <h3 className="font-semibold">Histoire</h3>
             <p>{category.history}</p>
           </div>
           <div className="flex flex-col gap-2">
-            <h3>Regles du jeux</h3>
+            <h3 className="font-semibold">Regles du jeux</h3>
             <p>{category.rules}</p>
           </div>
         </div>

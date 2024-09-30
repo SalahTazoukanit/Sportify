@@ -95,13 +95,13 @@ const SettingUser = () => {
   return (
     <>
       <div className="flex w-full justify-center">
-        <div className="flex flex-col w-1/4 ml-10">
+        {/* <div className="flex flex-col w-1/4 ml-10">
           <h3>Configuration</h3>
           <h3>Mes Favoris</h3>
           <div>Regalges</div>
           <div>myEvents</div>
           <div>myPartecipatedEvents</div>
-        </div>
+        </div> */}
         <div className="flex flex-col w-3/4 mr-10">
           <div className="flex flex-col gap-10">
             <form
@@ -112,7 +112,9 @@ const SettingUser = () => {
               className="flex border rounded bg-white w-3/4 p-20 items-center gap-20"
             >
               <div className="flex flex-col w-1/2 gap-5">
-                <h2 className="font-medium ">Configuration</h2>
+                <h2 className="font-medium " id="configuration">
+                  Configuration
+                </h2>
                 <div className="hidden md:block border"></div>
                 <div className="flex flex-col gap-1">
                   <input

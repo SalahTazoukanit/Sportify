@@ -79,9 +79,13 @@ const MyEvents = () => {
     <>
       <div className="general-block ">
         {user_role === "member" ? (
-          <h2 className="font-semibold text-center ">Mes Événements</h2>
+          <h2 className="font-semibold text-center" id="evenements">
+            Mes Événements
+          </h2>
         ) : (
-          <h2 className="font-semibold text-center">Tous les Événements</h2>
+          <h2 id="evenements" className="font-semibold text-center">
+            Tous les Événements
+          </h2>
         )}
       </div>
       <div className="flex general-block justify-center">

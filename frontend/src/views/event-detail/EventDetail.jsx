@@ -98,6 +98,7 @@ const EventDetail = () => {
                     ? getImageUrl(event.image)
                     : "/src/assets/images/sports-removebg-preview.png"
                 }
+                alt="image événement"
               />
             </div>
             <div className="date-block flex flex-col max-sm:w-1/2 gap-2 bg-white p-5 h-48 rounded-md">

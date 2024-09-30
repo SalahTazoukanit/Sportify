@@ -54,7 +54,9 @@ const MyParticipatedEvents = () => {
   return (
     <>
       <div className="general-block flex flex-col w-full items-center ">
-        <h2 className="">Événements participés et à venir</h2>
+        <h2 id="participes" className="">
+          Événements participés et à venir
+        </h2>
       </div>
       <div className=" flex flex-wra justify-center ">
         <Swiper
