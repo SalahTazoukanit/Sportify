@@ -67,6 +67,7 @@ const Sport = () => {
                   className="mb-10 flex justify-center"
                   key={sport.id}
                 >
+                  {/* <NavLink to={"/"}> */}
                   <div className="flex flex-col justify-center items-center sm:w-full gap-1">
                     <img
                       className="rounded-md"
@@ -75,6 +76,7 @@ const Sport = () => {
                     />
                     <h3 className="font-medium "> {sport.name}</h3>
                   </div>
+                  {/* </NavLink> */}
                 </SwiperSlide>
               ))}
           </Swiper>
