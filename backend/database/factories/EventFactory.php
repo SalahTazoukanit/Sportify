@@ -21,7 +21,7 @@ class EventFactory extends Factory
             "category_id" => random_int(1,8),
             "status"=> "published",
             'name' => fake()->words(3 , true),
-            'image' => fake()->image(),
+            'image' => "images/events/stade.jpg",
             'description' => fake()->sentence(20),
             'date' => fake()->date(),
             'position' => fake()->streetAddress(),

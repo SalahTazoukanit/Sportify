@@ -185,7 +185,7 @@ class EventController extends Controller
         $request->validate([
             'name' => 'string|max:200',
             'category_id' => 'integer',
-            'description' => 'sometimes|max:1000',
+            'description' => 'sometimes',
             'date' => 'date|required',
             'position' => "string",
             'aviable_places' => "sometimes|required",
