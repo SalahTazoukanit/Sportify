@@ -27,11 +27,7 @@ const DescriptionBanner = () => {
               </p>
             </div>
             <div className="shadow-custom md:w-1/3 flex flex-col border rounded-md justify-center items-center text-center p-10 bg-white">
-              <img
-                className="w-28 hidden md:block"
-                src="src/assets/images/gym.png"
-                alt="logo"
-              />
+              <img className="w-28 hidden md:block" src="gym.png" alt="logo" />
               <p>
                 Participez à des activités régulières pour maintenir votre forme
                 physique.
