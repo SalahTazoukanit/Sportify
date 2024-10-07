@@ -26,7 +26,7 @@ const CreateEventBanner = () => {
             </NavLink>
           ) : (
             <NavLink to={"/sign-in"}>
-              <div className="bg-second-color w-full md:w-52 h-10 flex justify-center items-center rounded hover:opacity-90">
+              <div className="color-btn-green w-full md:w-52 h-10 flex justify-center items-center rounded hover:opacity-90">
                 <button className="w-full h-full">Créez un événement</button>
               </div>
             </NavLink>

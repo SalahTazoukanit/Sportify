@@ -120,7 +120,7 @@ const Header = () => {
           </NavLink>
         )}
         {!token && (
-          <div className="btn flex justify-center items-center rounded">
+          <div className="btn color-btn-green flex justify-center items-center rounded">
             <NavLink to={"/sign-in"}>Connexion</NavLink>
           </div>
         )}

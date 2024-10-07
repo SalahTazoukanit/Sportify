@@ -1,5 +1,5 @@
 .banner-inscription {
-    background-image: url(public/src/assets/images/tennis.jpg);
+    background-image: url(/src/assets/images/tennis.jpg);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
