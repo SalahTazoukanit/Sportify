@@ -1,9 +1,14 @@
 .banner-top-text{
     text-shadow: 5px 5px 5px black ;
 }
-.banner-top-text h1{
-
-}
+.top-banner{
+    background-image: url(/src/assets/images/piotr-osmenda-20K-JZ2ppbE-unsplash.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 40rem;
+    
+  }
 
 @media screen and (max-width: 485px){
     .banner-top-text{

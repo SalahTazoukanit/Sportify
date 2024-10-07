@@ -44,7 +44,13 @@ const Footer = () => {
               <NavLink to={"/sports"}>Sports</NavLink>
               <NavLink to={"/a-propos"}>A propos</NavLink>
               <NavLink to={"/legal-mentions"}>Mentions légales</NavLink>
-              <NavLink to={"/contact"}>Contact</NavLink>
+              <div className="flex gap-4">
+                <p>Contact</p>
+                <div className="flex flex-col text-xs">
+                  <p>exemple@gmail.com</p>
+                  <p> 0723456789 </p>
+                </div>
+              </div>
             </div>
           </div>
           <div className="flex">

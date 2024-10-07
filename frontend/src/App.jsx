@@ -4,7 +4,6 @@ import Homepage from "./views/homepage/Homepage";
 import Events from "./views/events/Events";
 import Sports from "./views/sports/Sports";
 import About from "./views/about/About";
-import Contact from "./views/contact/Contact";
 import SignIn from "./views/sign-in/SignIn";
 import SignUp from "./views/sign-up/SignUp";
 import Dashboard from "./views/dashboard/Dashboard";
@@ -28,7 +27,6 @@ function App() {
           <Route path="/sports" element={<Sports />} />
           <Route path="/sport-details/:id" element={<SportDetails />} />
           <Route path="/a-propos" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
           <Route path="/legal-mentions" element={<LegalMentions />} />
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />

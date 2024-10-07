@@ -6,6 +6,7 @@ import CreateEventBanner from "../../components/create-event-banner/CreateEventB
 import Sport from "../../components/sport-card/Sport";
 import BottomBanner from "../../components/bottom-banner/BottomBanner";
 import Footer from "../../components/footer/Footer";
+import Contact from "../../components/contact/Contact";
 
 const Homepage = () => {
   return (
@@ -18,6 +19,7 @@ const Homepage = () => {
         <CreateEventBanner />
         <Sport />
         <BottomBanner />
+        <Contact />
         <Footer />
       </div>
     </>
