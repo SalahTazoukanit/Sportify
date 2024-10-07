@@ -1,5 +1,5 @@
 .banner-register {
-    background-image: url("src/assets/images/runningSolo.jpg");
+    background-image: url(public/src/assets/images/runningSolo.jpg);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;

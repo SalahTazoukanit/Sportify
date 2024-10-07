@@ -1,5 +1,5 @@
 .create-events{
-    background-image: url("src/assets/images/sports-removebg-preview.png");
+    background-image: url(public/src/assets/images/sports-removebg-preview.png);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
