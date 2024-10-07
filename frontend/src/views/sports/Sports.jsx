@@ -38,7 +38,7 @@ const Sports = () => {
       <div className="flex w-full justify-center">
         <div className="general-block flex justify-center rounded-md p-5 bg-third-color w-11/12 md:w-1/2">
           <input
-            className="rounded-md w-full md:w-1/2 md:h-10 text-center"
+            className="rounded-md w-full md:w-2/3 md:h-10 text-center"
             type="text"
             name="searchBar"
             placeholder="Cherchez votre sport"

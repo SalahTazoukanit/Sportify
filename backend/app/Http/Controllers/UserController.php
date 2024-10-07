@@ -9,14 +9,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
-
+use PhpParser\Node\Stmt\TryCatch;
 
 class UserController extends Controller
 {
 
     public function register(Request $request)
     {
-
         $request->validate([
             "name" => "string|required|max:255",
             "email" => "required|string|max:255|unique:users|email",
@@ -40,24 +39,10 @@ class UserController extends Controller
             "password_confirmation" => bcrypt($request->password_confirmation),
         ]);
 
-        // $user = User::create([
-        //     "name" => $request->name,
-        //     "email" => $request->email,
-        //     'image_profile' =>  $request->file('image_profile')->store('images/profiles', 'public'),
-        //     "password" => bcrypt($request->password),
-        //     "password_confirmation" => bcrypt($request->password_confirmation),
-        // ]);
-
-        // if($user){
             return response()->json([
                 "user" => $user,
                 "message" => "Votre compte a été créé avec succès. "
         ], 200);
-        // }else{
-        //     return response()->json([
-        //         "message" => "Echec !!!!"
-        //     ],400);
-        // }
 
     }
 

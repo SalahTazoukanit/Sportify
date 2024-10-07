@@ -51,11 +51,13 @@ const Header = () => {
   return (
     <div className="bg-third-color flex flex-col md:flex-row p-4 ">
       <div className="flex justify-between items-center w-full md:w-1/4">
-        <img
-          className="w-32 md:w-48"
-          src="/src/assets/images/logoSportifyOrangetVert.png"
-          alt="image logo sportify"
-        />
+        <NavLink to={"/"}>
+          <img
+            className="w-32 md:w-48"
+            src="/src/assets/images/logoSportifyOrangetVert.png"
+            alt="image logo sportify"
+          />
+        </NavLink>
         {/* Menu hamburger pour les petits écrans */}
         <button
           className="block md:hidden text-white"
@@ -109,14 +111,6 @@ const Header = () => {
             to={"/a-propos"}
           >
             À propos
-          </NavLink>
-        )}
-        {!token && (
-          <NavLink
-            className={(nav) => (nav.isActive ? "nav-active" : "")}
-            to={"/contact"}
-          >
-            Contact
           </NavLink>
         )}
         {!token && (

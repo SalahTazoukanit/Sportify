@@ -26,11 +26,13 @@ const LastEvents = () => {
           </h2>
           <div className="general-block grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 ">
             {events &&
-              events.slice(0, 4).map((event) => {
-                // event.status === "published" ? (
-                <Event key={event.id} event={event} />;
+              events.slice(0, 4).map(
+                (event) => (
+                  // event.status === "published" ? (
+                  <Event key={event.id} event={event} />
+                )
                 // ) : null;
-              })}
+              )}
           </div>
         </div>
         <div className="general-block">
