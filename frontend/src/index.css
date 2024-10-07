@@ -23,7 +23,7 @@ h2{
   height: 35px;
 }
 .btn-2{
-  background-color: #AACC00;
+  background-color: #007f5f;
   width: 200px;
   height: 30px;
   border-radius: 5px;
@@ -31,6 +31,9 @@ h2{
 }
 .nav-active{
   color: #AACC00;
+}
+.color-btn-green{
+  background-color: #007f5f;
 }
 .input-text{
   width: 100%;

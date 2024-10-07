@@ -109,13 +109,6 @@ const Events = () => {
               type="text"
               placeholder="Rechercher"
             />
-            <div className="flex justify-center bg-second-color rounded">
-              <img
-                className=" text-white hidden md:block"
-                src="src/assets/images/icons8-search-50.png"
-                alt="image search"
-              />
-            </div>
           </div>
         </div>
       </div>

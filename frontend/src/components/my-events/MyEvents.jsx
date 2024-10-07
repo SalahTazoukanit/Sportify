@@ -145,7 +145,7 @@ const MyEvents = () => {
                       </button>
                     </>
                   ) : (
-                    <span className="text-orange-500 italic flex gap-2">
+                    <span className="opacity-70 italic flex gap-2">
                       <span>
                         {myEvent.status === "pending" ? "En Attente" : "Publié"}
                       </span>
@@ -171,14 +171,14 @@ const MyEvents = () => {
                       <button>Modifier</button>
                     </NavLink>
                   </div>
-                  <div className="bg-red-500 text-white p-1 rounded hover:opacity-50">
+                  <div className="bg-red-900 text-white p-1 rounded hover:opacity-50">
                     <button onClick={(e) => deleteEvent(e, myEvent.id)}>
                       Supprimer
                     </button>
                   </div>
                   <NavLink to={`/events/event-details/${myEvent.id}`}>
                     <div>
-                      <p className="italic font-semibold text-green-800">
+                      <p className="italic font-semibold text-green-900">
                         Voir plus...
                       </p>
                     </div>

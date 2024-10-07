@@ -28,7 +28,7 @@ const Event = ({ event }) => {
             </div>
           </NavLink>
           <div>
-            <h3 className="font-bold">{event.name}</h3>
+            <h3 className="font-semibold">{event.name}</h3>
             <p className="text-third-color opacity-65">
               {event.description.slice(0, 30) + "..."}
             </p>
@@ -42,7 +42,7 @@ const Event = ({ event }) => {
               {event.aviable_places > 0 ? (
                 <p className="text-third-color font-medium opacity-65 ">
                   Places disponibles :
-                  <span className="font-semibold text-second-color">
+                  <span className="font-semibold">
                     {event.aviable_places && event.aviable_places}
                   </span>
                 </p>

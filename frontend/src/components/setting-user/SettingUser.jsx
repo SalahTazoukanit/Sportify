@@ -156,7 +156,7 @@ const SettingUser = () => {
                     }
                   />
                 </div>
-                <div className="flex justify-center bg-second-color text-white p-1 border rounded-full w-full lg:w-1/3 mt-5">
+                <div className="flex justify-center color-btn-green text-white p-1 border rounded-full w-full lg:w-1/3 mt-5">
                   <button type="submit">Sauvegarder</button>
                 </div>
                 {isVisible && <div className="message">{message}</div>}

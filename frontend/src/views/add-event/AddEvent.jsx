@@ -70,10 +70,11 @@ const AddEvent = () => {
           className="flex md:mt-5 md:mb-5 flex-col gap-2 w-full md:w-1/2 p-5"
         >
           <div className="title flex flex-col w-full">
-            <label className="font-medium" htmlFor="">
+            <label className="font-medium" htmlFor="name">
               Nom événement
             </label>
             <input
+              id="name"
               className="input-text"
               type="text"
               name="name"
@@ -83,10 +84,11 @@ const AddEvent = () => {
           </div>
           <div className="date flex gap-2">
             <div className="title flex flex-col w-1/2">
-              <label className="font-medium" htmlFor="">
+              <label className="font-medium" htmlFor="date">
                 Date
               </label>
               <input
+                id="date"
                 className="input-text"
                 type="date"
                 name="date"
@@ -95,10 +97,11 @@ const AddEvent = () => {
               />
             </div>
             <div className="title flex flex-col w-1/2">
-              <label className="font-medium" htmlFor="">
+              <label className="font-medium" htmlFor="time">
                 Horaires
               </label>
               <input
+                id="time"
                 className="input-text"
                 type="time"
                 name="time"
@@ -108,10 +111,11 @@ const AddEvent = () => {
             </div>
           </div>
           <div className="title flex flex-col w-full">
-            <label className="font-medium" htmlFor="">
+            <label className="font-medium" htmlFor="position">
               Lieu
             </label>
             <input
+              id="position"
               className="input-text"
               type="text"
               name="position"
@@ -121,10 +125,11 @@ const AddEvent = () => {
             />
           </div>
           <div className="title flex flex-col ">
-            <label className="font-medium" htmlFor="">
+            <label className="font-medium" htmlFor="places">
               Places disponibles
             </label>
             <input
+              id="places"
               className="input-text"
               type="number"
               name="aviable_places"
@@ -161,10 +166,11 @@ const AddEvent = () => {
             {error && <span className="text-red-500"> {error} </span>}
           </div>
           <div className="description flex flex-col">
-            <label className="font-medium" htmlFor="">
+            <label className="font-medium" htmlFor="description">
               Description
             </label>
             <textarea
+              id="description"
               className="md:h-40 rounded"
               name="description"
               required
