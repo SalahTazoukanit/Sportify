@@ -20,6 +20,7 @@ const Dashboard = () => {
       </div>
       <MyEvents />
       <MyParticipatedEvents />
+
       <Footer />
     </>
   );

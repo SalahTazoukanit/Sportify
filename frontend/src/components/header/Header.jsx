@@ -49,7 +49,7 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="bg-third-color flex flex-col md:flex-row p-4">
+    <div className="bg-third-color flex flex-col md:flex-row p-4 ">
       <div className="flex justify-between items-center w-full md:w-1/4">
         <img
           className="w-32 md:w-48"

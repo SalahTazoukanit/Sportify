@@ -10,12 +10,6 @@ const FavouriteEventCard = ({ event }) => {
     Authorization: "Bearer " + token,
   };
 
-  const getImageUrl = (image) => {
-    if (image) {
-      return "http://127.0.0.1:8000/storage/" + image;
-    }
-  };
-
   const removeEventFromFavourites = (id) => {
     axios
       .post(
