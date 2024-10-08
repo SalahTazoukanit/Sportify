@@ -50,6 +50,14 @@ class CategoryController extends Controller
         $user = Auth::user();
 
         if ($user->role === "admin") {
+
+            $request->validate([
+                'name' => 'required|string',
+                'history' => 'nullable|text',
+                'rules' => 'nullable|text',
+                'images' => 'nullable|image',
+            ]);
+
             $category = new Category;
             $category->name = $request->name;
             $category->history = $request->history;
@@ -58,6 +66,10 @@ class CategoryController extends Controller
             if ($request->hasFile('image')) {
                 $category->image = $request->file('image')->store('images/categories', 'public');
             }
+
+
+
+
         }else {
             return response()->json([ 'message' => "Vous n'êtes pas administrateur."],409);
         }
