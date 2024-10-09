@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -9,63 +10,6 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 
-/**
- * @OA\Schema(
- *     schema="User",
- *     title="User",
- *     description="Modèle de l'utilisateur",
- *     required={"name", "email", "password"},
- *     @OA\Property(
- *         property="id",
- *         type="integer",
- *         description="ID unique de l'utilisateur",
- *         example=1
- *     ),
- *     @OA\Property(
- *         property="name",
- *         type="string",
- *         description="Nom de l'utilisateur",
- *         example="John Doe"
- *     ),
- *     @OA\Property(
- *         property="email",
- *         type="string",
- *         format="email",
- *         description="Adresse email de l'utilisateur",
- *         example="john@example.com"
- *     ),
- *     @OA\Property(
- *         property="password",
- *         type="string",
- *         description="Mot de passe de l'utilisateur",
- *         example="password123"
- *     ),
- *     @OA\Property(
- *         property="role",
- *         type="string",
- *         description="Rôle de l'utilisateur",
- *         example="admin"
- *     ),
- *     @OA\Property(
- *         property="image_profile",
- *         type="string",
- *         description="Chemin vers l'image de profil de l'utilisateur",
- *         example="/images/profile.jpg"
- *     ),
- *     @OA\Property(
- *         property="created_at",
- *         type="string",
- *         format="date-time",
- *         description="Date de création de l'utilisateur"
- *     ),
- *     @OA\Property(
- *         property="updated_at",
- *         type="string",
- *         format="date-time",
- *         description="Date de mise à jour de l'utilisateur"
- *     ),
- * )
- */
 class User extends Authenticatable
 {
     use HasApiTokens;
@@ -75,7 +19,7 @@ class User extends Authenticatable
     use TwoFactorAuthenticatable;
 
     /**
-     * Les attributs pouvant être assignés en masse.
+     * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
@@ -87,28 +31,19 @@ class User extends Authenticatable
         'image_profile'
     ];
 
-    /**
-     * Relation entre les utilisateurs et les événements.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
+    // Relation between users and events ;
     public function events()
     {
         return $this->belongsToMany(Event::class);
     }
 
-    /**
-     * Relation définissant la table pivot user_favourite.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function eventsFavourites()
-    {
-        return $this->belongsToMany(Event::class, 'user_favourite');
+    //Relation to define table_pivot user_favourite
+    public function eventsFavourites(){
+        return $this->belongsToMany(Event::class ,'user_favourite');
     }
 
     /**
-     * Les attributs à cacher lors de la sérialisation.
+     * The attributes that should be hidden for serialization.
      *
      * @var array<int, string>
      */
@@ -120,7 +55,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * Les accessors à ajouter à la forme de tableau du modèle.
+     * The accessors to append to the model's array form.
      *
      * @var array<int, string>
      */
@@ -129,7 +64,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * Obtenir les attributs qui doivent être castés.
+     * Get the attributes that should be cast.
      *
      * @return array<string, string>
      */
