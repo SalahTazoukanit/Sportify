@@ -33,7 +33,10 @@ const SignUp = () => {
     userAdded.append("password_confirmation", user.password_confirmation);
 
     axios
-      .post("http://127.0.0.1:8000/api/v1/users/register", userAdded)
+      .post(
+        `${import.meta.env.VITE_BACK_URL_LARAVEL}/users/register`,
+        userAdded
+      )
       .then((response) => {
         alert(response.data.message);
         navigate("/sign-in");
