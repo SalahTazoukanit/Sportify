@@ -6,6 +6,8 @@ import axios from "axios";
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [isVisible, setIsVisible] = useState(false);
 
   const navigate = useNavigate();
 
@@ -28,9 +30,14 @@ const SignIn = () => {
         localStorage.setItem("user_id", user_id);
         localStorage.setItem("user_role", user_role);
 
-        alert(response.data.message);
-
         navigate("/dashboard");
+      })
+      .catch((error) => {
+        setError(error.response.data.message);
+        setIsVisible(true);
+        setTimeout(() => {
+          setIsVisible(null);
+        }, 3000);
       });
   };
 
@@ -73,6 +80,11 @@ const SignIn = () => {
                     required
                   />
                 </div>
+                {isVisible && (
+                  <div>
+                    <p className="text-xs text-red-950">{error}</p>
+                  </div>
+                )}
                 <button className="btn-2 w-full max-md:w-[90vw]">
                   Se Connecter
                 </button>

@@ -35,10 +35,8 @@ const SignUp = () => {
     axios
       .post("http://127.0.0.1:8000/api/v1/users/register", userAdded)
       .then((response) => {
-        console.log(response);
-
-        // alert(response.data.message);
-        // navigate("/sign-in");
+        alert(response.data.message);
+        navigate("/sign-in");
       });
   };
 
