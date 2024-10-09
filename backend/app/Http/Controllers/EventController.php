@@ -3,34 +3,44 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
+/**
+ * @OA\Info(title="API Events", version="1.0.0")
+ * @OA\Server(url="http://localhost/api/v1")
+ */
 class EventController extends Controller
 {
-
-    // function that is used to participate in an event ;
+    /**
+     * @OA\Post(
+     *     path="/events/{id}/participateToEvent",
+     *     summary="Participate in an event",
+     *     tags={"Events"},
+     *     @OA\Parameter(name="id", in="path", required=true, description="Event ID", @OA\Schema(type="string")),
+     *     @OA\RequestBody(required=true, @OA\JsonContent(ref="#/components/schemas/ParticipateRequest")),
+     *     @OA\Response(response="200", description="Successfully participated"),
+     *     @OA\Response(response="409", description="Already participating"),
+     *     @OA\Response(response="404", description="Event not found"),
+     * )
+     */
     public function participate(Request $request, String $id)
     {
         $user = Auth::user();
         $user_id = $user->id;
 
         if (!$user) {
-            return redirect()->back()->with('error', 'Utilisateur pas trouvé.');
+            return response()->json(["message" => "Utilisateur pas trouvé."], 404);
         }
 
         $event = Event::findOrFail($id);
 
-        if ($event->participants()->where('user_id', $user_id )->exists()) {
-            return response()->json([
-                'message' => "Vous êtes déjà inscrit à l'événement."
-            ], 409);
+        if ($event->participants()->where('user_id', $user_id)->exists()) {
+            return response()->json(["message" => "Vous êtes déjà inscrit à l'événement."], 409);
         }
 
         if ($event->aviable_places > 0) {
             $event->participants()->attach($user->id);
-
             $event->aviable_places -= 1;
             $event->save();
 
@@ -39,263 +49,320 @@ class EventController extends Controller
                 "aviable_places_remaining" => $event->aviable_places,
             ], 200);
         } else {
-            return response()->json([
-                "message" => "Desolé , il ne reste plus de places disponibles ."
-            ]);
-        };
-
-    }
-
-    // function to self remove from event participation
-    public function removeMeAsParticipant(String $id){
-        $user = Auth::user();
-
-        $event  = Event::findOrFail($id);
-
-        $event->participants()->detach($user->id);
-
-        $event->aviable_places += 1 ;
-
-        $event->save();
-
-        return response()->json([
-            "event_updated" => $event ,
-            "message" => "Vous n'êtes plus participant."
-        ],200);
-
-    }
-
-    // function that shows all event participants ;
-    public function showParticipantsEvent( String $id){
-
-        $event = Event::with('participants')->findOrFail($id);
-
-        return response()->json([
-            'event' => $event,
-        ],200);
-    }
-
-    public function showMyParticipatedEvents(){
-
-        $user = Auth::user();
-
-        $myParticipatedEvents = $user->events()->get();
-        return response()->json([
-            'myParticipatedEvents' => $myParticipatedEvents
-        ],200);
-    }
-
-    //function to add an event to user favourites
-    public function addEventToFavourites( String $id){
-
-        $user = Auth::user();
-
-        $event = Event::findOrFail($id);
-
-        if($event->usersFavourites()->where('user_id', $user->id )->exists()){
-            return response()->json([
-                "message" => "Événement déja ajouté aux favoris."
-            ],200);
+            return response()->json(["message" => "Désolé, il ne reste plus de places disponibles."], 409);
         }
-
-        $event->usersFavourites()->attach($user->id);
-
-        return response()->json([
-            "message" => "Événement " . $event->name . " ajouté aux favoris."
-        ],200);
-
-    }
-
-    //function to remove events from favourites
-    public function removeEventFromFavourites(String $id){
-
-        $user = Auth::user();
-
-        $event = Event::findOrFail($id);
-
-        $event->usersFavourites()->detach($user->id);
-
-        return response()->json([
-            "message" => "Événement supprimé des favoris."
-        ],200) ;
-    }
-
-    //function to show favourites
-    public function showMyFavourites(){
-
-        $user = Auth::user();
-
-        $favourites_events = $user->eventsFavourites()->get();
-
-        return response()->json([
-            "favourites_events" => $favourites_events
-        ],200);
-    }
-
-    //function to get own events ;
-    public function getOwnEvents(){
-
-        $user = Auth::user();
-
-        $events = Event::where('user_id', $user->id)->get();
-
-        return response()->json([
-            "events" => $events
-        ],200);
-    }
-
-    //filter events by name
-    public function filterEventsByName($name){
-
-        $event = Event::where('name', 'like', '%' . $name . '%')
-            ->get();
-
-        $number_events = $event->count();
-
-        return response()->json([
-            "event" => $event,
-            "number_events" => $number_events
-        ],200);
     }
 
     /**
-     * Display a listing of the resource.
+     * @OA\Post(
+     *     path="/events/removeMeAsParticipant/{id}",
+     *     summary="Remove self from event participation",
+     *     tags={"Events"},
+     *     @OA\Parameter(name="id", in="path", required=true, description="Event ID", @OA\Schema(type="string")),
+     *     @OA\Response(response="200", description="Successfully removed from event"),
+     *     @OA\Response(response="404", description="Event not found"),
+     * )
+     */
+    public function removeMeAsParticipant(String $id)
+    {
+        $user = Auth::user();
+        $event = Event::findOrFail($id);
+
+        $event->participants()->detach($user->id);
+        $event->aviable_places += 1;
+        $event->save();
+
+        return response()->json(["message" => "Vous n'êtes plus participant."], 200);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/events/{id}/showParticipantsEvent",
+     *     summary="Show all participants of an event",
+     *     tags={"Events"},
+     *     @OA\Parameter(name="id", in="path", required=true, description="Event ID", @OA\Schema(type="string")),
+     *     @OA\Response(response="200", description="Participants retrieved successfully"),
+     *     @OA\Response(response="404", description="Event not found"),
+     * )
+     */
+    public function showParticipantsEvent(String $id)
+    {
+        $event = Event::with('participants')->findOrFail($id);
+        return response()->json(['event' => $event], 200);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/events/showMyParticipatedEvents",
+     *     summary="Show my participated events",
+     *     tags={"Events"},
+     *     @OA\Response(response="200", description="Successfully retrieved my participated events"),
+     * )
+     */
+    public function showMyParticipatedEvents()
+    {
+        $user = Auth::user();
+        $myParticipatedEvents = $user->events()->get();
+        return response()->json(['myParticipatedEvents' => $myParticipatedEvents], 200);
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/events/addEventToFavourites/{id}",
+     *     summary="Add an event to user favourites",
+     *     tags={"Events"},
+     *     @OA\Parameter(name="id", in="path", required=true, description="Event ID", @OA\Schema(type="string")),
+     *     @OA\Response(response="200", description="Event added to favourites"),
+     *     @OA\Response(response="404", description="Event not found"),
+     * )
+     */
+    public function addEventToFavourites(String $id)
+    {
+        $user = Auth::user();
+        $event = Event::findOrFail($id);
+
+        if ($event->usersFavourites()->where('user_id', $user->id)->exists()) {
+            return response()->json(["message" => "Événement déjà ajouté aux favoris."], 200);
+        }
+
+        $event->usersFavourites()->attach($user->id);
+        return response()->json(["message" => "Événement " . $event->name . " ajouté aux favoris."], 200);
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/events/removeEventFromFavourites/{id}",
+     *     summary="Remove event from favourites",
+     *     tags={"Events"},
+     *     @OA\Parameter(name="id", in="path", required=true, description="Event ID", @OA\Schema(type="string")),
+     *     @OA\Response(response="200", description="Event removed from favourites"),
+     *     @OA\Response(response="404", description="Event not found"),
+     * )
+     */
+    public function removeEventFromFavourites(String $id)
+    {
+        $user = Auth::user();
+        $event = Event::findOrFail($id);
+        $event->usersFavourites()->detach($user->id);
+
+        return response()->json(["message" => "Événement supprimé des favoris."], 200);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/events/showMyFavourites",
+     *     summary="Show my favourite events",
+     *     tags={"Events"},
+     *     @OA\Response(response="200", description="Successfully retrieved favourite events"),
+     * )
+     */
+    public function showMyFavourites()
+    {
+        $user = Auth::user();
+        $favourites_events = $user->eventsFavourites()->get();
+
+        return response()->json(["favourites_events" => $favourites_events], 200);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/events/getOwnEvents",
+     *     summary="Get own events",
+     *     tags={"Events"},
+     *     @OA\Response(response="200", description="Successfully retrieved own events"),
+     * )
+     */
+    public function getOwnEvents()
+    {
+        $user = Auth::user();
+        $events = Event::where('user_id', $user->id)->get();
+
+        return response()->json(["events" => $events], 200);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/events/filterEventsByName/{name}",
+     *     summary="Filter events by name",
+     *     tags={"Events"},
+     *     @OA\Parameter(name="name", in="path", required=true, description="Event name", @OA\Schema(type="string")),
+     *     @OA\Response(response="200", description="Events filtered successfully"),
+     * )
+     */
+    public function filterEventsByName($name)
+    {
+        $events = Event::where('name', 'like', '%' . $name . '%')->get();
+        $number_events = $events->count();
+
+        return response()->json(["events" => $events, "number_events" => $number_events], 200);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/events",
+     *     summary="Display a listing of the events",
+     *     tags={"Events"},
+     *     @OA\Response(response="200", description="List of events"),
+     * )
      */
     public function index()
     {
         $events = Event::all();
-        return response()->json([
-            'events' => $events
-        ], 200);
+        return response()->json(['events' => $events], 200);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @OA\Post(
+     *     path="/events/store",
+     *     summary="Store a newly created event",
+     *     tags={"Events"},
+     *     @OA\RequestBody(required=true, @OA\JsonContent(ref="#/components/schemas/EventRequest")),
+     *     @OA\Response(response="200", description="Event created successfully"),
+     *     @OA\Response(response="401", description="Unauthorized"),
+     * )
      */
     public function store(Request $request)
     {
         $user = Auth::user();
 
-        if(!$user){
-            return response()->json([
-                "message" => "Vous n'etes pas connecté(e) ."
-            ]);
+        if (!$user) {
+            return response()->json(["message" => "Vous n'êtes pas connecté(e)."], 401);
         }
 
         $request->validate([
-            'name' => 'string|max:200',
-            'category_id' => 'integer',
-            'description' => 'sometimes',
+            'name' => 'string|max:200|required',
+            'category_id' => 'integer|required',
+            'description' => 'sometimes|string|max:1000',
             'date' => 'date|required',
-            'position' => "string",
-            'aviable_places' => "sometimes|required",
-            'image' => "image|sometimes|mimes:jpeg,png,jpg|max:2048",
-            'time' => "date_format:H:i",
+            'position' => 'sometimes|string',
+            'aviable_places' => 'sometimes|required|integer',
+            'image' => 'sometimes|image|mimes:jpeg,png,jpg|max:2048',
+            'time' => 'sometimes|date_format:H:i',
         ]);
 
         $event = Event::create([
-            'user_id' => $user->id ,
-            'name' => $request->name ,
-            'category_id' =>  $request->category_id,
-            'description' =>  $request->description,
-            'date' =>  $request->date,
-            'position' =>  $request->position,
-            'aviable_places' =>  $request->aviable_places,
-            'image' =>  $request->file('image')->store('images/events', 'public'),
-            'time' =>  $request->time,
+            'user_id' => $user->id,
+            'name' => $request->name,
+            'category_id' => $request->category_id,
+            'description' => $request->description,
+            'date' => $request->date,
+            'position' => $request->position,
+            'aviable_places' => $request->aviable_places,
+            'image' => $request->file('image') ? $request->file('image')->store('images/events', 'public') : null,
+            'time' => $request->time,
         ]);
-
-
 
         return response()->json([
             'event' => $event,
-            'message' => "L'evenement " .  $event->name . " a été créé avec succès et est en attente de validation par l'un de nos administrateurs."
+            'message' => "L'événement " . $event->name . " a été créé avec succès et est en attente de validation par l'un de nos administrateurs."
         ]);
     }
 
     /**
-     * Display the specified resource.
+     * @OA\Get(
+     *     path="/events/{id}",
+     *     summary="Display the specified event",
+     *     tags={"Events"},
+     *     @OA\Parameter(name="id", in="path", required=true, description="Event ID", @OA\Schema(type="string")),
+     *     @OA\Response(response="200", description="Event retrieved successfully"),
+     *     @OA\Response(response="404", description="Event not found"),
+     * )
      */
-    public function show(Request $request, String $id)
+    public function show(String $id)
     {
-        $event = Event::with('user' , 'category')->findOrFail($id);
-        return response()->json([
-            "event" => $event ,
-        ],200);
-
+        $event = Event::with('user', 'category')->findOrFail($id);
+        return response()->json(["event" => $event], 200);
     }
 
     /**
-     * Update the specified resource in storage.
+     * @OA\Put(
+     *     path="/events/update/{id}",
+     *     summary="Update the specified event",
+     *     tags={"Events"},
+     *     @OA\Parameter(name="id", in="path", required=true, description="Event ID", @OA\Schema(type="string")),
+     *     @OA\RequestBody(required=true, @OA\JsonContent(ref="#/components/schemas/EventRequest")),
+     *     @OA\Response(response="200", description="Event updated successfully"),
+     *     @OA\Response(response="404", description="Event not found"),
+     * )
      */
-    public function update(Request $request, Event $event, String $id)
-{
-    $user = Auth::user();
+    public function update(Request $request, String $id)
+    {
+        $user = Auth::user();
+        $event = Event::findOrFail($id);
 
-    $event = Event::find($id);
+        if (!$user) {
+            return response()->json(["message" => "Vous n'êtes pas connecté(e)."], 401);
+        }
 
-    if (!$user) {
-        return response()->json([
-            "message" => "Vous n'êtes pas connecté(e)."
+        $validatedData = $request->validate([
+            'name' => 'string|sometimes|max:200',
+            'category_id' => 'sometimes|integer',
+            'description' => 'sometimes|string|max:1000',
+            'date' => 'sometimes|date',
+            'position' => 'sometimes|string',
+            'aviable_places' => 'sometimes|integer',
+            'image' => 'sometimes|image|mimes:jpeg,png,jpg|max:2048',
+            'time' => 'sometimes|date_format:H:i',
         ]);
+
+        if ($request->hasFile('image')) {
+            $validatedData['image'] = $request->file('image')->store('images/events', 'public');
+        }
+
+        $event->update($validatedData);
+
+        return response()->json([
+            'event' => $event,
+            'message' => "L'événement " . $event->name . " a été mis à jour."
+        ], 200);
     }
 
-    $validatedData = $request->validate([
-        'name' => 'string|sometimes|max:200',
-        'category_id' => 'sometimes',
-        'description' => 'sometimes|max:1000',
-        'date' => 'date|sometimes',
-        'position' => "string|sometimes",
-        'available_places' => "sometimes|integer",
-        'image' => "image|sometimes|mimes:jpeg,png,jpg|max:2048",
-        'time' => "sometimes|date_format:H:i",
-    ]);
-
-    if ($request->hasFile('image')) {
-        $validatedData['image'] = $request->file('image')->store('images/events', 'public');
-    }
-
-    $event->update($validatedData);
-
-    return response()->json([
-        'event' => $event,
-        'message' => "L'événement " . $event->name . " a été mis à jour."
-    ], 200);
-}
-
-
-    // function to change event status only for admins
-    public function changeStatus (Request $request , String $id) {
-
+    /**
+     * @OA\Put(
+     *     path="/events/changeStatus/{id}",
+     *     summary="Change event status",
+     *     tags={"Events"},
+     *     @OA\Parameter(name="id", in="path", required=true, description="Event ID", @OA\Schema(type="string")),
+     *     @OA\RequestBody(required=true, @OA\JsonContent(ref="#/components/schemas/ChangeStatusRequest")),
+     *     @OA\Response(response="200", description="Event status changed successfully"),
+     *     @OA\Response(response="403", description="Forbidden"),
+     * )
+     */
+    public function changeStatus(Request $request, String $id)
+    {
         $user = Auth::user();
 
         if ($user->role == "admin") {
-
             $request->validate([
                 "status" => "in:pending,published",
             ]);
-
         }
 
-        $event = Event::findOrFail($id) ;
+        $event = Event::findOrFail($id);
         $event->update($request->all());
 
         return response()->json([
-            "message" => "Status de l'événement changé en " . $request->status ,
-        ],200);
+            "message" => "Status de l'événement changé en " . $request->status,
+        ], 200);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @OA\Delete(
+     *     path="/events/delete/{id}",
+     *     summary="Remove the specified event",
+     *     tags={"Events"},
+     *     @OA\Parameter(name="id", in="path", required=true, description="Event ID", @OA\Schema(type="string")),
+     *     @OA\Response(response="200", description="Event deleted successfully"),
+     *     @OA\Response(response="404", description="Event not found"),
+     * )
      */
-    public function destroy(Event $event, String $id)
+    public function destroy(String $id)
     {
         $event = Event::findOrFail($id);
-
         $event->delete();
 
         return response()->json([
-            'message' => "L'evenement " . $event->name . " a été supprimé avec success."
+            'message' => "L'événement " . $event->name . " a été supprimé avec succès."
         ], 200);
     }
 }
