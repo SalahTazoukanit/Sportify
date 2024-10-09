@@ -20,9 +20,7 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          {/* Routes navbar */}
           <Route path="/" element={<Homepage />} />
-          {/* <Route path="/chat" element={<Chat />} /> */}
           <Route path="/events" element={<Events />} />
           <Route path="/sports" element={<Sports />} />
           <Route path="/sport-details/:id" element={<SportDetails />} />
