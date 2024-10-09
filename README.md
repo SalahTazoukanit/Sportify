@@ -39,6 +39,8 @@ Avant de commencer, assurez-vous d'avoir les outils suivants installés sur votr
    composer install
    ```
 
+3. Modifier le fichier .env
+
 ## Migration de la base de données
 
 1. Lancer la migration de la base de données :
@@ -53,7 +55,7 @@ Avant de commencer, assurez-vous d'avoir les outils suivants installés sur votr
   php artisan db:seed
   ```
 
-## D2marage du server
+## Demarage du server
 
 1. Commande pour lancer le server :
 
