@@ -11,7 +11,7 @@ const SportDetails = () => {
 
   const getCategoryById = (id) => {
     axios
-      .get(`http://127.0.0.1:8000/api/v1/categories/${id}`)
+      .get(`${import.meta.env.VITE_BACK_URL_LARAVEL}/categories/${id}`)
       .then((response) => {
         console.log(response.data.category);
         setCategory(response.data.category);

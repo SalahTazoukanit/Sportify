@@ -29,16 +29,20 @@ const UpdateEvent = () => {
   const navigate = useNavigate();
 
   const getEventDetail = (id) => {
-    axios.get("http://127.0.0.1:8000/api/v1/events/" + id).then((response) => {
-      console.log(response.data.event);
-      setEvent(response.data.event);
-    });
+    axios
+      .get(`${import.meta.env.VITE_BACK_URL_LARAVEL}/events/` + id)
+      .then((response) => {
+        console.log(response.data.event);
+        setEvent(response.data.event);
+      });
   };
 
   const getCategories = () => {
-    axios.get("http://127.0.0.1:8000/api/v1/categories/").then((response) => {
-      setCategories(response.data.categories);
-    });
+    axios
+      .get(`${import.meta.env.VITE_BACK_URL_LARAVEL}/categories/`)
+      .then((response) => {
+        setCategories(response.data.categories);
+      });
   };
 
   const updateEvent = (e) => {
@@ -64,7 +68,9 @@ const UpdateEvent = () => {
 
     axios
       .post(
-        `http://127.0.0.1:8000/api/v1/events/update/${id}?_method=PUT`,
+        `${
+          import.meta.env.VITE_BACK_URL_LARAVEL
+        }/events/update/${id}?_method=PUT`,
         eventUpdated,
         {
           headers,

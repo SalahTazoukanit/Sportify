@@ -8,7 +8,7 @@ const LastEvents = () => {
   const [events, setEvents] = useState([]);
 
   const getEvents = () => {
-    axios.get("http://127.0.0.1:8000/api/v1/events/").then((response) => {
+    axios.get(`${import.meta.env.VITE_BACK_URL_LARAVEL}/events/`).then((response) => {
       console.log(response.data.events);
       setEvents(response.data.events);
     });

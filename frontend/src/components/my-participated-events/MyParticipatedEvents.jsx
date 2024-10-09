@@ -24,7 +24,7 @@ const MyParticipatedEvents = () => {
   const showMyParticipatedEvents = () => {
     axios
       .post(
-        "http://127.0.0.1:8000/api/v1/events/showMyParticipatedEvents",
+        `${import.meta.env.VITE_BACK_URL_LARAVEL}/events/showMyParticipatedEvents`,
         {},
         { headers }
       )

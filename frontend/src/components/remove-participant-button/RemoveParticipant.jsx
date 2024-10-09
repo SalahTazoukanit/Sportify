@@ -11,7 +11,9 @@ const RemoveParticipant = ({ eventId }) => {
   const removeMeAsParticipant = (id) => {
     axios
       .post(
-        `http://127.0.0.1:8000/api/v1/events/removeMeAsParticipant/${id}`,
+        `${
+          import.meta.env.VITE_BACK_URL_LARAVEL
+        }/events/removeMeAsParticipant/${id}`,
         {},
         {
           headers,

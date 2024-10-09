@@ -30,18 +30,22 @@ const EventDetail = () => {
   };
 
   const getEventDetail = (id) => {
-    axios.get("http://127.0.0.1:8000/api/v1/events/" + id).then((response) => {
-      console.log(response.data.event);
-      setEvent(response.data.event);
-      setEventUser(response.data.event.user.name);
-      setEventCategory(response.data.event.category.name);
-    });
+    axios
+      .get(`${import.meta.env.VITE_BACK_URL_LARAVEL}/events/` + id)
+      .then((response) => {
+        console.log(response.data.event);
+        setEvent(response.data.event);
+        setEventUser(response.data.event.user.name);
+        setEventCategory(response.data.event.category.name);
+      });
   };
 
   const getParticipants = (id) => {
     axios
       .post(
-        `http://127.0.0.1:8000/api/v1/events/${id}/showParticipantsEvent`,
+        `${
+          import.meta.env.VITE_BACK_URL_LARAVEL
+        }/events/${id}/showParticipantsEvent`,
         {},
         { headers }
       )
@@ -54,7 +58,9 @@ const EventDetail = () => {
   const participateToEvent = (id) => {
     axios
       .post(
-        `http://127.0.0.1:8000/api/v1/events/${id}/participateToEvent`,
+        `${
+          import.meta.env.VITE_BACK_URL_LARAVEL
+        }/events/${id}/participateToEvent`,
         {},
         {
           headers,

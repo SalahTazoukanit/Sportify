@@ -18,9 +18,11 @@ const Sport = () => {
   const [sports, setSports] = useState([]);
 
   const getSports = () => {
-    axios.get("http://127.0.0.1:8000/api/v1/categories").then((response) => {
-      setSports(response.data.categories);
-    });
+    axios
+      .get(`${import.meta.env.VITE_BACK_URL_LARAVEL}/categories`)
+      .then((response) => {
+        setSports(response.data.categories);
+      });
   };
 
   useEffect(() => {

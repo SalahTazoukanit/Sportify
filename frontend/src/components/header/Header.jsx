@@ -25,7 +25,7 @@ const Header = () => {
 
   const logout = () => {
     axios
-      .post("http://127.0.0.1:8000/api/v1/users/logout", {}, { headers })
+      .post(`${import.meta.env.VITE_BACK_URL_LARAVEL}/users/logout`, {}, { headers })
       .then((response) => {
         alert(response.data.message);
         localStorage.removeItem("token");
@@ -37,7 +37,7 @@ const Header = () => {
 
   const getUserInfos = () => {
     axios
-      .post("http://127.0.0.1:8000/api/v1/users/show", {}, { headers })
+      .post(`${import.meta.env.VITE_BACK_URL_LARAVEL}/users/show`, {}, { headers })
       .then((response) => {
         console.log(response);
         setUserInfos(response.data.user);

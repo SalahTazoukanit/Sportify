@@ -43,7 +43,9 @@ const AddEvent = () => {
     }
 
     axios
-      .post("http://127.0.0.1:8000/api/v1/events/store", event, { headers })
+      .post(`${import.meta.env.VITE_BACK_URL_LARAVEL}/events/store`, event, {
+        headers,
+      })
       .then((response) => {
         alert(response.data.message);
         navigate("/dashboard");
@@ -51,9 +53,11 @@ const AddEvent = () => {
   };
 
   const getCategories = () => {
-    axios.get("http://127.0.0.1:8000/api/v1/categories/").then((response) => {
-      setCategories(response.data.categories);
-    });
+    axios
+      .get(`${import.meta.env.VITE_BACK_URL_LARAVEL}/categories/`)
+      .then((response) => {
+        setCategories(response.data.categories);
+      });
   };
 
   useEffect(() => {

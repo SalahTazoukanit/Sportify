@@ -24,7 +24,7 @@ const SettingUser = () => {
 
   const getUserInfos = () => {
     axios
-      .post("http://127.0.0.1:8000/api/v1/users/show", {}, { headers })
+      .post(`${import.meta.env.VITE_BACK_URL_LARAVEL}/users/show`, {}, { headers })
       .then((response) => {
         console.log(response);
         setUser(response.data.user);
@@ -71,7 +71,7 @@ const SettingUser = () => {
 
     axios
       .post(
-        "http://127.0.0.1:8000/api/v1/users/updateUser?_method=PUT",
+        `${import.meta.env.VITE_BACK_URL_LARAVEL}/users/updateUser?_method=PUT`,
         formData,
         {
           headers,

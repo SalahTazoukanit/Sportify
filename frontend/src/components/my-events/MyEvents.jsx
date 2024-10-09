@@ -25,7 +25,7 @@ const MyEvents = () => {
     if (user_role === "member") {
       axios
         .post(
-          "http://127.0.0.1:8000/api/v1/events/getOwnEvents/",
+          `${import.meta.env.VITE_BACK_URL_LARAVEL}/events/getOwnEvents/`,
           {},
           { headers }
         )
@@ -33,15 +33,17 @@ const MyEvents = () => {
           setMyEvents(response.data.events);
         });
     } else if (user_role === "admin") {
-      axios.get("http://127.0.0.1:8000/api/v1/events/").then((response) => {
-        setMyEvents(response.data.events);
-      });
+      axios
+        .get(`${import.meta.env.VITE_BACK_URL_LARAVEL}/events/`)
+        .then((response) => {
+          setMyEvents(response.data.events);
+        });
     }
   };
 
   const deleteEvent = (e, id) => {
     axios
-      .delete("http://127.0.0.1:8000/api/v1/events/delete/" + id, {
+      .delete(`${import.meta.env.VITE_BACK_URL_LARAVEL}/events/delete/` + id, {
         headers,
       })
       .then((response) => {
@@ -54,7 +56,9 @@ const MyEvents = () => {
     // Esegui la chiamata API per aggiornare lo stato dell'evento nel server
     axios
       .post(
-        `http://127.0.0.1:8000/api/v1/events/changeStatus/${eventId}?_method=PUT`,
+        `${
+          import.meta.env.VITE_BACK_URL_LARAVEL
+        }/events/changeStatus/${eventId}?_method=PUT`,
         { status: updatedStatus },
         { headers }
       )

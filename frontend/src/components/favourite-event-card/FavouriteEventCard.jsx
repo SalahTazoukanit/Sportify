@@ -13,7 +13,9 @@ const FavouriteEventCard = ({ event }) => {
   const removeEventFromFavourites = (id) => {
     axios
       .post(
-        `http://127.0.0.1:8000/api/v1/events/removeEventFromFavourites/${id}`,
+        `${
+          import.meta.env.VITE_BACK_URL_LARAVEL
+        }/events/removeEventFromFavourites/${id}`,
         {},
         { headers }
       )

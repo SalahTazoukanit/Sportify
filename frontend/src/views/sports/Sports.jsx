@@ -10,7 +10,7 @@ const Sports = () => {
   const [searchBarValue, setSearchBarValue] = useState("");
 
   const getCategories = () => {
-    axios.get("http://127.0.0.1:8000/api/v1/categories/").then((response) => {
+    axios.get(`${import.meta.env.VITE_BACK_URL_LARAVEL}/categories/`).then((response) => {
       console.log(response.data.categories);
       setCategories(response.data.categories);
     });

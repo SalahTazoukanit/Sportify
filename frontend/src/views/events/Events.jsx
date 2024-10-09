@@ -15,16 +15,19 @@ const Events = () => {
   const [error, setError] = useState("");
 
   const getCategories = () => {
-    axios.get("http://127.0.0.1:8000/api/v1/categories/").then((response) => {
-      setCategories(response.data.categories);
-    });
+    axios
+      .get(`${import.meta.env.VITE_BACK_URL_LARAVEL}/categories/`)
+      .then((response) => {
+        setCategories(response.data.categories);
+      });
   };
 
   const filterEventsByCategory = (categoryName) => {
     axios
       .get(
-        "http://127.0.0.1:8000/api/v1/categories/filterEventsByCategory/" +
-          categoryName
+        `${
+          import.meta.env.VITE_BACK_URL_LARAVEL
+        }/categories/filterEventsByCategory/` + categoryName
       )
       .then((response) => {
         const elementFounded = response.data.allEvents;
@@ -45,16 +48,18 @@ const Events = () => {
   };
 
   const getEvents = () => {
-    axios.get("http://127.0.0.1:8000/api/v1/events/").then((response) => {
-      setEvents(response.data.events);
-    });
+    axios
+      .get(`${import.meta.env.VITE_BACK_URL_LARAVEL}/events/`)
+      .then((response) => {
+        setEvents(response.data.events);
+      });
   };
 
   const getEventsByName = (searchBar) => {
     setError("");
     axios
       .get(
-        "http://127.0.0.1:8000/api/v1/events/filterEventsByName/" + searchBar
+        `${import.meta.env.VITE_BACK_URL_LARAVEL}/events/filterEventsByName/` + searchBar
       )
       .then((response) => {
         setFilteredEvents(response.data.event);

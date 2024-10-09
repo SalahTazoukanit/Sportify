@@ -12,7 +12,9 @@ const AddFavouriteButton = ({ eventId }) => {
   const addEventToFavourites = (id) => {
     axios
       .post(
-        `http://127.0.0.1:8000/api/v1/events/addEventToFavourites/${id}`,
+        `${
+          import.meta.env.VITE_BACK_URL_LARAVEL
+        }/events/addEventToFavourites/${id}`,
         {},
         { headers }
       )
