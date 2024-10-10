@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Cloudinary\Api\Upload\UploadApi;
+use Cloudinary\Configuration\Configuration;
+
 use App\Models\User;
 
 use Illuminate\Support\Facades\Hash;
@@ -30,18 +33,48 @@ class UserController extends Controller
             'password_confirmation' => 'required|same:password'
         ]);
 
-        $imagePath = $request->file('image_profile') ? $request->file('image_profile')->store('images/profiles', 'public') : null ;
+        // $imagePath = $request->file('image_profile') ? $request->file('image_profile')->store('images/profiles', options: 'public') : null ;
+
+        //
+
+        // else {
+        //     return null ;
+        // }
+        //
 
         if ($request->validate([])) {
 
         }
+
         $user = User::create([
             "name" => $request->name,
             "email" => $request->email,
-            'image_profile' =>  $imagePath,
+            // 'image_profile' =>  $imagePath,
             "password" => bcrypt($request->password),
             "password_confirmation" => bcrypt($request->password_confirmation),
         ]);
+
+        if (request()->hasFile('image_profile')) {
+            Configuration::instance([
+                'cloud' => [
+                    'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
+                    'api_key' => env('CLOUDINARY_API_KEY'),
+                    'api_secret' => env('CLOUDINARY_API_SECRET'),
+                ],
+                'url' => [
+                    'secure' => true
+                ]
+            ]);
+
+            $filePath = request()->file('image_profile')->getRealPath();
+
+            $uploadResult = (new UploadApi())->upload($filePath, [
+                'folder' => 'users/' . $user->id,
+            ]);
+
+            $user->update(['image_profile' => $uploadResult['secure_url']]);
+
+        }
 
             return response()->json([
                 "user" => $user,

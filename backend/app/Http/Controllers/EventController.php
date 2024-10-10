@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Cloudinary\Api\Upload\UploadApi;
+use Cloudinary\Configuration\Configuration;
+
 use App\Models\Event;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;

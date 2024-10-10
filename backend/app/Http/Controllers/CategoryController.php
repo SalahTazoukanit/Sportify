@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Cloudinary\Api\Upload\UploadApi;
+use Cloudinary\Configuration\Configuration;
+
 use Illuminate\Http\Request;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
