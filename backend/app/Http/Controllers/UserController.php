@@ -178,6 +178,10 @@ class UserController extends Controller
         //     $validatedData['image_profile'] = null ;
         // }
 
+
+
+        $user->update($validatedData);
+
         if (request()->hasFile('image_profile')) {
 
             Configuration::instance([
@@ -200,12 +204,6 @@ class UserController extends Controller
             $user->update(['image_profile' => $uploadResult['secure_url']]);
 
         }
-
-
-        $user->update($validatedData);
-
-
-
 
 
         return response()->json([
