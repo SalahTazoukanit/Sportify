@@ -14,6 +14,7 @@ import UpdateEvent from "./views/update-event/UpdateEvent";
 import MyFavouritesEvents from "./views/my-favourites-events/MyFavouritesEvents";
 import ProtectedRoute from "./components/protected-route/ProtectedRoutes";
 import SportDetails from "./views/sport-detail/SportDetails";
+import AddCategory from "./views/add-category/AddCategory";
 
 function App() {
   return (
@@ -41,6 +42,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <AddEvent />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/dashboard/categories/add-category"
+            element={
+              <ProtectedRoute>
+                <AddCategory />
               </ProtectedRoute>
             }
           />

@@ -36,10 +36,14 @@ const AddEvent = () => {
     event.append("time", timeRef.current.value);
     event.append("description", descriptionRef.current.value);
     event.append("aviable_places", aviablePlacesRef.current.value);
-    event.append("image", imageRef.current.files[0]);
     event.append("category_id", sport.target.value);
-    if (imageRef.current.files[0].size > 2 * 1024 * 1024) {
+
+    const imageFile = imageRef.current.files[0];
+    if (imageFile && imageFile.size > 2 * 1024 * 1024) {
       setError("L'image ne doit pas dépasser 2 Mo.");
+      return;
+    } else {
+      event.append("image", imageFile);
     }
 
     axios

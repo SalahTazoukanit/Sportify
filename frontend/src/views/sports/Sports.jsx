@@ -56,7 +56,7 @@ const Sports = () => {
                 <NavLink to={`/sport-details/${category.id}`}>
                   <div className="relative overflow-hidden bg-cover bg-no-repeat">
                     <img
-                      className="rounded-t-lg"
+                      className="w-64 h-32 object-cover rounded-t-lg"
                       src={
                         category.image
                           ? category.image

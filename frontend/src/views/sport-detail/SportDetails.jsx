@@ -18,13 +18,13 @@ const SportDetails = () => {
       });
   };
 
-  const verifImage = () => {
-    if (category.image) {
-      return category.image;
-    } else {
-      return "/src/assets/images/835001-best-of-2022-les-exploits-sportifs-de-nos-francais-cette-annee.jpg";
-    }
-  };
+  // const verifImage = () => {
+  //   if (category.image) {
+  //     return category.image;
+  //   } else {
+  //     return "/src/assets/images/835001-best-of-2022-les-exploits-sportifs-de-nos-francais-cette-annee.jpg";
+  //   }
+  // };
 
   useEffect(() => {
     getCategoryById(id);
@@ -36,7 +36,7 @@ const SportDetails = () => {
       <div
         className="flex items-center"
         style={{
-          backgroundImage: `url(${verifImage()})`,
+          backgroundImage: `url(${category.image})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           height: "300px",
