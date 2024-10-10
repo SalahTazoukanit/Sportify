@@ -58,7 +58,6 @@ class CategoryController extends Controller
                 'name' => 'required|string',
                 'history' => 'nullable|text',
                 'rules' => 'nullable|text',
-                'images' => 'nullable|image',
             ]);
 
             $category = new Category;
@@ -66,8 +65,26 @@ class CategoryController extends Controller
             $category->history = $request->history;
             $category->rules = $request->rules;
 
-            if ($request->hasFile('image')) {
-                $category->image = $request->file('image')->store('images/categories', 'public');
+            if (request()->hasFile('image')) {
+                Configuration::instance([
+                    'cloud' => [
+                        'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
+                        'api_key' => env('CLOUDINARY_API_KEY'),
+                        'api_secret' => env('CLOUDINARY_API_SECRET'),
+                    ],
+                    'url' => [
+                        'secure' => true
+                    ]
+                ]);
+
+                $filePath = request()->file('image')->getRealPath();
+
+                $uploadResult = (new UploadApi())->upload($filePath, [
+                    'folder' => 'categories/' . $category->id,
+                ]);
+
+                $category->update(['image' => $uploadResult['secure_url']]);
+
             }
 
 
@@ -108,17 +125,34 @@ class CategoryController extends Controller
             $category->name = $request->name;
             $category->history = $request->history;
             $category->rules = $request->rules;
-            $category->name = $request->name;
 
-            if ($request->hasFile('image')) {
-               $category->image = $request->file('image')->store("images/categories" , "public") ;
-            }
         }else{
             return response()->json([ 'message' => "Vous n'êtes pas administrateur."],409);
         }
 
-
         $category->update();
+
+        if (request()->hasFile('image')) {
+            Configuration::instance([
+                'cloud' => [
+                    'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
+                    'api_key' => env('CLOUDINARY_API_KEY'),
+                    'api_secret' => env('CLOUDINARY_API_SECRET'),
+                ],
+                'url' => [
+                    'secure' => true
+                ]
+            ]);
+
+            $filePath = request()->file('image')->getRealPath();
+
+            $uploadResult = (new UploadApi())->upload($filePath, [
+                'folder' => 'categories/' . $category->id,
+            ]);
+
+            $category->update(['image' => $uploadResult['secure_url']]);
+
+        }
 
         return response()->json([
             "category" => $category,

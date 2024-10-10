@@ -172,14 +172,6 @@ class UserController extends Controller
             'password_confirmation' => 'nullable|same:password'
         ]);
 
-        // if ($request->hasFile('image_profile')) {
-        //     $validatedData['image_profile'] = $request->file('image_profile')->store('images/profiles', 'public');
-        // }else {
-        //     $validatedData['image_profile'] = null ;
-        // }
-
-
-
         $user->update($validatedData);
 
         if (request()->hasFile('image_profile')) {

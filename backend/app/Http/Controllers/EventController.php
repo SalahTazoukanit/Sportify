@@ -204,11 +204,30 @@ class EventController extends Controller
             'date' =>  $request->date,
             'position' =>  $request->position,
             'aviable_places' =>  $request->aviable_places,
-            'image' =>  $request->file('image')->store('images/events', 'public'),
             'time' =>  $request->time,
         ]);
 
+        if (request()->hasFile('image')) {
+            Configuration::instance([
+                'cloud' => [
+                    'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
+                    'api_key' => env('CLOUDINARY_API_KEY'),
+                    'api_secret' => env('CLOUDINARY_API_SECRET'),
+                ],
+                'url' => [
+                    'secure' => true
+                ]
+            ]);
 
+            $filePath = request()->file('image')->getRealPath();
+
+            $uploadResult = (new UploadApi())->upload($filePath, [
+                'folder' => 'events/' . $event->id,
+            ]);
+
+            $event->update(['image' => $uploadResult['secure_url']]);
+
+        }
 
         return response()->json([
             'event' => $event,
@@ -254,11 +273,29 @@ class EventController extends Controller
         'time' => "sometimes|date_format:H:i",
     ]);
 
-    if ($request->hasFile('image')) {
-        $validatedData['image'] = $request->file('image')->store('images/events', 'public');
-    }
-
     $event->update($validatedData);
+
+    if (request()->hasFile('image')) {
+        Configuration::instance([
+            'cloud' => [
+                'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
+                'api_key' => env('CLOUDINARY_API_KEY'),
+                'api_secret' => env('CLOUDINARY_API_SECRET'),
+            ],
+            'url' => [
+                'secure' => true
+            ]
+        ]);
+
+        $filePath = request()->file('image')->getRealPath();
+
+        $uploadResult = (new UploadApi())->upload($filePath, [
+            'folder' => 'events/' . $event->id,
+        ]);
+
+        $event->update(['image' => $uploadResult['secure_url']]);
+
+    }
 
     return response()->json([
         'event' => $event,
