@@ -33,23 +33,9 @@ class UserController extends Controller
             'password_confirmation' => 'required|same:password'
         ]);
 
-        // $imagePath = $request->file('image_profile') ? $request->file('image_profile')->store('images/profiles', options: 'public') : null ;
-
-        //
-
-        // else {
-        //     return null ;
-        // }
-        //
-
-        if ($request->validate([])) {
-
-        }
-
         $user = User::create([
             "name" => $request->name,
             "email" => $request->email,
-            // 'image_profile' =>  $imagePath,
             "password" => bcrypt($request->password),
             "password_confirmation" => bcrypt($request->password_confirmation),
         ]);
@@ -186,20 +172,41 @@ class UserController extends Controller
             'password_confirmation' => 'nullable|same:password'
         ]);
 
-        if ($request->hasFile('image_profile')) {
-            $validatedData['image_profile'] = $request->file('image_profile')->store('images/profiles', 'public');
-        }else {
-            $validatedData['image_profile'] = null ;
+        // if ($request->hasFile('image_profile')) {
+        //     $validatedData['image_profile'] = $request->file('image_profile')->store('images/profiles', 'public');
+        // }else {
+        //     $validatedData['image_profile'] = null ;
+        // }
+
+        if (request()->hasFile('image_profile')) {
+
+            Configuration::instance([
+                'cloud' => [
+                    'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
+                    'api_key' => env('CLOUDINARY_API_KEY'),
+                    'api_secret' => env('CLOUDINARY_API_SECRET'),
+                ],
+                'url' => [
+                    'secure' => true
+                ]
+            ]);
+
+            $filePath = request()->file('image_profile')->getRealPath();
+
+            $uploadResult = (new UploadApi())->upload($filePath, [
+                'folder' => 'users/' . $user->id,
+            ]);
+
+            $user->update(['image_profile' => $uploadResult['secure_url']]);
+
         }
 
 
-        // $user->name = $request->name;
-        // $user->email = $request->email;
-        // $user->image_profile = $request->image_profile;
-        // $user->password = $request->password;
-        // $user->password_confirmation = $request->password_confirmation;
-
         $user->update($validatedData);
+
+
+
+
 
         return response()->json([
             "user_updated" => $user ,
