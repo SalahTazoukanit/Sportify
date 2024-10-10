@@ -18,15 +18,9 @@ const SportDetails = () => {
       });
   };
 
-  const getImageUrl = (image) => {
-    if (image) {
-      return "http://127.0.0.1:8000/storage" + image;
-    }
-  };
-
   const verifImage = () => {
     if (category.image) {
-      return getImageUrl(category.image);
+      return category.image;
     } else {
       return "/src/assets/images/835001-best-of-2022-les-exploits-sportifs-de-nos-francais-cette-annee.jpg";
     }

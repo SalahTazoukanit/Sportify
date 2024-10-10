@@ -17,15 +17,13 @@ const Header = () => {
 
   const navigate = useNavigate();
 
-  const getImageUrl = (image) => {
-    if (image) {
-      return "http://127.0.0.1:8000/storage/" + image;
-    }
-  };
-
   const logout = () => {
     axios
-      .post(`${import.meta.env.VITE_BACK_URL_LARAVEL}/users/logout`, {}, { headers })
+      .post(
+        `${import.meta.env.VITE_BACK_URL_LARAVEL}/users/logout`,
+        {},
+        { headers }
+      )
       .then((response) => {
         alert(response.data.message);
         localStorage.removeItem("token");
@@ -37,7 +35,11 @@ const Header = () => {
 
   const getUserInfos = () => {
     axios
-      .post(`${import.meta.env.VITE_BACK_URL_LARAVEL}/users/show`, {}, { headers })
+      .post(
+        `${import.meta.env.VITE_BACK_URL_LARAVEL}/users/show`,
+        {},
+        { headers }
+      )
       .then((response) => {
         console.log(response);
         setUserInfos(response.data.user);
@@ -133,7 +135,7 @@ const Header = () => {
               ) : (
                 <img
                   className="w-20 h-20 rounded-full hover:opacity-50 hover:cursor-pointer"
-                  src={getImageUrl(userInfos.image_profile)}
+                  src={userInfos.image_profile}
                   alt="image utilisateur"
                 />
               )}

@@ -4,12 +4,6 @@ import AddFavouriteButton from "../add-favourite-button/AddFavouriteButton";
 
 //props event gived from LastEvents.jsx
 const Event = ({ event }) => {
-  const getImageUrl = (image) => {
-    if (image) {
-      return "http://127.0.0.1:8000/storage/" + image;
-    }
-  };
-
   return (
     <>
       <div className="boxShadow shadow-custom bg-white rounded-xl flex flex-wrap justify-center p-1 md:p-6 ">
@@ -18,11 +12,7 @@ const Event = ({ event }) => {
             <div className="flex justify-center items-center mb-1">
               <img
                 className="md:w-full md:h-56 rounded w-2/3"
-                src={
-                  event.image.startsWith("images/events")
-                    ? getImageUrl(event.image)
-                    : "src/assets/images/sports-removebg-preview.png"
-                }
+                src={event.image}
                 alt="image événement"
               />
             </div>

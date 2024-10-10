@@ -24,7 +24,11 @@ const SettingUser = () => {
 
   const getUserInfos = () => {
     axios
-      .post(`${import.meta.env.VITE_BACK_URL_LARAVEL}/users/show`, {}, { headers })
+      .post(
+        `${import.meta.env.VITE_BACK_URL_LARAVEL}/users/show`,
+        {},
+        { headers }
+      )
       .then((response) => {
         console.log(response);
         setUser(response.data.user);
@@ -37,10 +41,6 @@ const SettingUser = () => {
       setFileName(file.name); // Aggiorna lo stato con il nome del file
     }
     setUser(user.image_profile);
-  };
-
-  const getImageUrl = (image) => {
-    return "http://127.0.0.1:8000/storage/" + image;
   };
 
   const updateUser = (e) => {
@@ -166,7 +166,7 @@ const SettingUser = () => {
                   {user.image_profile ? (
                     <img
                       className="rounded-full border-black w-32 h-32 md:w-40 md:h-40"
-                      src={getImageUrl(user.image_profile)}
+                      src={user.image_profile}
                       alt="Profile"
                     />
                   ) : (

@@ -25,10 +25,6 @@ const EventDetail = () => {
     Authorization: "Bearer " + token,
   };
 
-  const getImageUrl = (image) => {
-    return "http://127.0.0.1:8000/storage/" + image;
-  };
-
   const getEventDetail = (id) => {
     axios
       .get(`${import.meta.env.VITE_BACK_URL_LARAVEL}/events/` + id)
@@ -103,7 +99,7 @@ const EventDetail = () => {
                 className=""
                 src={
                   event.image
-                    ? getImageUrl(event.image)
+                    ? event.image
                     : "/src/assets/images/sports-removebg-preview.png"
                 }
                 alt="image événement"

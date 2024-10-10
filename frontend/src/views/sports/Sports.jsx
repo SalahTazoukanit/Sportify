@@ -10,19 +10,17 @@ const Sports = () => {
   const [searchBarValue, setSearchBarValue] = useState("");
 
   const getCategories = () => {
-    axios.get(`${import.meta.env.VITE_BACK_URL_LARAVEL}/categories/`).then((response) => {
-      console.log(response.data.categories);
-      setCategories(response.data.categories);
-    });
+    axios
+      .get(`${import.meta.env.VITE_BACK_URL_LARAVEL}/categories/`)
+      .then((response) => {
+        console.log(response.data.categories);
+        setCategories(response.data.categories);
+      });
   };
 
   const filteredCategories = categories.filter((category) =>
     category.name.toLowerCase().includes(searchBarValue.toLowerCase())
   );
-
-  const getImageUrl = (image) => {
-    return "http://127.0.0.1:8000/storage/" + image;
-  };
 
   useEffect(() => {
     getCategories();
@@ -61,7 +59,7 @@ const Sports = () => {
                       className="rounded-t-lg"
                       src={
                         category.image
-                          ? getImageUrl(category.image)
+                          ? category.image
                           : "/src/assets/images/835001-best-of-2022-les-exploits-sportifs-de-nos-francais-cette-annee.jpg"
                       }
                       alt="image sport"
