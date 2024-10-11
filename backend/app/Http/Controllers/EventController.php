@@ -204,6 +204,7 @@ class EventController extends Controller
             'date' =>  $request->date,
             'position' =>  $request->position,
             'aviable_places' =>  $request->aviable_places,
+            'image' =>  "",
             'time' =>  $request->time,
         ]);
 

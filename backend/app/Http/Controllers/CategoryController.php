@@ -56,14 +56,18 @@ class CategoryController extends Controller
 
             $request->validate([
                 'name' => 'required|string',
-                'history' => 'nullable|text',
-                'rules' => 'nullable|text',
+                'history' => 'nullable|max:2000',
+                'rules' => 'nullable|max:2000',
+                'image' => 'nullable|image',
             ]);
 
             $category = new Category;
             $category->name = $request->name;
             $category->history = $request->history;
             $category->rules = $request->rules;
+            $category->image = $request->image;
+
+            $category->save();
 
             if (request()->hasFile('image')) {
                 Configuration::instance([
@@ -92,11 +96,9 @@ class CategoryController extends Controller
             return response()->json([ 'message' => "Vous n'êtes pas administrateur."],409);
         }
 
-        $category->save();
-
         return response()->json([
             "category" => $category,
-            "message" => "La categorie " . $category->name . " a été ajouté avec succes."
+            "message" => "La categorie " . $category->name . " a été ajoutée avec succes."
         ],200);
     }
 

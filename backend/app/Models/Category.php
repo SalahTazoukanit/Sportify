@@ -13,7 +13,7 @@ class Category extends Model
         "name",
         "history",
         "rules",
-        "images"
+        "image"
     ];
 
     // Relation between event and category ;
