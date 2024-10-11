@@ -9,18 +9,18 @@ const Event = ({ event }) => {
   return (
     <>
       <div className="boxShadow shadow-custom bg-white rounded-xl flex flex-wrap justify-center p-1 md:p-6 ">
-        <div className="flex flex-col md:w-full justify-center ">
+        <div className="flex flex-col md:w-full justify-center max-sm:p-5">
           <NavLink to={`/events/event-details/${event.id}`}>
             <div className="flex justify-center items-center mb-1">
               <img
-                className="md:w-full md:h-56 rounded w-2/3"
+                className="md:w-full md:h-56 rounded w-10/12"
                 src={event.image}
                 alt="image événement"
               />
             </div>
           </NavLink>
-          <div>
-            <h3 className="font-semibold">{event.name}</h3>
+          <div className="flex flex-col max-sm:justify-center max-sm:items-center">
+            <p className="font-semibold">{event.name}</p>
             <p className="text-third-color opacity-65">
               {event.description.slice(0, 30) + "..."}
             </p>

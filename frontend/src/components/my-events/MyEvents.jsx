@@ -47,7 +47,6 @@ const MyEvents = () => {
   };
 
   const handleStatusChange = (eventId) => {
-    // Esegui la chiamata API per aggiornare lo stato dell'evento nel server
     axios
       .post(
         `${
@@ -57,7 +56,6 @@ const MyEvents = () => {
         { headers }
       )
       .then((response) => {
-        // Aggiorna lo stato dell'evento anche lato client dopo aver ricevuto risposta dal server
         const updatedEvents = myEvents.map((event) => {
           if (event.id === eventId) {
             return { ...event, status: updatedStatus };
@@ -65,7 +63,7 @@ const MyEvents = () => {
           return event;
         });
         setMyEvents(updatedEvents);
-        setEditingEventId(null); // Nascondi il select dopo aver salvato
+        setEditingEventId(null);
       });
   };
 

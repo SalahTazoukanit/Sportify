@@ -29,7 +29,6 @@ const EventDetail = () => {
     axios
       .get(`${import.meta.env.VITE_BACK_URL_LARAVEL}/events/` + id)
       .then((response) => {
-        console.log(response.data.event);
         setEvent(response.data.event);
         setEventUser(response.data.event.user.name);
         setEventCategory(response.data.event.category.name);
@@ -46,7 +45,6 @@ const EventDetail = () => {
         { headers }
       )
       .then((response) => {
-        console.log(response.data.event.participants);
         setParticipants(response.data.event.participants);
       });
   };
@@ -75,7 +73,6 @@ const EventDetail = () => {
           }, 3000);
         }
       });
-    // alert(response.data.message);
   };
 
   useEffect(() => {
@@ -105,7 +102,7 @@ const EventDetail = () => {
                 alt="image événement"
               />
             </div>
-            <div className="date-block flex flex-col max-sm:w-1/2 gap-2 bg-white p-5 h-48 rounded-md">
+            <div className="date-block flex flex-col max-sm:w-11/12 gap-2 bg-white p-5 h-48 rounded-md">
               <div className="flex flex-col md:gap-2">
                 <div>
                   <h3 className="font-bold">Date && Horaires</h3>
@@ -113,7 +110,7 @@ const EventDetail = () => {
                 <div>Date : {new Date(event.date).toLocaleDateString()} </div>
                 <div>Horaires : {event.time} </div>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 max-sm:gap-16">
                 {token ? (
                   <div
                     onClick={() => participateToEvent(event.id)}
@@ -133,7 +130,7 @@ const EventDetail = () => {
             </div>
           </div>
           <div className="flex flex-col gap-3 max-sm:items-center ">
-            <div className="flex flex-col">
+            <div className="flex flex-col max-sm:w-11/12">
               <h3 className="font-semibold">Description</h3>
               <p>{event.description}</p>
             </div>
@@ -183,7 +180,6 @@ const EventDetail = () => {
           </div>
         </div>
       </div>
-      {/* <div>EVENEMENTS DE LA MEME CATEGORIE</div> */}
       <Footer />
     </>
   );

@@ -42,7 +42,6 @@ const Header = () => {
         { headers }
       )
       .then((response) => {
-        console.log(response);
         setUserInfos(response.data.user);
       });
   };
@@ -91,26 +90,34 @@ const Header = () => {
         } flex-col md:flex-row justify-around items-center gap-3 text-white w-full mt-4 md:mt-0 md:flex`}
       >
         <NavLink
-          className={(nav) => (nav.isActive ? "nav-active" : "")}
+          className={(nav) =>
+            nav.isActive ? "nav-active " : "hover:opacity-50"
+          }
           to={"/"}
         >
           Accueil
         </NavLink>
         <NavLink
-          className={(nav) => (nav.isActive ? "nav-active" : "")}
+          className={(nav) =>
+            nav.isActive ? "nav-active " : "hover:opacity-50"
+          }
           to={"/events"}
         >
           Événements
         </NavLink>
         <NavLink
-          className={(nav) => (nav.isActive ? "nav-active" : "")}
+          className={(nav) =>
+            nav.isActive ? "nav-active" : "hover:opacity-50"
+          }
           to={"/sports"}
         >
           Sports
         </NavLink>
         {!token && (
           <NavLink
-            className={(nav) => (nav.isActive ? "nav-active" : "")}
+            className={(nav) =>
+              nav.isActive ? "nav-active" : "hover:opacity-50"
+            }
             to={"/a-propos"}
           >
             À propos

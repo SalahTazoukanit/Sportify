@@ -59,7 +59,8 @@ const Events = () => {
     setError("");
     axios
       .get(
-        `${import.meta.env.VITE_BACK_URL_LARAVEL}/events/filterEventsByName/` + searchBar
+        `${import.meta.env.VITE_BACK_URL_LARAVEL}/events/filterEventsByName/` +
+          searchBar
       )
       .then((response) => {
         setFilteredEvents(response.data.event);

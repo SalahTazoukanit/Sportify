@@ -13,18 +13,9 @@ const SportDetails = () => {
     axios
       .get(`${import.meta.env.VITE_BACK_URL_LARAVEL}/categories/${id}`)
       .then((response) => {
-        console.log(response.data.category);
         setCategory(response.data.category);
       });
   };
-
-  // const verifImage = () => {
-  //   if (category.image) {
-  //     return category.image;
-  //   } else {
-  //     return "/src/assets/images/835001-best-of-2022-les-exploits-sportifs-de-nos-francais-cette-annee.jpg";
-  //   }
-  // };
 
   useEffect(() => {
     getCategoryById(id);

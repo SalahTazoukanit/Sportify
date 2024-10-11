@@ -15,7 +15,7 @@ const SettingUser = () => {
     password_confirmation: "",
   });
 
-  const [fileName, setFileName] = useState(""); // Stato per il nome del file
+  const [fileName, setFileName] = useState("");
 
   const token = localStorage.getItem("token");
   const headers = {
@@ -30,15 +30,14 @@ const SettingUser = () => {
         { headers }
       )
       .then((response) => {
-        console.log(response);
         setUser(response.data.user);
       });
   };
 
   const handleImageChange = (e) => {
-    const file = e.target.files[0]; // Prende il primo file (l'immagine selezionata)
+    const file = e.target.files[0];
     if (file) {
-      setFileName(file.name); // Aggiorna lo stato con il nome del file
+      setFileName(file.name);
     }
     setUser(user.image_profile);
   };
@@ -84,13 +83,12 @@ const SettingUser = () => {
         setTimeout(() => {
           setIsVisible(null);
         }, 3000);
-        // window.location.reload();
       });
   };
 
   useEffect(() => {
     getUserInfos();
-  }, []);
+  }, [user]);
 
   return (
     <>

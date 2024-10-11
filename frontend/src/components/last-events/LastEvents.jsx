@@ -8,10 +8,11 @@ const LastEvents = () => {
   const [events, setEvents] = useState([]);
 
   const getEvents = () => {
-    axios.get(`${import.meta.env.VITE_BACK_URL_LARAVEL}/events/`).then((response) => {
-      console.log(response.data.events);
-      setEvents(response.data.events);
-    });
+    axios
+      .get(`${import.meta.env.VITE_BACK_URL_LARAVEL}/events/`)
+      .then((response) => {
+        setEvents(response.data.events);
+      });
   };
   useEffect(() => {
     getEvents();

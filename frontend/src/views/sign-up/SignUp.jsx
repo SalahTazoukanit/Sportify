@@ -14,7 +14,7 @@ const SignUp = () => {
 
   const [errorMex, setErrorMex] = useState("");
 
-  const [imagePreview, setImagePreview] = useState(null); // Nuovo stato per l'anteprima dell'immagine
+  const [imagePreview, setImagePreview] = useState(null);
 
   const navigate = useNavigate();
 
@@ -40,6 +40,13 @@ const SignUp = () => {
       .then((response) => {
         alert(response.data.message);
         navigate("/sign-in");
+      })
+      .catch((error) => {
+        let errors = error.response.data.errors;
+
+        Object.keys(errors).forEach((error) => {
+          setErrorMex(errors[error][0]);
+        });
       });
   };
 
@@ -48,10 +55,10 @@ const SignUp = () => {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setImagePreview(reader.result); // Imposta l'anteprima dell'immagine
+        setImagePreview(reader.result);
       };
-      reader.readAsDataURL(file); // Leggi il file come URL
-      setUser({ ...user, image_profile: file }); // Aggiorna l'utente con il file
+      reader.readAsDataURL(file);
+      setUser({ ...user, image_profile: file });
     }
   };
 
@@ -59,7 +66,6 @@ const SignUp = () => {
     <>
       <div className="block-signup flex justify-center items-center w-full bg-gray-100 h-screen">
         <div className="flex w-full h-full max-md:flex-col">
-          {/* Section Bannière */}
           <div className="banner-register flex justify-center items-center w-2/5 max-md:w-full max-md:h-60">
             <div className="flex flex-col items-center text-center mt-80 max-md:mt-10">
               <h2 className="text-white font-bold tracking-wider text-xl max-md:text-lg">
@@ -72,9 +78,7 @@ const SignUp = () => {
               </NavLink>
             </div>
           </div>
-          {/* Section Formulaire */}
           <div className="flex flex-col justify-center items-center w-2/3 max-md:w-full p-5">
-            {/* Logo */}
             <div className="flex justify-center w-full mb-5">
               <NavLink to={"/"}>
                 <img
@@ -84,7 +88,6 @@ const SignUp = () => {
                 />
               </NavLink>
             </div>
-            {/* Formulaire */}
             <div className="flex flex-col justify-center gap-5 w-1/3 max-md:w-full">
               <h2 className="font-medium text-center text-xl max-md:text-lg">
                 Créer mon compte
@@ -94,7 +97,6 @@ const SignUp = () => {
                 className="flex flex-col gap-5"
                 encType="multipart/form-data"
               >
-                {/* Avatar Upload */}
                 <div className="flex items-center justify-center">
                   <label htmlFor="image_profile" className="cursor-pointer">
                     <div className="w-24 h-24 rounded-full overflow-hidden bg-gray-200 flex items-center justify-center">
@@ -119,9 +121,7 @@ const SignUp = () => {
                     className="hidden"
                     onChange={handleImageChange}
                   />
-                  {errorMex ? errorMex : null}
                 </div>
-                {/* Inputs */}
                 <div>
                   <label htmlFor="">USERNAME</label>
                   <input
@@ -158,6 +158,10 @@ const SignUp = () => {
                     placeholder="Entrez votre mot de pass"
                     required
                   />
+                  <p className="text-xs opacity-50">
+                    Minimum 8 : une majuscule, un chiffre et un caractère
+                    spécial.
+                  </p>
                 </div>
                 <div>
                   <label htmlFor="">CONFIRMATION MOT DE PASS</label>
@@ -175,6 +179,7 @@ const SignUp = () => {
                     required
                   />
                 </div>
+                {errorMex && <p className="text-xs">{errorMex}</p>}
                 <button type="submit" className="btn-2 w-full max-md:w-[90vw]">
                   Créer mon compte
                 </button>
