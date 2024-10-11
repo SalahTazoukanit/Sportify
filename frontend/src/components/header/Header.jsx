@@ -10,6 +10,7 @@ const Header = () => {
   const [userInfos, setUserInfos] = useState("");
 
   const token = localStorage.getItem("token");
+  const user_role = localStorage.getItem("user_role");
 
   const headers = {
     Authorization: "Bearer " + token,
@@ -141,20 +142,42 @@ const Header = () => {
               )}
             </div>
             {isVisibleSettings ? (
-              <div className="absolute text-black top-full right-0 mt-2 bg-white shadow-lg rounded-lg p-4 flex flex-col italic z-10">
+              <div className="absolute text-black top-full right-0 mt-2 bg-white shadow-lg rounded-lg p-4 flex flex-col z-10 w-48 md:w-48 text-left">
                 <NavLink
-                  className={(nav) => (nav.isActive ? "nav-active" : "")}
+                  className={(nav) =>
+                    nav.isActive ? "nav-active " : "hover:opacity-50"
+                  }
                   to={"/dashboard"}
                 >
                   Mon profil
                 </NavLink>
+
+                <NavLink
+                  to={"/dashboard/my-events/add-event"}
+                  className="hover:opacity-50"
+                >
+                  Ajouter événement +
+                </NavLink>
+
+                {user_role === "admin" ? (
+                  <NavLink
+                    to={"/dashboard/categories/add-category"}
+                    className="hover:opacity-50"
+                  >
+                    Ajouter sport +
+                  </NavLink>
+                ) : null}
+
                 <NavLink
                   to={"/events/my-favourites-events"}
-                  className={(nav) => (nav.isActive ? "nav-active" : "")}
+                  className={(nav) =>
+                    nav.isActive ? "nav-active " : "hover:opacity-50"
+                  }
                 >
                   Mes favoris
                 </NavLink>
-                <button onClick={logout} className="text-red-600">
+
+                <button onClick={logout} className="text-red-600  text-left">
                   Déconnexion
                 </button>
               </div>

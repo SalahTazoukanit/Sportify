@@ -4,6 +4,8 @@ import AddFavouriteButton from "../add-favourite-button/AddFavouriteButton";
 
 //props event gived from LastEvents.jsx
 const Event = ({ event }) => {
+  const token = localStorage.getItem("token");
+
   return (
     <>
       <div className="boxShadow shadow-custom bg-white rounded-xl flex flex-wrap justify-center p-1 md:p-6 ">
@@ -41,7 +43,7 @@ const Event = ({ event }) => {
                   Événement complet .
                 </p>
               )}
-              <AddFavouriteButton eventId={event.id} />
+              {token && <AddFavouriteButton eventId={event.id} />}
             </div>
           </div>
         </div>

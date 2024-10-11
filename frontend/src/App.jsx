@@ -15,6 +15,7 @@ import MyFavouritesEvents from "./views/my-favourites-events/MyFavouritesEvents"
 import ProtectedRoute from "./components/protected-route/ProtectedRoutes";
 import SportDetails from "./views/sport-detail/SportDetails";
 import AddCategory from "./views/add-category/AddCategory";
+import Contact from "./views/contact/Contact";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/sports" element={<Sports />} />
           <Route path="/sport-details/:id" element={<SportDetails />} />
           <Route path="/a-propos" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/legal-mentions" element={<LegalMentions />} />
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />

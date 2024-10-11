@@ -70,11 +70,7 @@ const Sport = () => {
                   key={sport.id}
                 >
                   <div className="flex flex-col justify-center items-center sm:w-full gap-1">
-                    <img
-                      className="rounded-md"
-                      src="src/assets/images/piotr-osmenda-20K-JZ2ppbE-unsplash.jpg"
-                      alt=""
-                    />
+                    <img className="rounded-md" src={sport.image} alt="" />
                     <h3 className="font-medium "> {sport.name}</h3>
                   </div>
                 </SwiperSlide>
