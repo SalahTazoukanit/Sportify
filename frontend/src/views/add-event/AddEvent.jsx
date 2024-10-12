@@ -3,6 +3,7 @@ import Footer from "../../components/footer/Footer";
 import Header from "../../components/header/Header";
 import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const AddEvent = () => {
   const [categories, setCategories] = useState([]);
@@ -51,7 +52,11 @@ const AddEvent = () => {
         headers,
       })
       .then((response) => {
-        alert(response.data.message);
+        Swal.fire({
+          title: response.data.event.name,
+          text: response.data.message,
+          icon: "success",
+        });
         navigate("/dashboard");
       });
   };

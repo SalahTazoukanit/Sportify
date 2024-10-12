@@ -5,6 +5,7 @@ import Header from "../../components/header/Header";
 import "./EventDetail.css";
 import Footer from "../../components/footer/Footer";
 import AddFavouriteButton from "../../components/add-favourite-button/AddFavouriteButton";
+import Swal from "sweetalert2";
 
 const EventDetail = () => {
   const { id } = useParams();
@@ -61,8 +62,11 @@ const EventDetail = () => {
         }
       )
       .then((response) => {
-        alert(response.data.message);
-        window.location.reload();
+        Swal.fire({
+          title: "Inscrit(e).",
+          text: response.data.message,
+          icon: "success",
+        });
       })
       .catch((error) => {
         if (error) {

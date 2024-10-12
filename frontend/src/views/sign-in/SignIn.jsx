@@ -2,6 +2,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import "./SignIn.css";
 import { useState } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -30,6 +31,10 @@ const SignIn = () => {
         localStorage.setItem("user_id", user_id);
         localStorage.setItem("user_role", user_role);
 
+        Swal.fire({
+          text: response.data.message,
+          icon: "success",
+        });
         navigate("/dashboard");
       })
       .catch((error) => {
@@ -85,7 +90,7 @@ const SignIn = () => {
                     <p className="text-xs text-red-950">{error}</p>
                   </div>
                 )}
-                <button className="btn-2 w-full max-md:w-[90vw]">
+                <button className="flex justify-center items-center color-btn-green rounded-md text-white w-full h-10">
                   Se Connecter
                 </button>
               </form>

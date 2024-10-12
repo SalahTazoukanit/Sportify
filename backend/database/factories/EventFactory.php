@@ -18,10 +18,10 @@ class EventFactory extends Factory
     {
         return [
             "user_id" => fake()->numberBetween(1,2),
-            "category_id" => random_int(1,8),
+            "category_id" => random_int(1,5),
             "status"=> "published",
             'name' => fake()->words(3 , true),
-            'image' => "images/events/stade.jpg",
+            'image' => fake()->imageUrl(),
             'description' => fake()->sentence(20),
             'date' => fake()->date(),
             'position' => fake()->streetAddress(),

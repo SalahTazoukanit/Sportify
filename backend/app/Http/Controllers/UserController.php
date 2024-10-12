@@ -31,6 +31,9 @@ class UserController extends Controller
                 'confirmed',
             ],
             'password_confirmation' => 'required|same:password'
+        ],[
+            "email.unique" => "Le mail fourni existe déjà.",
+            "password.regex" => "Le mot de pass n'est pas valide."
         ]);
 
         $user = User::create([

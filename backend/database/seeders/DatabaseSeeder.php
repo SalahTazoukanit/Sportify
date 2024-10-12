@@ -18,18 +18,18 @@ class DatabaseSeeder extends Seeder
     {
 
         User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-            'password' => 'test',
+            'name' => 'Test Admin',
+            'email' => 'admin@example.com',
+            'password' => 'admin',
             "role" => "admin",
-            "image_profile" => 'images/profiles/admin.jpg'
+            "image_profile" => 'https://www.icone-png.com/png/54/53786.png'
         ]);
 
         User::factory()->create([
             'name' => 'Test Member',
             'email' => 'member@example.com',
             'password' => 'member',
-            "image_profile" => 'images/profiles/member.jpg',
+            "image_profile" => 'https://i.pinimg.com/736x/59/74/d0/5974d04323d9efbaf170c72cfdb07b44.jpg',
         ]);
 
         $this->call([

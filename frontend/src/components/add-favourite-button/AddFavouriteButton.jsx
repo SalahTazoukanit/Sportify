@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const AddFavouriteButton = ({ eventId }) => {
   const token = localStorage.getItem("token");
@@ -19,7 +20,10 @@ const AddFavouriteButton = ({ eventId }) => {
         { headers }
       )
       .then((response) => {
-        alert(response.data.message);
+        Swal.fire({
+          text: response.data.message,
+          icon: "success",
+        });
       });
   };
 

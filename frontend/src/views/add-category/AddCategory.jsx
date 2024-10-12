@@ -3,6 +3,7 @@ import Footer from "../../components/footer/Footer";
 import Header from "../../components/header/Header";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const AddCategory = () => {
   const titleRef = useRef(null);
@@ -42,7 +43,11 @@ const AddCategory = () => {
         { headers }
       )
       .then((response) => {
-        alert(response.data.message);
+        Swal.fire({
+          title: response.data.category.name,
+          text: response.data.message,
+          icon: "success",
+        });
         navigate("/dashboard");
       });
   };
@@ -100,7 +105,7 @@ const AddCategory = () => {
             </label>
             <input
               id="image"
-              className="input-text"
+              className=""
               type="file"
               name="image"
               required

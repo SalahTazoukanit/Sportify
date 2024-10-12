@@ -83,12 +83,16 @@ const SettingUser = () => {
         setTimeout(() => {
           setIsVisible(null);
         }, 3000);
+
+        setTimeout(() => {
+          location.reload();
+        }, 3000);
       });
   };
 
   useEffect(() => {
     getUserInfos();
-  }, [user]);
+  }, []);
 
   return (
     <>
@@ -107,7 +111,7 @@ const SettingUser = () => {
                 <div className="hidden md:block border"></div>
                 <div className="flex flex-col gap-1">
                   <input
-                    className="w-full lg:w-10/12 rounded border h-8 text-sm"
+                    className="input-text rounded border text-sm"
                     type="text"
                     name="name"
                     defaultValue={user.name}
@@ -118,7 +122,7 @@ const SettingUser = () => {
                 </div>
                 <div className="flex flex-col gap-1">
                   <input
-                    className="w-full lg:w-10/12 rounded border h-8 text-sm"
+                    className="input-text rounded border text-sm"
                     type="email"
                     name="email"
                     defaultValue={user.email}
@@ -129,7 +133,7 @@ const SettingUser = () => {
                 </div>
                 <div className="flex flex-col gap-1">
                   <input
-                    className="w-full lg:w-10/12 rounded border h-8 text-sm"
+                    className="input-text rounded border text-sm"
                     type="password"
                     placeholder="********"
                     name="password"
@@ -141,7 +145,7 @@ const SettingUser = () => {
                 </div>
                 <div className="flex flex-col gap-1">
                   <input
-                    className="w-full lg:w-10/12 rounded border h-8 text-sm"
+                    className="input-text rounded border text-sm"
                     type="password"
                     placeholder="********"
                     name="password_confirmation"
@@ -154,8 +158,10 @@ const SettingUser = () => {
                     }
                   />
                 </div>
-                <div className="flex justify-center color-btn-green text-white p-1 border rounded-full w-full lg:w-1/3 mt-5">
-                  <button type="submit">Sauvegarder</button>
+                <div className="flex justify-center items-center color-btn-green text-white p-1 border rounded-full input-text">
+                  <button className="w-full" type="submit">
+                    Sauvegarder
+                  </button>
                 </div>
                 {isVisible && <div className="message">{message}</div>}
               </div>

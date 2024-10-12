@@ -17,9 +17,10 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            "name" => fake()->randomElement(['Football' ,'Ping-Pong','Basket','Musculation', 'Volleyball' , 'Vélo' , "Randonnée",'Balade']),
+            "name" => fake()->randomElement(['Football' ,'Ping-Pong','Basket','Randonnée','Vélo','Bowling','Musculation']),
             "history" => fake()->text(),
-            "rules"=>fake()->text()
+            "rules"=>fake()->text(),
+            "image"=>fake()->imageUrl(),
         ];
     }
 }

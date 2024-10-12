@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false); // État pour gérer l'ouverture/fermeture du menu
@@ -26,10 +27,15 @@ const Header = () => {
         { headers }
       )
       .then((response) => {
-        alert(response.data.message);
         localStorage.removeItem("token");
         localStorage.removeItem("user_id");
         localStorage.removeItem("user_role");
+
+        Swal.fire({
+          icon: "success",
+          title: "Déconnexion",
+          text: response.data.message,
+        });
         navigate("/sign-in");
       });
   };
@@ -182,6 +188,14 @@ const Header = () => {
                   }
                 >
                   Mes favoris
+                </NavLink>
+                <NavLink
+                  to={"/contact"}
+                  className={(nav) =>
+                    nav.isActive ? "nav-active " : "hover:opacity-50"
+                  }
+                >
+                  Contact
                 </NavLink>
 
                 <button onClick={logout} className="text-red-600  text-left">

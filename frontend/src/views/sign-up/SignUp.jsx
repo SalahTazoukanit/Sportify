@@ -2,6 +2,7 @@ import "./SignUp.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
   const [user, setUser] = useState({
@@ -38,7 +39,10 @@ const SignUp = () => {
         userAdded
       )
       .then((response) => {
-        alert(response.data.message);
+        Swal.fire({
+          text: response.data.message,
+          icon: "success",
+        });
         navigate("/sign-in");
       })
       .catch((error) => {
@@ -180,7 +184,10 @@ const SignUp = () => {
                   />
                 </div>
                 {errorMex && <p className="text-xs">{errorMex}</p>}
-                <button type="submit" className="btn-2 w-full max-md:w-[90vw]">
+                <button
+                  type="submit"
+                  className="flex justify-center items-center color-btn-green rounded-md text-white w-full h-10"
+                >
                   Créer mon compte
                 </button>
               </form>
