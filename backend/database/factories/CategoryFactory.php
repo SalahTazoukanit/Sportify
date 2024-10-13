@@ -17,10 +17,10 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            "name" => fake()->randomElement(['Football' ,'Ping-Pong','Basket','Randonnée','Vélo','Bowling','Musculation']),
+            "name" => fake()->randomElement(['Football']),
             "history" => fake()->text(),
             "rules"=>fake()->text(),
-            "image"=>fake()->imageUrl(),
+            "image"=>'https://media.laregione.ch/files/domains/laregione.ch/images/sizes/1440x756/4c6b/f_-madrid-city-real-quarti-finale-champions-1enjm.jpg?v=1',
         ];
     }
 }
