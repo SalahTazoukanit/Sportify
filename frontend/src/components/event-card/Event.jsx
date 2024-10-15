@@ -40,7 +40,7 @@ const Event = ({ event }) => {
                 </p>
               ) : (
                 <p className="text-rouge-500 font-semibold underline opacity-65">
-                  Événement complet .
+                  Événement au complet .
                 </p>
               )}
               {token && <AddFavouriteButton eventId={event.id} />}

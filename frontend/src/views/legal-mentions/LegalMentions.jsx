@@ -67,28 +67,51 @@ const LegalMentions = () => {
               </div>
               <div className="mt-5 flex flex-col gap-1">
                 <h2 id="hosting">Hébergement</h2>
-                <h3>Le site Sportify est hébergé par :</h3>
-                <div className="flex flex-col">
-                  <p>
-                    <span className="font-medium">Nom :</span>
-                  </p>
-                  <p>
-                    <span className="font-medium">Adresse :</span>
-                  </p>
-                  <p>
-                    <span className="font-medium">Email : </span>
-                  </p>
+                <h3>Le site Sportify est hébergé par deux platformes :</h3>
+                <div className="flex flex-col gap-5 mt-5">
+                  <div className="flex flex-col">
+                    <p>
+                      <span className="font-medium">
+                        Nom : O2Switch pour le backend.
+                      </span>
+                    </p>
+                    <p>
+                      <span className="font-medium">
+                        Adresse : RCS Clermont Ferrand
+                      </span>
+                    </p>
+                    <p>
+                      <span className="font-medium">
+                        Email : support@o2switch.fr
+                      </span>
+                    </p>
+                  </div>
+                  <div className="flex flex-col">
+                    <p>
+                      <span className="font-medium">
+                        Nom : Netlify pour l'interface utilisateur.
+                      </span>
+                    </p>
+                    <p>
+                      <span className="font-medium">
+                        Adresse : Delaware , United States
+                      </span>
+                    </p>
+                    <p>
+                      <span className="font-medium">Email : </span>
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
             <div className="mt-5 flex flex-col gap-1">
               <h2 id="propriety"> Propriété des contenus</h2>
               <p>
-                Tous les contenus présents sur SportifyKick (textes, images,
-                logos, etc.) ont été créés dans le cadre du développement de ce
-                projet. Ils sont destinés à l'usage personnel et éducatif du
-                site. Toute reproduction ou utilisation de ces éléments à
-                d'autres fins nécessite une autorisation.
+                Tous les contenus présents sur Sportify (textes, images, logos,
+                etc.) ont été créés dans le cadre du développement de ce projet.
+                Ils sont destinés à l'usage personnel et éducatif du site. Toute
+                reproduction ou utilisation de ces éléments à d'autres fins
+                nécessite une autorisation.
               </p>
             </div>
             <div className="mt-5 flex flex-col gap-1">

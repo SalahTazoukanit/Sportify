@@ -42,8 +42,6 @@ const MyEvents = () => {
         headers,
       })
       .then((response) => {
-        console.log(response);
-
         Swal.fire({
           text: response.data.message,
           icon: "success",

@@ -167,12 +167,13 @@ const EventDetail = () => {
                   <h3 className="font-semibold">Sport</h3>
                   <p className="italic ">{event_category}</p>
                 </div>
-                {event.aviable_places > 0 ? (
+                {event.aviable_places > 0 && (
                   <div className="flex-col gap-3">
                     <h3 className="font-semibold">Places encore disponibles</h3>
                     <p className="italic ">{event.aviable_places}</p>
                   </div>
-                ) : (
+                )}
+                {event.aviable_places == 0 && (
                   <div>
                     <p className="italic text-red-500">
                       Il ne reste plus de places.

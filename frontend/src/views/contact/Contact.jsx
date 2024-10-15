@@ -46,7 +46,7 @@ const Contact = () => {
                   Parlons-en
                 </h2>
                 <p className="text-sm text-gray-500 w-11/12">
-                  Vous avez une question ou une grande idée ? N'hésitez pas à
+                  Vous avez une question ou un sport à ajouter ? N'hésitez pas à
                   nous contacter, nous serions ravis d'en entendre parler et de
                   vous apporter notre aide.
                 </p>
@@ -119,6 +119,12 @@ const Contact = () => {
                     name="message"
                     required
                   ></textarea>
+                </div>
+                <div className="flex gap-2">
+                  <input id="check" type="checkbox" name="check" required />
+                  <label htmlFor="check">
+                    J'ai lu et j'accepte la politique de confidentialité
+                  </label>
                 </div>
                 <div
                   className="bg-third-color h-8 rounded-md text-white flex justify-center items-center"
