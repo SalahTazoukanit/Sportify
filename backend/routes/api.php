@@ -45,6 +45,7 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::post('/logout', [UserController::class, 'logout'])->name('logout');
             Route::post('/show', [UserController::class, 'show'])->name('show.user');
             Route::put('/updateUser', [UserController::class, 'updateUser'])->name('updateUser.user');
+            Route::delete('/deleteUser/{id}', [UserController::class, 'destroy'])->name('delete.user');
         });
 
         //Events Routes

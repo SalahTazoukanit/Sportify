@@ -212,7 +212,13 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = Auth::user();
+        $user->events()->detach();
+        $user->delete();
+
+        return response()->json([
+            "message" => "Votre compte a été supprimé. À bientôt !"
+        ],200);
     }
 }
 
