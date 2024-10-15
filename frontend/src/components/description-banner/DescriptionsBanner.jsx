@@ -7,7 +7,7 @@ const DescriptionBanner = () => {
             <div className="shadow-custom md:w-1/3 flex flex-col border rounded-md justify-center items-center text-center p-10 bg-white">
               <img
                 className="w-28 hidden md:block"
-                src="src/assets/images/calendar.png"
+                src="/src/assets/images/add-button.png"
                 alt="logo"
               />
               <p>
@@ -18,7 +18,7 @@ const DescriptionBanner = () => {
             <div className="shadow-custom md:w-1/3  flex flex-col border rounded-md justify-center items-center text-center p-10 bg-white">
               <img
                 className="w-28 hidden md:block"
-                src="src/assets/images/team.png"
+                src="/src/assets/images/group.png"
                 alt="logo"
               />
               <p>
@@ -29,7 +29,7 @@ const DescriptionBanner = () => {
             <div className="shadow-custom md:w-1/3 flex flex-col border rounded-md justify-center items-center text-center p-10 bg-white">
               <img
                 className="w-28 hidden md:block"
-                src="src/assets/images/gym.png"
+                src="/src/assets/images/lightning.png"
                 alt="logo"
               />
               <p>

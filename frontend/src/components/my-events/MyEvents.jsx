@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./MyEvents.css";
+import Swal from "sweetalert2";
 
 const MyEvents = () => {
   const [myEvents, setMyEvents] = useState([]);
@@ -19,7 +20,7 @@ const MyEvents = () => {
     if (user_role === "member") {
       axios
         .post(
-          `${import.meta.env.VITE_BACK_URL_LARAVEL}/events/getOwnEvents/`,
+          `${import.meta.env.VITE_BACK_URL_LARAVEL}/events/getOwnEvents`,
           {},
           { headers }
         )
@@ -28,7 +29,7 @@ const MyEvents = () => {
         });
     } else if (user_role === "admin") {
       axios
-        .get(`${import.meta.env.VITE_BACK_URL_LARAVEL}/events/`)
+        .get(`${import.meta.env.VITE_BACK_URL_LARAVEL}/events`)
         .then((response) => {
           setMyEvents(response.data.events);
         });
@@ -41,8 +42,16 @@ const MyEvents = () => {
         headers,
       })
       .then((response) => {
-        alert(response.data.message);
-        window.location.reload();
+        console.log(response);
+
+        Swal.fire({
+          text: response.data.message,
+          icon: "success",
+        });
+
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
       });
   };
 

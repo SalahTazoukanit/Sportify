@@ -67,6 +67,10 @@ const EventDetail = () => {
           text: response.data.message,
           icon: "success",
         });
+
+        setTimeout(() => {
+          location.reload();
+        }, 1500);
       })
       .catch((error) => {
         if (error) {
@@ -96,15 +100,7 @@ const EventDetail = () => {
           </h2>
           <div className="flex flex-col gap-5 md:flex-row justify-between items-center md:items-start">
             <div className="w-2/3">
-              <img
-                className=""
-                src={
-                  event.image
-                    ? event.image
-                    : "/src/assets/images/sports-removebg-preview.png"
-                }
-                alt="image événement"
-              />
+              <img className="" src={event.image} alt="image événement" />
             </div>
             <div className="date-block flex flex-col max-sm:w-11/12 gap-2 bg-white p-5 h-48 rounded-md">
               <div className="flex flex-col md:gap-2">
@@ -118,18 +114,22 @@ const EventDetail = () => {
                 {token ? (
                   <div
                     onClick={() => participateToEvent(event.id)}
-                    className="flex w-1/2 md:w-56 justify-center bg-third-color rounded-md text-white hover:opacity-50 hover:cursor-pointer p-2"
+                    className="flex w-2/3 md:w-56 justify-center bg-third-color rounded-md text-white hover:opacity-50 hover:cursor-pointer p-2"
                   >
                     <p>Participer</p>
                   </div>
                 ) : (
-                  <NavLink to={"/sign-in"}>
-                    <div className="flex w-1/2 md:w-56 justify-center bg-third-color rounded-md text-white hover:opacity-50 hover:cursor-pointer p-2">
+                  <NavLink to={"/sign-in"} className="w-full">
+                    <div className="flex w-2/3 md:w-56 justify-center bg-third-color rounded-md text-white hover:opacity-50 hover:cursor-pointer p-2">
                       <p>Participer</p>
                     </div>
                   </NavLink>
                 )}
-                <AddFavouriteButton eventId={event.id} />
+                {token ? (
+                  <div className="hover:opacity-50">
+                    <AddFavouriteButton eventId={event.id} />
+                  </div>
+                ) : null}
               </div>
             </div>
           </div>
@@ -138,7 +138,7 @@ const EventDetail = () => {
               <h3 className="font-semibold">Description</h3>
               <p>{event.description}</p>
             </div>
-            <div className="flex gap-10 md:gap-0">
+            <div className="flex gap-10 md:gap-0 max-sm:w-11/12">
               <div className="flex flex-col md:w-1/2 gap-3">
                 <div className="flex-col">
                   <h3 className="font-semibold">Adresse événement</h3>

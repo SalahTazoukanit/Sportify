@@ -1,4 +1,5 @@
 import axios from "axios";
+import Swal from "sweetalert2";
 
 //props eventId gived from MyParticipatedEvents.jsx
 const RemoveParticipant = ({ eventId }) => {
@@ -20,8 +21,14 @@ const RemoveParticipant = ({ eventId }) => {
         }
       )
       .then((response) => {
-        alert(response.data.message);
-        window.location.reload();
+        // alert(response.data.message);
+        Swal.fire({
+          text: response.data.message,
+          icon: "success",
+        });
+        setTimeout(() => {
+          window.location.reload();
+        }, 1500);
       });
   };
   return (

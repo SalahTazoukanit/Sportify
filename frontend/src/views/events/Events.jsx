@@ -16,7 +16,7 @@ const Events = () => {
 
   const getCategories = () => {
     axios
-      .get(`${import.meta.env.VITE_BACK_URL_LARAVEL}/categories/`)
+      .get(`${import.meta.env.VITE_BACK_URL_LARAVEL}/categories`)
       .then((response) => {
         setCategories(response.data.categories);
       });
@@ -49,7 +49,7 @@ const Events = () => {
 
   const getEvents = () => {
     axios
-      .get(`${import.meta.env.VITE_BACK_URL_LARAVEL}/events/`)
+      .get(`${import.meta.env.VITE_BACK_URL_LARAVEL}/events`)
       .then((response) => {
         setEvents(response.data.events);
       });

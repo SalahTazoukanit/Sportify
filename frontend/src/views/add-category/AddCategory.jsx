@@ -111,6 +111,9 @@ const AddCategory = () => {
               required
               ref={imageRef}
             />
+            <p className="text-xs opacity-50">
+              L'image (JPEG, PNG, JPG) ne doit pas dépasser 2 Mo.
+            </p>
             <br />
             {error && <span className="text-red-500"> {error} </span>}
           </div>

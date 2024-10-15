@@ -9,11 +9,15 @@ const LastEvents = () => {
 
   const getEvents = () => {
     axios
-      .get(`${import.meta.env.VITE_BACK_URL_LARAVEL}/events/`)
+      .get(`${import.meta.env.VITE_BACK_URL_LARAVEL}/events`)
       .then((response) => {
-        setEvents(response.data.events);
+        const sortedEvents = response.data.events.sort(
+          (a, b) => new Date(b.created_at) - new Date(a.created_at)
+        );
+        setEvents(sortedEvents);
       });
   };
+
   useEffect(() => {
     getEvents();
   }, []);
@@ -21,19 +25,15 @@ const LastEvents = () => {
   return (
     <>
       <div className="general-block flex flex-col items-center">
-        <div className="flex flex-col justify-center w-5/6 ">
+        <div className="flex flex-col justify-center w-5/6">
           <h2 className="text-start font-semibold">
             Nos derniers événements disponibles
           </h2>
-          <div className="general-block grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 ">
+          <div className="general-block grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
             {events &&
-              events.slice(0, 4).map(
-                (event) => (
-                  // event.status === "published" ? (
-                  <Event key={event.id} event={event} />
-                )
-                // ) : null;
-              )}
+              events
+                .slice(0, 4)
+                .map((event) => <Event key={event.id} event={event} />)}
           </div>
         </div>
         <div className="general-block">
@@ -45,4 +45,5 @@ const LastEvents = () => {
     </>
   );
 };
+
 export default LastEvents;

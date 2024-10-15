@@ -56,9 +56,20 @@ const SettingUser = () => {
     }
 
     if (userUpload.image_profile) {
-      formData.append("image_profile", userUpload.image_profile);
+      const fileSizeInMB = userUpload.image_profile.size / (1024 * 1024);
+      if (fileSizeInMB > 2) {
+        setMessage(
+          "La taille du fichier dépasse 2 Mo. Veuillez sélectionner une autre image."
+        );
+        setIsVisible(true);
+        setTimeout(() => {
+          setIsVisible(false);
+        }, 3000);
+        return;
+      } else {
+        formData.append("image_profile", userUpload.image_profile);
+      }
     }
-    console.log(userUpload.image_profile);
 
     if (userUpload.password) {
       formData.append("password", userUpload.password);

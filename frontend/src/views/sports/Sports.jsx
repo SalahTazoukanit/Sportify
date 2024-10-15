@@ -11,7 +11,7 @@ const Sports = () => {
 
   const getCategories = () => {
     axios
-      .get(`${import.meta.env.VITE_BACK_URL_LARAVEL}/categories/`)
+      .get(`${import.meta.env.VITE_BACK_URL_LARAVEL}/categories`)
       .then((response) => {
         setCategories(response.data.categories);
       });

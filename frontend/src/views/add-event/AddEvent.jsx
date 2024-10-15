@@ -63,7 +63,7 @@ const AddEvent = () => {
 
   const getCategories = () => {
     axios
-      .get(`${import.meta.env.VITE_BACK_URL_LARAVEL}/categories/`)
+      .get(`${import.meta.env.VITE_BACK_URL_LARAVEL}/categories`)
       .then((response) => {
         setCategories(response.data.categories);
       });
@@ -176,6 +176,9 @@ const AddEvent = () => {
           <div>
             <input type="file" name="image" ref={imageRef} required />
             <br />
+            <p className="text-xs opacity-50">
+              L'image (JPEG, PNG, JPG) ne doit pas dépasser 2 Mo.
+            </p>
             {error && <span className="text-red-500"> {error} </span>}
           </div>
           <div className="description flex flex-col">
